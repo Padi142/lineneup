@@ -19,19 +19,25 @@ mixin _$LineupState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(LineupModel lineup) loaded,
+    required TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(LineupModel lineup)? loaded,
+    TResult? Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(LineupModel lineup)? loaded,
+    TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,11 +64,14 @@ mixin _$LineupState {
 
 /// @nodoc
 abstract class $LineupStateCopyWith<$Res> {
-  factory $LineupStateCopyWith(LineupState value, $Res Function(LineupState) then) = _$LineupStateCopyWithImpl<$Res, LineupState>;
+  factory $LineupStateCopyWith(
+          LineupState value, $Res Function(LineupState) then) =
+      _$LineupStateCopyWithImpl<$Res, LineupState>;
 }
 
 /// @nodoc
-class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState> implements $LineupStateCopyWith<$Res> {
+class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState>
+    implements $LineupStateCopyWith<$Res> {
   _$LineupStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -73,12 +82,16 @@ class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState> implements $Line
 
 /// @nodoc
 abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) = __$$InitialCopyWithImpl<$Res>;
+  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
+      __$$InitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Initial> implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then) : super(_value, _then);
+class __$$InitialCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Initial>
+    implements _$$InitialCopyWith<$Res> {
+  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -93,7 +106,8 @@ class _$Initial implements Initial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Initial);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @override
@@ -103,7 +117,9 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(LineupModel lineup) loaded,
+    required TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
+        loaded,
   }) {
     return initial();
   }
@@ -112,7 +128,9 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(LineupModel lineup)? loaded,
+    TResult? Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -121,7 +139,9 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(LineupModel lineup)? loaded,
+    TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -168,25 +188,34 @@ abstract class Initial implements LineupState {
 
 /// @nodoc
 abstract class _$$LoadedCopyWith<$Res> {
-  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) = __$$LoadedCopyWithImpl<$Res>;
+  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
+      __$$LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({LineupModel lineup});
+  $Res call({List<ArtistModel> upcommingArtists, ArtistModel currentArtist});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loaded> implements _$$LoadedCopyWith<$Res> {
-  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then) : super(_value, _then);
+class __$$LoadedCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Loaded>
+    implements _$$LoadedCopyWith<$Res> {
+  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lineup = null,
+    Object? upcommingArtists = null,
+    Object? currentArtist = null,
   }) {
     return _then(_$Loaded(
-      null == lineup
-          ? _value.lineup
-          : lineup // ignore: cast_nullable_to_non_nullable
-              as LineupModel,
+      null == upcommingArtists
+          ? _value._upcommingArtists
+          : upcommingArtists // ignore: cast_nullable_to_non_nullable
+              as List<ArtistModel>,
+      null == currentArtist
+          ? _value.currentArtist
+          : currentArtist // ignore: cast_nullable_to_non_nullable
+              as ArtistModel,
     ));
   }
 }
@@ -194,56 +223,78 @@ class __$$LoadedCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loa
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded(this.lineup);
+  const _$Loaded(final List<ArtistModel> upcommingArtists, this.currentArtist)
+      : _upcommingArtists = upcommingArtists;
+
+  final List<ArtistModel> _upcommingArtists;
+  @override
+  List<ArtistModel> get upcommingArtists {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_upcommingArtists);
+  }
 
   @override
-  final LineupModel lineup;
+  final ArtistModel currentArtist;
 
   @override
   String toString() {
-    return 'LineupState.loaded(lineup: $lineup)';
+    return 'LineupState.loaded(upcommingArtists: $upcommingArtists, currentArtist: $currentArtist)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loaded && (identical(other.lineup, lineup) || other.lineup == lineup));
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Loaded &&
+            const DeepCollectionEquality()
+                .equals(other._upcommingArtists, _upcommingArtists) &&
+            (identical(other.currentArtist, currentArtist) ||
+                other.currentArtist == currentArtist));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, lineup);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_upcommingArtists), currentArtist);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedCopyWith<_$Loaded> get copyWith => __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
+  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+      __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(LineupModel lineup) loaded,
+    required TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
+        loaded,
   }) {
-    return loaded(lineup);
+    return loaded(upcommingArtists, currentArtist);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(LineupModel lineup)? loaded,
+    TResult? Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
   }) {
-    return loaded?.call(lineup);
+    return loaded?.call(upcommingArtists, currentArtist);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(LineupModel lineup)? loaded,
+    TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(lineup);
+      return loaded(upcommingArtists, currentArtist);
     }
     return orElse();
   }
@@ -281,9 +332,12 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements LineupState {
-  const factory Loaded(final LineupModel lineup) = _$Loaded;
+  const factory Loaded(final List<ArtistModel> upcommingArtists,
+      final ArtistModel currentArtist) = _$Loaded;
 
-  LineupModel get lineup;
+  List<ArtistModel> get upcommingArtists;
+  ArtistModel get currentArtist;
   @JsonKey(ignore: true)
-  _$$LoadedCopyWith<_$Loaded> get copyWith => throw _privateConstructorUsedError;
+  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

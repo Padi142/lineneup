@@ -3,72 +3,24 @@ import 'package:equatable/equatable.dart';
 import 'package:lineneup/src/core/bloc/lineup/lineup_state.dart';
 import 'package:lineneup/src/core/models/artist_model.dart';
 import 'package:lineneup/src/core/models/lineup_model.dart';
+import 'package:lineneup/src/core/provider/lineup_provider.dart';
 
 part 'lineup_event.dart';
 
 class LineupBloc extends Bloc<LineupEvent, LineupState> {
   LineupBloc() : super(const LineupState.initial()) {
-    on<LineupEvent>(_onLineupEvent);
+    on<GetLineup>(_onLineupEvent);
   }
-  _onLineupEvent(LineupEvent event, Emitter<LineupState> emit) {
-    final lineup = LineupModel(artists: [
-      ArtistModel(
-          artistName: "Bob Kubert",
-          start: DateTime(
-            2002,
-            1,
-            1,
-            21,
-          ),
-          end: DateTime(
-            2002,
-            1,
-            1,
-            22,
-          )),
-      ArtistModel(
-          artistName: "Granko Škwára",
-          start: DateTime(
-            2002,
-            1,
-            1,
-            22,
-          ),
-          end: DateTime(
-            2002,
-            1,
-            1,
-            23,
-          )),
-      ArtistModel(
-          artistName: "Litterbin",
-          start: DateTime(
-            2002,
-            1,
-            1,
-            23,
-          ),
-          end: DateTime(
-            2002,
-            1,
-            2,
-            0,
-          )),
-      ArtistModel(
-          artistName: "Dj Ketak",
-          start: DateTime(
-            2002,
-            1,
-            1,
-            0,
-          ),
-          end: DateTime(
-            2002,
-            1,
-            1,
-            2,
-          )),
-    ]);
-    emit(LineupState.loaded(lineup));
+  LineupProvider lineupProvider = LineupProvider();
+
+  _onLineupEvent(GetLineup event, Emitter<LineupState> emit) async {
+    LineupModel lineup = await lineupProvider.getLineup();
+    //int curentHour = DateTime.now().hour;
+
+    ArtistModel currentArtist = lineup.artists.first;
+    List<ArtistModel> upcommingArtists = lineup.artists;
+    upcommingArtists.remove(currentArtist);
+
+    emit(LineupState.loaded(upcommingArtists, currentArtist));
   }
 }

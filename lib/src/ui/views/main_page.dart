@@ -1,6 +1,13 @@
 import 'package:curved_progress_bar/curved_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lineneup/src/core/bloc/lineup/lineup_bloc.dart';
+import 'package:lineneup/src/core/bloc/lineup/lineup_state.dart';
+import 'package:lineneup/src/core/models/artist_model.dart';
+import 'package:lineneup/src/core/models/lineup_model.dart';
+import 'package:lineneup/src/ui/components/lineup_current.dart';
+import 'package:lineneup/src/ui/components/lineup_uncomming.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -12,6 +19,7 @@ class MainPage extends StatefulWidget {
 class _MainPage extends State<MainPage> {
   @override
   void initState() {
+    BlocProvider.of<LineupBloc>(context).add(const GetLineup());
     super.initState();
   }
 
@@ -35,13 +43,29 @@ class _MainPage extends State<MainPage> {
                   1,
                 ],
               )),
-              child: const MobileBody())),
+              child: BlocBuilder<LineupBloc, LineupState>(
+                builder: (context, state) {
+                  return state.maybeMap(loaded: ((loaded) {
+                    return MobileBody(
+                      currentArtist: loaded.currentArtist,
+                      upcommingArtists: loaded.upcommingArtists,
+                    );
+                  }), orElse: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  });
+                },
+              ))),
     );
   }
 }
 
 class MobileBody extends StatelessWidget {
-  const MobileBody({super.key});
+  final ArtistModel currentArtist;
+  final List<ArtistModel> upcommingArtists;
+  const MobileBody(
+      {super.key, required this.currentArtist, required this.upcommingArtists});
 
   @override
   Widget build(BuildContext context) {
@@ -84,42 +108,20 @@ class MobileBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Card(
-            color: Theme.of(context).primaryColor,
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: InkWell(
-                highlightColor: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(20),
-                onTap: () {},
-                child: Container(
-                  height: 100,
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                "https://media.discordapp.net/attachments/989639754393993276/1042903195753660416/image.png"),
-                          ),
-                          Text(
-                            "Bob Kubert",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )),
+          CurrentArtist(
+            artist: currentArtist,
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: upcommingArtists.length,
+              itemBuilder: ((context, index) {
+                return UpcommingArtist(
+                  artist: upcommingArtists[index],
+                );
+              }))
         ],
       ),
     );

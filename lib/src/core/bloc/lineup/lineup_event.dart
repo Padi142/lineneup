@@ -6,3 +6,10 @@ abstract class LineupEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetLineup extends LineupEvent {
+  const GetLineup();
+
+  @override
+  List<Object> get props => [];
+}
