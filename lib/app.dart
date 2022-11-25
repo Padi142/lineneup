@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lineneup/src/core/bloc/lineup/lineup_bloc.dart';
-import 'package:lineneup/src/ui/views/main_page.dart';
+import 'package:lineneup/src/feature/lineup/bloc/lineup_bloc.dart';
+import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
+import 'package:lineneup/src/feature/user/bloc/user_bloc.dart';
+import 'package:lineneup/src/shared/views/main_page.dart';
 
 class LineupApp extends StatelessWidget {
   const LineupApp({
@@ -16,6 +18,12 @@ class LineupApp extends StatelessWidget {
         providers: [
           BlocProvider<LineupBloc>(
             create: (BuildContext context) => LineupBloc(),
+          ),
+          BlocProvider<LoginBloc>(
+            create: (BuildContext context) => LoginBloc(),
+          ),
+          BlocProvider<UserBloc>(
+            create: (BuildContext context) => UserBloc(),
           ),
         ],
         child: MaterialApp(

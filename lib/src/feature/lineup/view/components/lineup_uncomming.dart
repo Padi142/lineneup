@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lineneup/src/core/models/artist_model.dart';
+import 'package:lineneup/src/shared/models/artist_model.dart';
 
 class UpcommingArtist extends StatelessWidget {
   final ArtistModel artist;
@@ -33,7 +33,7 @@ class UpcommingArtist extends StatelessWidget {
                       Expanded(
                         child: CircleAvatar(
                           minRadius: 30,
-                          backgroundImage: NetworkImage(artist.photo),
+                          backgroundImage: NetworkImage(artist.artistPhoto),
                         ),
                       ),
                       Expanded(
@@ -46,10 +46,10 @@ class UpcommingArtist extends StatelessWidget {
                               fontWeight: FontWeight.normal),
                         ),
                       ),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "23:00",
-                          style: TextStyle(
+                          "${artist.startTime.hour}:${artist.startTime.minute}",
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 28,
                               fontWeight: FontWeight.bold),

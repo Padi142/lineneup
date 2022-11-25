@@ -2,24 +2,24 @@ import 'package:curved_progress_bar/curved_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lineneup/src/core/bloc/lineup/lineup_bloc.dart';
-import 'package:lineneup/src/core/bloc/lineup/lineup_state.dart';
-import 'package:lineneup/src/core/models/artist_model.dart';
-import 'package:lineneup/src/core/models/lineup_model.dart';
-import 'package:lineneup/src/ui/components/lineup_current.dart';
-import 'package:lineneup/src/ui/components/lineup_uncomming.dart';
+import 'package:lineneup/src/feature/lineup/bloc/lineup_bloc.dart';
+import 'package:lineneup/src/feature/lineup/bloc/lineup_state.dart';
+import 'package:lineneup/src/feature/lineup/view/components/lineup_current.dart';
+import 'package:lineneup/src/feature/lineup/view/components/lineup_uncomming.dart';
+import 'package:lineneup/src/shared/models/artist_model.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class LineupPage extends StatefulWidget {
+  const LineupPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPage();
+  State<LineupPage> createState() => _LineupPageState();
 }
 
-class _MainPage extends State<MainPage> {
+class _LineupPageState extends State<LineupPage> {
   @override
   void initState() {
     BlocProvider.of<LineupBloc>(context).add(const GetLineup());
+
     super.initState();
   }
 
@@ -27,36 +27,37 @@ class _MainPage extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                colors: [
-                  Color(0xFF0F0C29),
-                  Color(0xFF302B63),
-                  Color(0xFF24243E),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [
-                  0,
-                  0.2,
-                  1,
-                ],
-              )),
-              child: BlocBuilder<LineupBloc, LineupState>(
-                builder: (context, state) {
-                  return state.maybeMap(loaded: ((loaded) {
-                    return MobileBody(
-                      currentArtist: loaded.currentArtist,
-                      upcommingArtists: loaded.upcommingArtists,
-                    );
-                  }), orElse: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  });
-                },
-              ))),
+        body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+              colors: [
+                Color(0xFF0F0C29),
+                Color(0xFF302B63),
+                Color(0xFF24243E),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [
+                0,
+                0.2,
+                1,
+              ],
+            )),
+            child: BlocBuilder<LineupBloc, LineupState>(
+              builder: (context, state) {
+                return state.maybeMap(loaded: ((loaded) {
+                  return MobileBody(
+                    currentArtist: loaded.currentArtist,
+                    upcommingArtists: loaded.upcommingArtists,
+                  );
+                }), orElse: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                });
+              },
+            )),
+      ),
     );
   }
 }

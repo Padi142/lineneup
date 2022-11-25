@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lineneup/src/core/models/artist_model.dart';
-import 'package:lineneup/src/core/models/lineup_model.dart';
+import 'package:lineneup/src/shared/models/artist_model.dart';
 
 part 'lineup_state.freezed.dart';
 
