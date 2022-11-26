@@ -26,9 +26,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   _onGoogleLogin(GoogleLogin event, Emitter<LoginState> emit) async {
-    await Supabase.instance.client.auth.signInWithOAuth(
-      Provider.google,
-    );
+    await Supabase.instance.client.auth.signInWithOAuth(Provider.google,
+        redirectTo: "${Uri.base.origin}/login-callback");
   }
 
   _onUriLogin(UriLogin event, Emitter<LoginState> emit) async {

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lineneup/src/feature/lineup/bloc/lineup_bloc.dart';
 import 'package:lineneup/src/feature/lineup/view/lineup_page.dart';
 import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
+import 'package:lineneup/src/feature/login/view/login_callback_page.dart';
 import 'package:lineneup/src/feature/login/view/login_page.dart';
 import 'package:lineneup/src/feature/user/bloc/user_bloc.dart';
 import 'package:lineneup/src/feature/user/view/user_page.dart';
@@ -61,6 +62,14 @@ List<QRoute> routes = [
     ],
     name: LoginPage.name,
     path: '/login',
+  ),
+  QRoute(
+    builder: () => const LoginCallbackPage(),
+    middleware: [
+      //AuthMiddleware(loadUserUseCase: di.get<LoadUserUseCase>()),
+    ],
+    name: LoginCallbackPage.name,
+    path: '/login-callback',
   ),
   QRoute(
     builder: () => const UserPage(),

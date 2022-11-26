@@ -19,8 +19,6 @@ class MainPage extends StatefulWidget {
 class _MainPage extends State<MainPage> {
   @override
   void initState() {
-    Uri.base.queryParameters;
-
     if (Uri.base.toString().contains("access_token")) {
       /// Uri.base is a auth redirect link
       BlocProvider.of<LoginBloc>(context).add(UriLogin(uri: Uri.base));
