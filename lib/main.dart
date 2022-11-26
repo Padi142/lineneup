@@ -1,9 +1,12 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:qlevar_router/qlevar_router.dart';
 import 'app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  QR.setUrlStrategy();
 
   await Supabase.initialize(
       url: "https://ynodkuxldoumbyyocxqt.supabase.co",

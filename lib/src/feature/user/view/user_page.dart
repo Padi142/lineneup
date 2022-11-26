@@ -9,6 +9,8 @@ import 'package:responsive_grid/responsive_grid.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserPage extends StatefulWidget {
+  static const String name = 'user_page';
+
   const UserPage({super.key});
 
   @override

@@ -4,6 +4,8 @@ import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
 import 'package:lineneup/src/feature/login/bloc/login_state.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String name = 'login_page';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override

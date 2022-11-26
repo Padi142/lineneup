@@ -1,6 +1,7 @@
 import 'package:curved_progress_bar/curved_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:lineneup/src/shared/models/artist_model.dart';
+import 'package:intl/intl.dart';
 
 class CurrentArtist extends StatelessWidget {
   final ArtistModel artist;
@@ -60,13 +61,13 @@ class CurrentArtist extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        artist.startTime.hour.toString(),
+                        DateFormat('kk').format(artist.startTime),
                         style:
                             const TextStyle(color: Colors.white, fontSize: 19),
                       ),
                       Container(),
                       Text(
-                        artist.endTime.hour.toString(),
+                        DateFormat('kk').format(artist.endTime),
                         style:
                             const TextStyle(color: Colors.white, fontSize: 19),
                       ),

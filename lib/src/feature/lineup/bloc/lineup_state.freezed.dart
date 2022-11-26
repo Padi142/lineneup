@@ -19,6 +19,7 @@ mixin _$LineupState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() error,
     required TResult Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
         loaded,
@@ -27,6 +28,7 @@ mixin _$LineupState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? error,
     TResult? Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
         loaded,
@@ -35,6 +37,7 @@ mixin _$LineupState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? error,
     TResult Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
         loaded,
@@ -44,18 +47,21 @@ mixin _$LineupState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Error value)? error,
     TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) =>
@@ -117,6 +123,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() error,
     required TResult Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
         loaded,
@@ -128,6 +135,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? error,
     TResult? Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
         loaded,
@@ -139,6 +147,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? error,
     TResult Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
         loaded,
@@ -154,6 +163,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
   }) {
     return initial(this);
@@ -163,6 +173,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Error value)? error,
     TResult? Function(Loaded value)? loaded,
   }) {
     return initial?.call(this);
@@ -172,6 +183,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -184,6 +196,118 @@ class _$Initial implements Initial {
 
 abstract class Initial implements LineupState {
   const factory Initial() = _$Initial;
+}
+
+/// @nodoc
+abstract class _$$ErrorCopyWith<$Res> {
+  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
+      __$$ErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ErrorCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Error>
+    implements _$$ErrorCopyWith<$Res> {
+  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$Error implements Error {
+  const _$Error();
+
+  @override
+  String toString() {
+    return 'LineupState.error()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Error);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() error,
+    required TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
+        loaded,
+  }) {
+    return error();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? error,
+    TResult? Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
+  }) {
+    return error?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? error,
+    TResult Function(
+            List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Error value) error,
+    required TResult Function(Loaded value) loaded,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Error value)? error,
+    TResult? Function(Loaded value)? loaded,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Error value)? error,
+    TResult Function(Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Error implements LineupState {
+  const factory Error() = _$Error;
 }
 
 /// @nodoc
@@ -266,6 +390,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() error,
     required TResult Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)
         loaded,
@@ -277,6 +402,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? error,
     TResult? Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
         loaded,
@@ -288,6 +414,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? error,
     TResult Function(
             List<ArtistModel> upcommingArtists, ArtistModel currentArtist)?
         loaded,
@@ -303,6 +430,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
   }) {
     return loaded(this);
@@ -312,6 +440,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Error value)? error,
     TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
@@ -321,6 +450,7 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {

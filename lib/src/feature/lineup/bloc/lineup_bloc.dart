@@ -13,8 +13,9 @@ class LineupBloc extends Bloc<LineupEvent, LineupState> {
   LineupProvider lineupProvider = LineupProvider();
 
   _onLineupEvent(GetLineup event, Emitter<LineupState> emit) async {
-    List<ArtistModel>? artists = await lineupProvider.getLineup("e651");
-    if (artists == null) {
+    List<ArtistModel>? artists = await lineupProvider.getLineup(event.uid);
+    if (artists == null || artists.isEmpty) {
+      emit(const LineupState.error());
     } else {
       ArtistModel currentArtist = artists.first;
       List<ArtistModel> upcommingArtists = artists;

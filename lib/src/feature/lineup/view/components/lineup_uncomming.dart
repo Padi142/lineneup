@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lineneup/src/shared/models/artist_model.dart';
 
 class UpcommingArtist extends StatelessWidget {
@@ -48,7 +49,7 @@ class UpcommingArtist extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          "${artist.startTime.hour}:${artist.startTime.minute}",
+                          DateFormat('kk:mm').format(artist.startTime),
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 28,

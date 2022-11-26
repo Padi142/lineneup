@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lineneup/src/feature/lineup/view/lineup_page.dart';
 import 'package:lineneup/src/shared/models/event_model.dart';
+import 'package:lineneup/src/shared/navigation.dart';
 
 class EventCard extends StatelessWidget {
   final EventModel event;
@@ -18,10 +19,7 @@ class EventCard extends StatelessWidget {
             highlightColor: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(20),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LineupPage()),
-              );
+              AppNavigation().push(LineupPage.name, root: true);
             },
             child: SizedBox(
                 width: double.infinity,

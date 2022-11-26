@@ -24,6 +24,11 @@ dependencies:
   supabase: ^1.2.0
   supabase_flutter: ^1.2.0
   responsive_grid: ^2.1.0
+  get_it: ^7.2.0
+  pretty_dio_logger: ^1.1.1
+  qlevar_router: ^1.6.3
+  intl: ^0.17.0
+
 
 
 dev_dependencies:

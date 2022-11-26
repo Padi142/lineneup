@@ -7,8 +7,11 @@ import 'package:lineneup/src/feature/lineup/bloc/lineup_state.dart';
 import 'package:lineneup/src/feature/lineup/view/components/lineup_current.dart';
 import 'package:lineneup/src/feature/lineup/view/components/lineup_uncomming.dart';
 import 'package:lineneup/src/shared/models/artist_model.dart';
+import 'package:qlevar_router/qlevar_router.dart';
 
 class LineupPage extends StatefulWidget {
+  static const String name = 'lineup_page';
+
   const LineupPage({super.key});
 
   @override
@@ -18,7 +21,8 @@ class LineupPage extends StatefulWidget {
 class _LineupPageState extends State<LineupPage> {
   @override
   void initState() {
-    BlocProvider.of<LineupBloc>(context).add(const GetLineup());
+    final uid = QR.params['uid'].toString();
+    BlocProvider.of<LineupBloc>(context).add(GetLineup(uid));
 
     super.initState();
   }
@@ -49,6 +53,13 @@ class _LineupPageState extends State<LineupPage> {
                   return MobileBody(
                     currentArtist: loaded.currentArtist,
                     upcommingArtists: loaded.upcommingArtists,
+                  );
+                }), error: ((value) {
+                  return const Center(
+                    child: Text(
+                      "No event with this id ",
+                      style: TextStyle(color: Colors.white, fontSize: 29),
+                    ),
                   );
                 }), orElse: () {
                   return const Center(

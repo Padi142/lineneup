@@ -4,9 +4,12 @@ import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
 import 'package:lineneup/src/feature/login/bloc/login_state.dart';
 import 'package:lineneup/src/feature/login/view/login_page.dart';
 import 'package:lineneup/src/feature/user/view/user_page.dart';
+import 'package:lineneup/src/shared/navigation.dart';
 import 'package:lineneup/src/shared/views/components/loading.dart';
 
 class MainPage extends StatefulWidget {
+  static const String name = 'main_page';
+
   const MainPage({Key? key}) : super(key: key);
 
   @override
@@ -32,20 +35,11 @@ class _MainPage extends State<MainPage> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         state.maybeWhen(loaded: ((user) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const UserPage()),
-          );
+          AppNavigation().push(UserPage.name, root: true);
         }), notLoggedIn: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-          );
+          AppNavigation().push(LoginPage.name, root: true);
         }, orElse: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-          );
+          AppNavigation().push(LoginPage.name, root: true);
         });
       },
       child: const Loading(),
