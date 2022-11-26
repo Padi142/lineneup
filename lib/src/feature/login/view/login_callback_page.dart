@@ -4,6 +4,7 @@ import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
 import 'package:lineneup/src/feature/login/bloc/login_state.dart';
 import 'package:lineneup/src/feature/user/view/user_page.dart';
 import 'package:lineneup/src/shared/navigation.dart';
+import 'package:qlevar_router/qlevar_router.dart';
 
 class LoginCallbackPage extends StatefulWidget {
   static const String name = 'login_callback_page';
@@ -17,9 +18,9 @@ class LoginCallbackPage extends StatefulWidget {
 class _LoginPage extends State<LoginCallbackPage> {
   @override
   void initState() {
-    if (Uri.base.toString().contains("access_token")) {
+    if (QR.params.isNotEmpty) {
       /// Uri.base is a auth redirect link
-      BlocProvider.of<LoginBloc>(context).add(UriLogin(uri: Uri.base));
+
     } else {
       BlocProvider.of<LoginBloc>(context).add(const InitialEvent());
     }

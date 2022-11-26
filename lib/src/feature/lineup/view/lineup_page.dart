@@ -6,6 +6,7 @@ import 'package:lineneup/src/feature/lineup/bloc/lineup_bloc.dart';
 import 'package:lineneup/src/feature/lineup/bloc/lineup_state.dart';
 import 'package:lineneup/src/feature/lineup/view/components/lineup_current.dart';
 import 'package:lineneup/src/feature/lineup/view/components/lineup_uncomming.dart';
+import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
 import 'package:lineneup/src/shared/models/artist_model.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -21,8 +22,13 @@ class LineupPage extends StatefulWidget {
 class _LineupPageState extends State<LineupPage> {
   @override
   void initState() {
-    final uid = QR.params['uid'].toString();
-    BlocProvider.of<LineupBloc>(context).add(GetLineup(uid));
+    if (Uri.base.toString().contains("access_token")) {
+      /// Uri.base is a auth redirect link
+      BlocProvider.of<LoginBloc>(context).add(UriLogin(uri: Uri.base));
+    } else {
+      final uid = QR.params['uid'].toString();
+      BlocProvider.of<LineupBloc>(context).add(GetLineup(uid));
+    }
 
     super.initState();
   }
