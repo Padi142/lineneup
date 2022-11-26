@@ -13,4 +13,8 @@ class AppNavigation {
 
     QR.navigator.pushName(path, params: params);
   }
+
+  void pushByPath(String path) {
+    QR.navigator.push(path);
+  }
 }

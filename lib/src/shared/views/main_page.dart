@@ -19,13 +19,13 @@ class MainPage extends StatefulWidget {
 class _MainPage extends State<MainPage> {
   @override
   void initState() {
-    BlocProvider.of<LoginBloc>(context).add(const InitialEvent());
-
     Uri.base.queryParameters;
 
     if (Uri.base.toString().contains("access_token")) {
       /// Uri.base is a auth redirect link
       BlocProvider.of<LoginBloc>(context).add(UriLogin(uri: Uri.base));
+    } else {
+      BlocProvider.of<LoginBloc>(context).add(const InitialEvent());
     }
     super.initState();
   }
