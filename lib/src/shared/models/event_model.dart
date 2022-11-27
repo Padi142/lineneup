@@ -15,8 +15,8 @@ class EventModel extends Equatable {
   final String creatorUid;
   @JsonKey(name: "Start_time")
   final DateTime startTime;
-  @JsonKey(name: "Start_date")
-  final DateTime startDate;
+  @JsonKey(name: "End_time")
+  final DateTime endTime;
 
   const EventModel({
     required this.eventName,
@@ -24,7 +24,7 @@ class EventModel extends Equatable {
     required this.eventUid,
     required this.creatorUid,
     required this.startTime,
-    required this.startDate,
+    required this.endTime,
   });
 
   @override

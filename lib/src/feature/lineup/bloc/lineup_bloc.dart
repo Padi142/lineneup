@@ -2,10 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lineneup/src/feature/home/view/home_page.dart';
 import 'package:lineneup/src/feature/lineup/bloc/lineup_state.dart';
 import 'package:lineneup/src/feature/lineup/provider/lineup_provider.dart';
 import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
 import 'package:lineneup/src/shared/models/artist_model.dart';
+import 'package:lineneup/src/shared/navigation.dart';
 
 part 'lineup_event.dart';
 
@@ -21,6 +23,8 @@ class LineupBloc extends Bloc<LineupEvent, LineupState> {
           uri: Uri.parse(
         event.uid,
       )));
+      AppNavigation().push(HomePage.name);
+      return;
     }
     List<ArtistModel>? artists = await lineupProvider.getLineup(event.uid);
     if (artists == null || artists.isEmpty) {

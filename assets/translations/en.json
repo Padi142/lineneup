@@ -3,6 +3,11 @@
     "log_in_button":"Log in",
     "create_event_button":"Create new event",
     "app_desc":"One place for all your events",
-    "no_events_label":"You have no events :/ "
+    "no_events_label":"You have no events :/ ",
+    "user_logged_button":"User",
+    "event_start_input_label":"Start date & Time",
+    "event_end_input_label":"End date & Time",
+    "event_name_input_label":"Event name",
+    "create_event_button_label":"Create event"
 
 }

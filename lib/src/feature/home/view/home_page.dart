@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lineneup/src/feature/login/view/login_page.dart';
+import 'package:lineneup/src/feature/user/view/user_page.dart';
 import 'package:lineneup/src/shared/navigation.dart';
 import 'package:lineneup/src/shared/views/components/gradient_button.dart';
+import 'package:lineneup/src/shared/views/components/gradient_icon_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomePage extends StatefulWidget {
   static const String name = 'home_page';
@@ -49,19 +52,33 @@ class MobileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String user = Supabase.instance.client.auth.currentUser?.email ?? "NULL";
+
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Icon(Icons.menu),
-            GradientButton(
-              buttonText: "log_in_button".tr(),
-              width: 60,
-              onpressed: () {
-                AppNavigation().push(LoginPage.name);
-              },
+            GradientIconButton(
+              icon: Icons.menu,
+              width: 10,
+              onpressed: () {},
             ),
+            user == "NULL"
+                ? GradientButton(
+                    buttonText: "log_in_button".tr(),
+                    width: 60,
+                    onpressed: () {
+                      AppNavigation().push(LoginPage.name);
+                    },
+                  )
+                : GradientButton(
+                    buttonText: "user_logged_button".tr(),
+                    width: 60,
+                    onpressed: () {
+                      AppNavigation().push(UserPage.name);
+                    },
+                  ),
           ],
         ),
         Center(

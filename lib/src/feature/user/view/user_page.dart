@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lineneup/src/feature/event/view/event_create_page.dart';
 import 'package:lineneup/src/feature/user/bloc/user_bloc.dart';
 import 'package:lineneup/src/feature/user/bloc/user_state.dart';
 import 'package:lineneup/src/feature/user/view/components/event_card.dart';
 import 'package:lineneup/src/shared/models/event_model.dart';
+import 'package:lineneup/src/shared/navigation.dart';
 import 'package:lineneup/src/shared/views/components/gradient_button.dart';
 import 'package:lineneup/src/shared/views/components/gradient_icon_button.dart';
 import 'package:lineneup/src/shared/views/components/loading.dart';
@@ -73,7 +75,9 @@ class MobileBody extends StatelessWidget {
               GradientButton(
                 buttonText: "create_event_button".tr(),
                 width: 80,
-                onpressed: () {},
+                onpressed: () {
+                  AppNavigation().push(EventCreatePage.name);
+                },
               ),
             ],
           ),

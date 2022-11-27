@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lineneup/src/feature/event/bloc/event_bloc.dart';
+import 'package:lineneup/src/feature/event/view/event_create_page.dart';
 import 'package:lineneup/src/feature/home/view/home_page.dart';
 import 'package:lineneup/src/feature/lineup/bloc/lineup_bloc.dart';
 import 'package:lineneup/src/feature/lineup/view/lineup_page.dart';
@@ -28,6 +30,9 @@ class LineupApp extends StatelessWidget {
           ),
           BlocProvider<LoginBloc>(
             create: (BuildContext context) => LoginBloc(),
+          ),
+          BlocProvider<EventBloc>(
+            create: (BuildContext context) => EventBloc(),
           ),
           BlocProvider<UserBloc>(
             create: (BuildContext context) => UserBloc(),
@@ -99,5 +104,13 @@ List<QRoute> routes = [
     ],
     name: LineupPage.name,
     path: '/:uid',
+  ),
+  QRoute(
+    builder: () => const EventCreatePage(),
+    middleware: [
+      //AuthMiddleware(loadUserUseCase: di.get<LoadUserUseCase>()),
+    ],
+    name: EventCreatePage.name,
+    path: '/event_create',
   ),
 ];
