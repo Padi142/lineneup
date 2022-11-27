@@ -27,7 +27,7 @@ class _LineupPageState extends State<LineupPage> {
       BlocProvider.of<LoginBloc>(context).add(UriLogin(uri: Uri.base));
     } else {
       final uid = QR.params['uid'].toString();
-      BlocProvider.of<LineupBloc>(context).add(GetLineup(uid));
+      BlocProvider.of<LineupBloc>(context).add(GetLineup(uid, context));
     }
 
     super.initState();

@@ -9,7 +9,8 @@ abstract class LineupEvent extends Equatable {
 
 class GetLineup extends LineupEvent {
   final String uid;
-  const GetLineup(this.uid);
+  final BuildContext context;
+  const GetLineup(this.uid, this.context);
 
   @override
   List<Object> get props => [];
