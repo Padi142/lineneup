@@ -1,20 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
+import 'package:lineneup/src/feature/login/view/login_page.dart';
+import 'package:lineneup/src/shared/navigation.dart';
 import 'package:lineneup/src/shared/views/components/gradient_button.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginPage extends StatefulWidget {
-  static const String name = 'login_page';
+class HomePage extends StatefulWidget {
+  static const String name = 'home_page';
 
-  const LoginPage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPage();
+  State<HomePage> createState() => _HomePage();
 }
 
-class _LoginPage extends State<LoginPage> {
+class _HomePage extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -50,25 +49,30 @@ class MobileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String user = Supabase.instance.client.auth.currentUser?.email ?? "NULL";
     return Column(
       children: [
-        const Center(
-          child: Text("Log in to be able to create events",
-              style: TextStyle(color: Colors.white, fontSize: 25)),
-        ),
-        GradientButton(
-          buttonText: "log_in_button".tr(),
-          width: 250,
-          onpressed: () {
-            BlocProvider.of<LoginBloc>(context).add(const GoogleLogin());
-          },
-        ),
-        const SizedBox(
-          height: 30,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Icon(Icons.menu),
+            GradientButton(
+              buttonText: "log_in_button".tr(),
+              width: 60,
+              onpressed: () {
+                AppNavigation().push(LoginPage.name);
+              },
+            ),
+          ],
         ),
         Center(
-          child: Text("Current user: $user",
+          child: Text('app_name'.tr(),
+              style: const TextStyle(color: Colors.white, fontSize: 28)),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Center(
+          child: Text('app_desc'.tr(),
               style: const TextStyle(color: Colors.white, fontSize: 25)),
         ),
       ],

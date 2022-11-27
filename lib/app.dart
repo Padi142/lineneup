@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lineneup/src/feature/home/view/home_page.dart';
 import 'package:lineneup/src/feature/lineup/bloc/lineup_bloc.dart';
 import 'package:lineneup/src/feature/lineup/view/lineup_page.dart';
 import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
@@ -32,13 +34,16 @@ class LineupApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           debugShowCheckedModeBanner: false,
           title: "Lineup",
           theme: ThemeData(
               primaryColor: const Color(0xFFE94560),
               highlightColor: const Color(0xFF4555E9),
               dividerColor: const Color(0xFFC403B1),
-              scaffoldBackgroundColor: Colors.purpleAccent,
+              scaffoldBackgroundColor: const Color(0xFF0F0C29),
               textTheme: GoogleFonts.poppinsTextTheme()),
           routeInformationParser: const QRouteInformationParser(),
           routerDelegate: QRouterDelegate(routes, initPath: '/'),
@@ -62,6 +67,14 @@ List<QRoute> routes = [
     ],
     name: LoginPage.name,
     path: '/login',
+  ),
+  QRoute(
+    builder: () => const HomePage(),
+    middleware: [
+      //AuthMiddleware(loadUserUseCase: di.get<LoadUserUseCase>()),
+    ],
+    name: HomePage.name,
+    path: '/landing',
   ),
   QRoute(
     builder: () => const LoginCallbackPage(),

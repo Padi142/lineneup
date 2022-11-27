@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/material.dart';
 import 'app.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   //final uri = Uri.base;
   //usePathUrlStrategy();
 
@@ -15,5 +17,10 @@ void main() async {
       authCallbackUrlHostname: 'http://localhost:3000', // optional
       debug: true // optional
       );
-  runApp(const LineupApp());
+  runApp(EasyLocalization(
+      key: UniqueKey(),
+      supportedLocales: const [Locale('en', 'EN')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: const LineupApp()));
 }

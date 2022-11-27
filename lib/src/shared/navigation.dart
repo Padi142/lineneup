@@ -15,6 +15,6 @@ class AppNavigation {
   }
 
   void pushByPath(String path) {
-    QR.navigator.push(path);
+    QR.to(path);
   }
 }

@@ -19,8 +19,7 @@ class EventCard extends StatelessWidget {
             highlightColor: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(20),
             onTap: () {
-              AppNavigation().pushByPath(
-                  Uri.base.toString().replaceAll("home", event.eventUid));
+              AppNavigation().pushByPath("/${event.eventUid}");
             },
             child: SizedBox(
                 width: double.infinity,

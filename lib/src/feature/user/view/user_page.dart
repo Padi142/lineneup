@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lineneup/src/feature/user/bloc/user_bloc.dart';
 import 'package:lineneup/src/feature/user/bloc/user_state.dart';
 import 'package:lineneup/src/feature/user/view/components/event_card.dart';
 import 'package:lineneup/src/shared/models/event_model.dart';
+import 'package:lineneup/src/shared/views/components/gradient_button.dart';
+import 'package:lineneup/src/shared/views/components/gradient_icon_button.dart';
 import 'package:lineneup/src/shared/views/components/loading.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -56,22 +59,51 @@ class MobileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (context, state) {
-        return state.maybeWhen(loaded: (events) {
-          return ResponsiveGridList(
-            desiredItemWidth: 400,
-            minSpacing: 10,
-            children: _generateContainers(events),
-          );
-        }, initial: (() {
-          return const Loading();
-        }), orElse: () {
-          return const Center(
-            child: Text("user error"),
-          );
-        });
-      },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GradientIconButton(
+                icon: Icons.menu,
+                width: 10,
+                onpressed: () {},
+              ),
+              GradientButton(
+                buttonText: "create_event_button".tr(),
+                width: 80,
+                onpressed: () {},
+              ),
+            ],
+          ),
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              return state.maybeWhen(loaded: (events) {
+                if (events.isNotEmpty) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: ResponsiveGridList(
+                      shrinkWrap: false,
+                      desiredItemWidth: 250,
+                      minSpacing: 10,
+                      children: _generateContainers(events),
+                    ),
+                  );
+                } else {
+                  return Text("no_events_label".tr());
+                }
+              }, initial: (() {
+                return const Loading();
+              }), orElse: () {
+                return const Center(
+                  child: Text("user error"),
+                );
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }

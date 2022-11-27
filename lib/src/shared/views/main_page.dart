@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lineneup/src/feature/home/view/home_page.dart';
 import 'package:lineneup/src/feature/login/bloc/login_bloc.dart';
 import 'package:lineneup/src/feature/login/bloc/login_state.dart';
 import 'package:lineneup/src/feature/login/view/login_page.dart';
@@ -35,7 +36,7 @@ class _MainPage extends State<MainPage> {
         state.maybeWhen(loaded: ((user) {
           AppNavigation().push(UserPage.name, root: true);
         }), notLoggedIn: () {
-          AppNavigation().push(LoginPage.name, root: true);
+          AppNavigation().push(HomePage.name, root: true);
         }, orElse: () {
           AppNavigation().push(LoginPage.name, root: true);
         });
