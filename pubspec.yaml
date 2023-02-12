@@ -20,19 +20,12 @@ dependencies:
   flutter_bloc: ^8.0.1
   google_fonts: ^3.0.1
   curved_progress_bar: ^1.0.2
-  dio: ^4.0.6
-  supabase: ^1.2.0
-  supabase_flutter: ^1.2.0
-  responsive_grid: ^2.1.0
   get_it: ^7.2.0
-  pretty_dio_logger: ^1.1.1
-  qlevar_router: ^1.6.3
-  intl: ^0.17.0
   easy_localization: ^3.0.1
-  reactive_forms: ^14.1.0
-  date_time_picker: ^2.1.0
-
-
+  logger: ^1.1.0
+  dio: ^4.0.6
+  pretty_dio_logger: ^1.2.0-beta-1
+  qlevar_router: ^1.8.0
 
 dev_dependencies:
   flutter_test:
@@ -41,10 +34,12 @@ dev_dependencies:
   build_runner: ^2.0.1
   freezed: ^2.0.3+1
   json_serializable: ^6.0.0
-
+  retrofit_generator: '>=4.0.0 <5.0.0'
 
 
 flutter:
   uses-material-design: true
+
   assets:
     - assets/translations/
+    - assets/images/

@@ -1,13 +1,10 @@
 {
-    "app_name":"Lineap",
-    "log_in_button":"Log in",
-    "create_event_button":"Create new event",
-    "app_desc":"One place for all your events",
-    "no_events_label":"You have no events :/ ",
-    "user_logged_button":"User",
-    "event_start_input_label":"Start date & Time",
-    "event_end_input_label":"End date & Time",
-    "event_name_input_label":"Event name",
-    "create_event_button_label":"Create event"
+  "app_name": "LineApp",
+  "unknown_screen__title": "Sorry",
+  "unknown_screen__message": "We could not find this screen",
+  "log_in_button": "Log in",
+  "sign_up_button": "Sign up",
+  "home_leading_text": "One place for all your events",
+  "home_trailing_text": "All the info about your next event in one, simple link"
 
 }
