@@ -6,11 +6,13 @@ import 'package:lineneup/feature/lineup/bloc/lineup_state.dart';
 import 'package:lineneup/generic/widget/app_gradient.dart';
 import 'package:lineneup/generic/widget/app_progress.dart';
 
+import '../../../generic/artist/model/artist_model.dart';
 import '../../../generic/constant.dart';
 import '../../../generic/event/model/event_model.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
 import '../../../library/app_screen.dart';
+import 'component/artist_container.dart';
 import 'component/lineup_header.dart';
 
 class LineupScreen extends Screen {
@@ -46,7 +48,10 @@ class MobileLineupBody extends StatelessWidget {
     return BlocBuilder<LineupBloc, LineupState>(
       builder: (context, state) {
         return state.maybeMap(loaded: (loaded) {
-          return MobileLineupContent(event: loaded.event);
+          return MobileLineupContent(
+            event: loaded.event,
+            artists: loaded.artists,
+          );
         }, orElse: () {
           return const Center(child: AppProgress());
         });
@@ -57,7 +62,10 @@ class MobileLineupBody extends StatelessWidget {
 
 class MobileLineupContent extends StatelessWidget {
   final EventModel event;
-  const MobileLineupContent({required this.event, Key? key}) : super(key: key);
+  final List<ArtistModel> artists;
+  const MobileLineupContent(
+      {required this.event, required this.artists, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,46 +90,14 @@ class MobileLineupContent extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Card(
-              color: Theme.of(context).highlightColor,
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: InkWell(
-                highlightColor: Theme.of(context).highlightColor,
-                borderRadius: BorderRadius.circular(20),
-                onTap: () {},
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CircleAvatar(
-                        minRadius: 30,
-                        backgroundImage: NetworkImage(artist.artistPhoto),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Text(
-                        artist.artistName,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        DateFormat('kk:mm').format(artist.startTime),
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-              )),
+          ListView.builder(
+              itemCount: artists.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ArtistContainer(
+                  artist: artists[index],
+                );
+              })
         ],
       ),
     );

@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:lineneup/generic/artist/model/params/get_artists_params.dart';
 import 'package:lineneup/generic/event/model/params/get_event_params.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
+import '../../../generic/artist/data/get_artists_use_case.dart';
 import '../../../generic/event/data/get_event_use_case.dart';
 import '../use_case/lineup_navigation.dart';
 import 'lineup_state.dart';
@@ -12,8 +14,10 @@ part 'lineup_event.dart';
 class LineupBloc extends Bloc<LineupEvent, LineupState> {
   final LineupNavigation lineupNavigation;
   final GetEventUseCase getEventUseCase;
+  final GetArtistsUseCase getArtistsUseCase;
   LineupBloc({
     required this.lineupNavigation,
+    required this.getArtistsUseCase,
     required this.getEventUseCase,
   }) : super(const LineupState.loading()) {
     on<InitialEvent>(_onInitialEvent);
@@ -30,12 +34,19 @@ class LineupBloc extends Bloc<LineupEvent, LineupState> {
       return;
     }
 
-    final GetEventParams params = GetEventParams(id: eventId.toString());
+    final GetEventParams eventParams = GetEventParams(id: eventId.toString());
+    final GetArtistsParams artistsParams =
+        GetArtistsParams(id: eventId.toString());
 
-    final result = await getEventUseCase.call(params);
+    final eventResult = await getEventUseCase.call(eventParams);
+    final artistsResult = await getArtistsUseCase.call(artistsParams);
 
-    result.map(loaded: (loaded) {
-      emit(LineupState.loaded(loaded.event));
+    eventResult.map(loaded: (loaded) {
+      artistsResult.map(loaded: (artistsLoaded) {
+        emit(LineupState.loaded(loaded.event, artistsLoaded.artists));
+      }, failure: (failure) {
+        emit(const LineupState.error());
+      });
     }, failure: (failure) {
       emit(const LineupState.error());
     });

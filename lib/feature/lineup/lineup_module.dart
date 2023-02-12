@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lineneup/feature/lineup/use_case/lineup_navigation.dart';
 import 'package:lineneup/feature/lineup/view/lineup_screen.dart';
+import 'package:lineneup/generic/artist/data/get_artists_use_case.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../../generic/event/data/get_event_use_case.dart';
@@ -20,6 +21,7 @@ class LineupModule extends AppModule {
       () => LineupBloc(
         lineupNavigation: GetIt.I.get<LineupNavigation>(),
         getEventUseCase: GetIt.I.get<GetEventUseCase>(),
+        getArtistsUseCase: GetIt.I.get<GetArtistsUseCase>(),
       ),
     );
   }

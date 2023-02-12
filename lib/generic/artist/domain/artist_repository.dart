@@ -1,8 +1,8 @@
-import '../model/params/get_artist_params.dart';
-import '../model/results/get_artist_result.dart';
+import '../model/params/get_artists_params.dart';
+import '../model/results/get_artists_result.dart';
 
 abstract class ArtistRepository {
-  Future<ArtistDataResult> getArtistsAtEvent(
-    GetArtistParams params,
+  Future<ArtistsDataResult> getArtistsAtEvent(
+      GetArtistsParams params,
   );
 }

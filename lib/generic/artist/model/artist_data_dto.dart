@@ -28,9 +28,9 @@ class ArtistDataDto {
   @JsonKey(name: 'artist_photo')
   final String artistPhoto;
   @JsonKey(name: 'start_time')
-  final String startTime;
+  final DateTime startTime;
   @JsonKey(name: 'end_time')
-  final String endTime;
+  final DateTime endTime;
   @JsonKey(name: 'artist_uid')
   final String artistUid;
   @JsonKey(name: 'artist_description')

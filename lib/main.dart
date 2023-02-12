@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:lineneup/feature/home/home_module.dart';
 import 'package:lineneup/feature/init/init_module.dart';
 import 'package:lineneup/feature/lineup/lineup_module.dart';
+import 'package:lineneup/generic/artist/artist_module.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import 'feature/unknown/view/unknown_screen.dart';
@@ -51,6 +52,7 @@ List<AppModule> modules() {
     InitModule(),
     LineupModule(),
     EventModule(),
+    ArtistModule(),
     HomeModule(),
   ];
 }

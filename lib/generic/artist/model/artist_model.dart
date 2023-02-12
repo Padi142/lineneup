@@ -6,8 +6,8 @@ class ArtistModel extends Equatable {
   final DateTime createdAt;
   final String artistName;
   final String artistPhoto;
-  final String startTime;
-  final String endTime;
+  final DateTime startTime;
+  final DateTime endTime;
   final String artistUid;
   final String artistDescription;
   final String spotifyLink;

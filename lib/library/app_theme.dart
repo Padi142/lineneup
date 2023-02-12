@@ -48,6 +48,7 @@ abstract class AppTheme {
     final ThemeData theme = ThemeData(
         brightness: brightness,
         fontFamily: appFont,
+        scaffoldBackgroundColor: colorBackground2,
         primaryColor: colorPrimary,
         primaryColorLight: colorPrimary,
         primaryColorDark: colorPrimary,

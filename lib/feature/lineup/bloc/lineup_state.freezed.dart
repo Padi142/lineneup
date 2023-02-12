@@ -20,21 +20,22 @@ mixin _$LineupState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event)? loaded,
+    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +119,8 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) {
     return loading();
   }
@@ -128,7 +130,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
   }) {
     return loading?.call();
   }
@@ -138,7 +140,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event)? loaded,
+    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -224,7 +226,8 @@ class _$Error implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) {
     return error();
   }
@@ -234,7 +237,7 @@ class _$Error implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
   }) {
     return error?.call();
   }
@@ -244,7 +247,7 @@ class _$Error implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event)? loaded,
+    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -297,7 +300,7 @@ abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({EventModel event});
+  $Res call({EventModel event, List<ArtistModel> artists});
 }
 
 /// @nodoc
@@ -311,12 +314,17 @@ class __$$LoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? event = null,
+    Object? artists = null,
   }) {
     return _then(_$Loaded(
       null == event
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as EventModel,
+      null == artists
+          ? _value._artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as List<ArtistModel>,
     ));
   }
 }
@@ -324,14 +332,22 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded(this.event);
+  const _$Loaded(this.event, final List<ArtistModel> artists)
+      : _artists = artists;
 
   @override
   final EventModel event;
+  final List<ArtistModel> _artists;
+  @override
+  List<ArtistModel> get artists {
+    if (_artists is EqualUnmodifiableListView) return _artists;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_artists);
+  }
 
   @override
   String toString() {
-    return 'LineupState.loaded(event: $event)';
+    return 'LineupState.loaded(event: $event, artists: $artists)';
   }
 
   @override
@@ -339,11 +355,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            (identical(other.event, event) || other.event == event));
+            (identical(other.event, event) || other.event == event) &&
+            const DeepCollectionEquality().equals(other._artists, _artists));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, event);
+  int get hashCode => Object.hash(
+      runtimeType, event, const DeepCollectionEquality().hash(_artists));
 
   @JsonKey(ignore: true)
   @override
@@ -356,9 +374,10 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) {
-    return loaded(event);
+    return loaded(event, artists);
   }
 
   @override
@@ -366,9 +385,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
   }) {
-    return loaded?.call(event);
+    return loaded?.call(event, artists);
   }
 
   @override
@@ -376,11 +395,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event)? loaded,
+    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(event);
+      return loaded(event, artists);
     }
     return orElse();
   }
@@ -421,9 +440,11 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements LineupState {
-  const factory Loaded(final EventModel event) = _$Loaded;
+  const factory Loaded(
+      final EventModel event, final List<ArtistModel> artists) = _$Loaded;
 
   EventModel get event;
+  List<ArtistModel> get artists;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
