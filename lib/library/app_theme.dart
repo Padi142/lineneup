@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart' as fonts;
 
 abstract class AppTheme {
   String get appFont;
@@ -24,8 +24,10 @@ abstract class AppTheme {
   Color get colorSuccess;
 
   //text
-  TextStyle get textSuperHeader => TextStyle(fontSize: 35.0, color: colorText, fontWeight: FontWeight.bold);
-  TextStyle get textHeader => TextStyle(fontSize: 18.0, color: colorText, fontWeight: FontWeight.bold);
+  TextStyle get textSuperHeader =>
+      TextStyle(fontSize: 35.0, color: colorText, fontWeight: FontWeight.bold);
+  TextStyle get textHeader =>
+      TextStyle(fontSize: 18.0, color: colorText, fontWeight: FontWeight.bold);
   TextStyle get textTitle => TextStyle(
         fontSize: 15.0,
         color: colorText,
@@ -50,7 +52,7 @@ abstract class AppTheme {
         primaryColorLight: colorPrimary,
         primaryColorDark: colorPrimary,
         primarySwatch: materialColor(colorPrimary),
-        textTheme: GoogleFonts.poppinsTextTheme(TextTheme(
+        textTheme: fonts.GoogleFonts.poppinsTextTheme(TextTheme(
           displayMedium: textSuperHeader,
           displaySmall: textHeader,
           headlineSmall: textHeader,
