@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'lineup_state.dart';
 
@@ -64,11 +64,14 @@ mixin _$LineupState {
 
 /// @nodoc
 abstract class $LineupStateCopyWith<$Res> {
-  factory $LineupStateCopyWith(LineupState value, $Res Function(LineupState) then) = _$LineupStateCopyWithImpl<$Res, LineupState>;
+  factory $LineupStateCopyWith(
+          LineupState value, $Res Function(LineupState) then) =
+      _$LineupStateCopyWithImpl<$Res, LineupState>;
 }
 
 /// @nodoc
-class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState> implements $LineupStateCopyWith<$Res> {
+class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState>
+    implements $LineupStateCopyWith<$Res> {
   _$LineupStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -79,12 +82,16 @@ class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState> implements $Line
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
-  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) = __$$LoadingCopyWithImpl<$Res>;
+  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
+      __$$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loading> implements _$$LoadingCopyWith<$Res> {
-  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then) : super(_value, _then);
+class __$$LoadingCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Loading>
+    implements _$$LoadingCopyWith<$Res> {
+  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -99,7 +106,8 @@ class _$Loading implements Loading {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loading);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @override
@@ -180,12 +188,16 @@ abstract class Loading implements LineupState {
 
 /// @nodoc
 abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) = __$$ErrorCopyWithImpl<$Res>;
+  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
+      __$$ErrorCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Error> implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then) : super(_value, _then);
+class __$$ErrorCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Error>
+    implements _$$ErrorCopyWith<$Res> {
+  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -200,7 +212,8 @@ class _$Error implements Error {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Error);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Error);
   }
 
   @override
@@ -281,14 +294,18 @@ abstract class Error implements LineupState {
 
 /// @nodoc
 abstract class _$$LoadedCopyWith<$Res> {
-  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) = __$$LoadedCopyWithImpl<$Res>;
+  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
+      __$$LoadedCopyWithImpl<$Res>;
   @useResult
   $Res call({EventModel event});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loaded> implements _$$LoadedCopyWith<$Res> {
-  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then) : super(_value, _then);
+class __$$LoadedCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Loaded>
+    implements _$$LoadedCopyWith<$Res> {
+  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -319,7 +336,10 @@ class _$Loaded implements Loaded {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loaded && (identical(other.event, event) || other.event == event));
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Loaded &&
+            (identical(other.event, event) || other.event == event));
   }
 
   @override
@@ -328,7 +348,8 @@ class _$Loaded implements Loaded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedCopyWith<_$Loaded> get copyWith => __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
+  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+      __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -404,5 +425,6 @@ abstract class Loaded implements LineupState {
 
   EventModel get event;
   @JsonKey(ignore: true)
-  _$$LoadedCopyWith<_$Loaded> get copyWith => throw _privateConstructorUsedError;
+  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

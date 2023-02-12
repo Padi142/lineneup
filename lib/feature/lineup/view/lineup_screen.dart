@@ -1,4 +1,4 @@
-import 'package:curved_progress_bar/curved_progress_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lineneup/feature/lineup/bloc/lineup_bloc.dart';
@@ -11,6 +11,7 @@ import '../../../generic/event/model/event_model.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
 import '../../../library/app_screen.dart';
+import 'component/lineup_header.dart';
 
 class LineupScreen extends Screen {
   static const String name = ScreenPath.LINEUP_SCREEN;
@@ -47,7 +48,7 @@ class MobileLineupBody extends StatelessWidget {
         return state.maybeMap(loaded: (loaded) {
           return MobileLineupContent(event: loaded.event);
         }, orElse: () {
-          return const AppProgress();
+          return const Center(child: AppProgress());
         });
       },
     );
@@ -60,60 +61,70 @@ class MobileLineupContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2,
-          child: Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              Image.network(event.eventLogo),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      Text(
-                        event.eventName,
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.black, // <-- Border color
-                        ),
-                      ),
-                      Text(
-                        event.eventName,
-                        style: const TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white, // <-- Inner color
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: CurvedLinearProgressIndicator(
-                      color: App.appTheme.colorSecondary,
-                      strokeWidth: 6,
-                      value: 0.65,
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                ],
-              )
-            ],
+    return Center(
+      child: Column(
+        children: [
+          LineupHeader(event: event),
+          Card(
+            color: Colors.red,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(1),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                'live_button_text'.tr(),
+                style: App.appTheme.textHeader
+                    .copyWith(fontWeight: FontWeight.normal, fontSize: 35),
+              ),
+            ),
           ),
-        ),
-      ],
+          const SizedBox(
+            height: 5,
+          ),
+          Card(
+              color: Theme.of(context).highlightColor,
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: InkWell(
+                highlightColor: Theme.of(context).highlightColor,
+                borderRadius: BorderRadius.circular(20),
+                onTap: () {},
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CircleAvatar(
+                        minRadius: 30,
+                        backgroundImage: NetworkImage(artist.artistPhoto),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        artist.artistName,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        DateFormat('kk:mm').format(artist.startTime),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+              )),
+        ],
+      ),
     );
-    ;
   }
 }
 
