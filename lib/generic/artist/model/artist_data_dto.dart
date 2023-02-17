@@ -10,8 +10,7 @@ class ArtistListDto {
     required this.artists,
   });
 
-  factory ArtistListDto.fromJson(Map<String, dynamic> json) =>
-      _$ArtistListDtoFromJson(json);
+  factory ArtistListDto.fromJson(Map<String, dynamic> json) => _$ArtistListDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ArtistListDtoToJson(this);
 }
@@ -56,8 +55,7 @@ class ArtistDataDto {
       required this.instagramLink,
       required this.spotifyLink});
 
-  factory ArtistDataDto.fromJson(Map<String, dynamic> json) =>
-      _$ArtistDataDtoFromJson(json);
+  factory ArtistDataDto.fromJson(Map<String, dynamic> json) => _$ArtistDataDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ArtistDataDtoToJson(this);
 }

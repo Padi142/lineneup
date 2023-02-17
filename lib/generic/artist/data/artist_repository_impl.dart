@@ -17,8 +17,7 @@ class ArtistRepositoryImpl extends ArtistRepository {
     GetArtistsParams params,
   ) async {
     return artistApi.getEventArtists(params.id).then((artistDto) {
-      return ArtistsDataResult.loaded(
-          artistDto.artists.map((it) => it.toDomain()).toList());
+      return ArtistsDataResult.loaded(artistDto.artists.map((it) => it.toDomain()).toList());
     }).onError((error, stackTrace) {
       return ArtistsDataResult.failure(error.toString());
     });

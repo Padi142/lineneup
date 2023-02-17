@@ -24,10 +24,8 @@ abstract class AppTheme {
   Color get colorSuccess;
 
   //text
-  TextStyle get textSuperHeader =>
-      TextStyle(fontSize: 35.0, color: colorText, fontWeight: FontWeight.bold);
-  TextStyle get textHeader =>
-      TextStyle(fontSize: 18.0, color: colorText, fontWeight: FontWeight.bold);
+  TextStyle get textSuperHeader => TextStyle(fontSize: 35.0, color: colorText, fontWeight: FontWeight.bold);
+  TextStyle get textHeader => TextStyle(fontSize: 18.0, color: colorText, fontWeight: FontWeight.bold);
   TextStyle get textTitle => TextStyle(
         fontSize: 15.0,
         color: colorText,

@@ -3,6 +3,6 @@ import '../model/results/get_artists_result.dart';
 
 abstract class ArtistRepository {
   Future<ArtistsDataResult> getArtistsAtEvent(
-      GetArtistsParams params,
+    GetArtistsParams params,
   );
 }

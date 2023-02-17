@@ -41,19 +41,13 @@ class _ArtistContainerState extends State<ArtistContainer> {
                 flex: 3,
                 child: Text(
                   widget.artist.artistName,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.normal),
+                  style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.normal),
                 ),
               ),
               Expanded(
                 child: Text(
                   DateFormat('kk:mm').format(widget.artist.startTime),
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
                 ),
               )
             ],

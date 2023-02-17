@@ -6,20 +6,15 @@ part of 'artist_data_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ArtistListDto _$ArtistListDtoFromJson(Map<String, dynamic> json) =>
-    ArtistListDto(
-      artists: (json['artists'] as List<dynamic>)
-          .map((e) => ArtistDataDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
+ArtistListDto _$ArtistListDtoFromJson(Map<String, dynamic> json) => ArtistListDto(
+      artists: (json['artists'] as List<dynamic>).map((e) => ArtistDataDto.fromJson(e as Map<String, dynamic>)).toList(),
     );
 
-Map<String, dynamic> _$ArtistListDtoToJson(ArtistListDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ArtistListDtoToJson(ArtistListDto instance) => <String, dynamic>{
       'artists': instance.artists,
     };
 
-ArtistDataDto _$ArtistDataDtoFromJson(Map<String, dynamic> json) =>
-    ArtistDataDto(
+ArtistDataDto _$ArtistDataDtoFromJson(Map<String, dynamic> json) => ArtistDataDto(
       id: json['id'] as int,
       eventId: json['event_id'] as String,
       artistName: json['artist_name'] as String,
@@ -34,8 +29,7 @@ ArtistDataDto _$ArtistDataDtoFromJson(Map<String, dynamic> json) =>
       spotifyLink: json['spotify_link'] as String,
     );
 
-Map<String, dynamic> _$ArtistDataDtoToJson(ArtistDataDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ArtistDataDtoToJson(ArtistDataDto instance) => <String, dynamic>{
       'id': instance.id,
       'event_id': instance.eventId,
       'created_at': instance.createdAt.toIso8601String(),

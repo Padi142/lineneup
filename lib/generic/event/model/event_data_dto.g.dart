@@ -18,8 +18,7 @@ EventDataDto _$EventDataDtoFromJson(Map<String, dynamic> json) => EventDataDto(
       ticketsUrl: json['tickets_url'] as String,
     );
 
-Map<String, dynamic> _$EventDataDtoToJson(EventDataDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$EventDataDtoToJson(EventDataDto instance) => <String, dynamic>{
       'id': instance.id,
       'created_at': instance.createdAt.toIso8601String(),
       'event_name': instance.eventName,

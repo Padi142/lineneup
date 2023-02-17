@@ -10,8 +10,7 @@ import 'data/artist_repository_impl.dart';
 class ArtistModule extends AppModule {
   @override
   void registerDI() {
-    GetIt.I
-        .registerFactory<ArtistApi>(() => ArtistApi(dio(App.config.endpoint)));
+    GetIt.I.registerFactory<ArtistApi>(() => ArtistApi(dio(App.config.endpoint)));
   }
 
   @override
