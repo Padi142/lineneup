@@ -63,7 +63,9 @@ class MobileLineupBody extends StatelessWidget {
 class MobileLineupContent extends StatefulWidget {
   final EventModel event;
   final List<ArtistModel> artists;
-  const MobileLineupContent({required this.event, required this.artists, Key? key}) : super(key: key);
+  const MobileLineupContent(
+      {required this.event, required this.artists, Key? key})
+      : super(key: key);
 
   @override
   State<MobileLineupContent> createState() => _MobileLineupContentState();
@@ -91,7 +93,8 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
                 ),
                 Text(
                   'Start - 17:00',
-                  style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorSecondary),
+                  style: App.appTheme.textTitle.copyWith(
+                      color: App.appTheme.colorSecondary, fontSize: 17),
                 ),
               ],
             ),
@@ -109,7 +112,9 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
                           Container(
                             width: 10,
                             height: double.infinity,
-                            decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(
+                                color: App.appTheme.colorInactive,
+                                borderRadius: BorderRadius.circular(20)),
                           ),
                           Container(
                             width: 10,
@@ -133,10 +138,16 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: Container(
-                    decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(25)),
-                    child: ArtistInfo(
-                      artist: widget.artists[chosenArtist],
+                  child: Material(
+                    elevation: 2,
+                    borderRadius: BorderRadius.circular(25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: App.appTheme.colorInactive,
+                          borderRadius: BorderRadius.circular(25)),
+                      child: ArtistInfo(
+                        artist: widget.artists[chosenArtist],
+                      ),
                     ),
                   ),
                 )
@@ -150,7 +161,8 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
               children: [
                 Text(
                   'End - 4:00',
-                  style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorPrimary),
+                  style: App.appTheme.textTitle
+                      .copyWith(color: App.appTheme.colorPrimary, fontSize: 17),
                 ),
                 Center(
                   child: Container(),
@@ -165,16 +177,24 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
 
   List<Widget> _getArtistPictures(List<ArtistModel> artists) {
     return artists.map((it) {
-      return InkWell(
+      return Material(
+        elevation: 5,
         borderRadius: BorderRadius.circular(50),
-        onTap: () {
-          chosenArtist = artists.indexOf(it);
-          setState(() {});
-        },
-        child: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: App.appTheme.colorPrimary), image: DecorationImage(image: NetworkImage(it.artistPhoto), fit: BoxFit.fill)),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(50),
+          onTap: () {
+            chosenArtist = artists.indexOf(it);
+            setState(() {});
+          },
+          child: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: App.appTheme.colorPrimary),
+                image: DecorationImage(
+                    image: NetworkImage(it.artistPhoto), fit: BoxFit.fill)),
+          ),
         ),
       );
     }).toList();
@@ -196,10 +216,14 @@ class ArtistInfo extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    width: 150,
-                    height: 150,
-                    decoration:
-                        BoxDecoration(shape: BoxShape.circle, border: Border.all(color: App.appTheme.colorPrimary), image: DecorationImage(image: NetworkImage(artist.artistPhoto), fit: BoxFit.fill)),
+                    width: 140,
+                    height: 140,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: App.appTheme.colorPrimary),
+                        image: DecorationImage(
+                            image: NetworkImage(artist.artistPhoto),
+                            fit: BoxFit.fill)),
                   ),
                   const SizedBox(
                     width: 20,
