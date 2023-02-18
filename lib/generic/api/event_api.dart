@@ -9,9 +9,16 @@ abstract class EventApi {
   factory EventApi(Dio dio) = _EventApi;
 
   @GET(
-    '/event?uid={id}',
+    '/event?uid={uid}',
   )
   Future<EventDataDto> getEvent(
-    @Path() String id,
+    @Path() String uid,
+  );
+
+  @GET(
+    '/user_events?uid={uid}',
+  )
+  Future<EventListDataDto> getUserEvents(
+    @Path() String uid,
   );
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'lineup_state.dart';
+part of 'login_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,27 +15,26 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$LineupState {
+mixin _$LoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists)
-        loaded,
+    required TResult Function(String username) loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult? Function(String username)? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult Function(String username)? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,37 +42,37 @@ mixin _$LineupState {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Loaded value) loaded,
+    required TResult Function(LoggedIn value) loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Loaded value)? loaded,
+    TResult? Function(LoggedIn value)? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Loaded value)? loaded,
+    TResult Function(LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LineupStateCopyWith<$Res> {
-  factory $LineupStateCopyWith(
-          LineupState value, $Res Function(LineupState) then) =
-      _$LineupStateCopyWithImpl<$Res, LineupState>;
+abstract class $LoginStateCopyWith<$Res> {
+  factory $LoginStateCopyWith(
+          LoginState value, $Res Function(LoginState) then) =
+      _$LoginStateCopyWithImpl<$Res, LoginState>;
 }
 
 /// @nodoc
-class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState>
-    implements $LineupStateCopyWith<$Res> {
-  _$LineupStateCopyWithImpl(this._value, this._then);
+class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
+    implements $LoginStateCopyWith<$Res> {
+  _$LoginStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -89,7 +88,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingCopyWithImpl<$Res>
-    extends _$LineupStateCopyWithImpl<$Res, _$Loading>
+    extends _$LoginStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, _then);
@@ -102,7 +101,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'LineupState.loading()';
+    return 'LoginState.loading()';
   }
 
   @override
@@ -119,8 +118,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists)
-        loaded,
+    required TResult Function(String username) loggedIn,
   }) {
     return loading();
   }
@@ -130,7 +128,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult? Function(String username)? loggedIn,
   }) {
     return loading?.call();
   }
@@ -140,7 +138,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult Function(String username)? loggedIn,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -154,7 +152,7 @@ class _$Loading implements Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Loaded value) loaded,
+    required TResult Function(LoggedIn value) loggedIn,
   }) {
     return loading(this);
   }
@@ -164,7 +162,7 @@ class _$Loading implements Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Loaded value)? loaded,
+    TResult? Function(LoggedIn value)? loggedIn,
   }) {
     return loading?.call(this);
   }
@@ -174,7 +172,7 @@ class _$Loading implements Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Loaded value)? loaded,
+    TResult Function(LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -184,7 +182,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements LineupState {
+abstract class Loading implements LoginState {
   const factory Loading() = _$Loading;
 }
 
@@ -196,7 +194,7 @@ abstract class _$$ErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorCopyWithImpl<$Res>
-    extends _$LineupStateCopyWithImpl<$Res, _$Error>
+    extends _$LoginStateCopyWithImpl<$Res, _$Error>
     implements _$$ErrorCopyWith<$Res> {
   __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
       : super(_value, _then);
@@ -209,7 +207,7 @@ class _$Error implements Error {
 
   @override
   String toString() {
-    return 'LineupState.error()';
+    return 'LoginState.error()';
   }
 
   @override
@@ -226,8 +224,7 @@ class _$Error implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists)
-        loaded,
+    required TResult Function(String username) loggedIn,
   }) {
     return error();
   }
@@ -237,7 +234,7 @@ class _$Error implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult? Function(String username)? loggedIn,
   }) {
     return error?.call();
   }
@@ -247,7 +244,7 @@ class _$Error implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult Function(String username)? loggedIn,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -261,7 +258,7 @@ class _$Error implements Error {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Loaded value) loaded,
+    required TResult Function(LoggedIn value) loggedIn,
   }) {
     return error(this);
   }
@@ -271,7 +268,7 @@ class _$Error implements Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Loaded value)? loaded,
+    TResult? Function(LoggedIn value)? loggedIn,
   }) {
     return error?.call(this);
   }
@@ -281,7 +278,7 @@ class _$Error implements Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Loaded value)? loaded,
+    TResult Function(LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -291,93 +288,79 @@ class _$Error implements Error {
   }
 }
 
-abstract class Error implements LineupState {
+abstract class Error implements LoginState {
   const factory Error() = _$Error;
 }
 
 /// @nodoc
-abstract class _$$LoadedCopyWith<$Res> {
-  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
-      __$$LoadedCopyWithImpl<$Res>;
+abstract class _$$LoggedInCopyWith<$Res> {
+  factory _$$LoggedInCopyWith(
+          _$LoggedIn value, $Res Function(_$LoggedIn) then) =
+      __$$LoggedInCopyWithImpl<$Res>;
   @useResult
-  $Res call({EventModel event, List<ArtistModel> artists});
+  $Res call({String username});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res>
-    extends _$LineupStateCopyWithImpl<$Res, _$Loaded>
-    implements _$$LoadedCopyWith<$Res> {
-  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
+class __$$LoggedInCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$LoggedIn>
+    implements _$$LoggedInCopyWith<$Res> {
+  __$$LoggedInCopyWithImpl(_$LoggedIn _value, $Res Function(_$LoggedIn) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? event = null,
-    Object? artists = null,
+    Object? username = null,
   }) {
-    return _then(_$Loaded(
-      null == event
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as EventModel,
-      null == artists
-          ? _value._artists
-          : artists // ignore: cast_nullable_to_non_nullable
-              as List<ArtistModel>,
+    return _then(_$LoggedIn(
+      null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$Loaded implements Loaded {
-  const _$Loaded(this.event, final List<ArtistModel> artists)
-      : _artists = artists;
+class _$LoggedIn implements LoggedIn {
+  const _$LoggedIn(this.username);
 
   @override
-  final EventModel event;
-  final List<ArtistModel> _artists;
-  @override
-  List<ArtistModel> get artists {
-    if (_artists is EqualUnmodifiableListView) return _artists;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_artists);
-  }
+  final String username;
 
   @override
   String toString() {
-    return 'LineupState.loaded(event: $event, artists: $artists)';
+    return 'LoginState.loggedIn(username: $username)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Loaded &&
-            (identical(other.event, event) || other.event == event) &&
-            const DeepCollectionEquality().equals(other._artists, _artists));
+            other is _$LoggedIn &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, event, const DeepCollectionEquality().hash(_artists));
+  int get hashCode => Object.hash(runtimeType, username);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedCopyWith<_$Loaded> get copyWith =>
-      __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
+  _$$LoggedInCopyWith<_$LoggedIn> get copyWith =>
+      __$$LoggedInCopyWithImpl<_$LoggedIn>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists)
-        loaded,
+    required TResult Function(String username) loggedIn,
   }) {
-    return loaded(event, artists);
+    return loggedIn(username);
   }
 
   @override
@@ -385,9 +368,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function()? error,
-    TResult? Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult? Function(String username)? loggedIn,
   }) {
-    return loaded?.call(event, artists);
+    return loggedIn?.call(username);
   }
 
   @override
@@ -395,11 +378,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(EventModel event, List<ArtistModel> artists)? loaded,
+    TResult Function(String username)? loggedIn,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(event, artists);
+    if (loggedIn != null) {
+      return loggedIn(username);
     }
     return orElse();
   }
@@ -409,9 +392,9 @@ class _$Loaded implements Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Loaded value) loaded,
+    required TResult Function(LoggedIn value) loggedIn,
   }) {
-    return loaded(this);
+    return loggedIn(this);
   }
 
   @override
@@ -419,9 +402,9 @@ class _$Loaded implements Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Loaded value)? loaded,
+    TResult? Function(LoggedIn value)? loggedIn,
   }) {
-    return loaded?.call(this);
+    return loggedIn?.call(this);
   }
 
   @override
@@ -429,23 +412,21 @@ class _$Loaded implements Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Loaded value)? loaded,
+    TResult Function(LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    if (loggedIn != null) {
+      return loggedIn(this);
     }
     return orElse();
   }
 }
 
-abstract class Loaded implements LineupState {
-  const factory Loaded(
-      final EventModel event, final List<ArtistModel> artists) = _$Loaded;
+abstract class LoggedIn implements LoginState {
+  const factory LoggedIn(final String username) = _$LoggedIn;
 
-  EventModel get event;
-  List<ArtistModel> get artists;
+  String get username;
   @JsonKey(ignore: true)
-  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+  _$$LoggedInCopyWith<_$LoggedIn> get copyWith =>
       throw _privateConstructorUsedError;
 }

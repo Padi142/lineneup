@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:lineneup/feature/home/use_case/home_navigation.dart';
 import 'package:lineneup/feature/home/view/home_screen.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -8,9 +9,14 @@ import 'bloc/home_bloc.dart';
 
 class HomeModule extends AppModule {
   @override
+  void registerNavigation() {
+    GetIt.I.registerFactory<HomeNavigation>(() => HomeNavigation());
+  }
+
+  @override
   void registerBloc() {
     GetIt.I.registerFactory<HomeBloc>(
-      () => HomeBloc(),
+      () => HomeBloc(homeNavigation: GetIt.I.get<HomeNavigation>()),
     );
   }
 

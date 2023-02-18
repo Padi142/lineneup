@@ -5,7 +5,7 @@ import 'package:lineneup/feature/lineup/view/lineup_screen.dart';
 import 'package:lineneup/generic/artist/data/get_artists_use_case.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../../generic/event/data/get_event_use_case.dart';
+import '../../generic/event/domain/get_event_use_case.dart';
 import '../../library/app_module.dart';
 import 'bloc/lineup_bloc.dart';
 

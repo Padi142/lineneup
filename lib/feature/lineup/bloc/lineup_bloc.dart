@@ -5,7 +5,7 @@ import 'package:lineneup/generic/event/model/params/get_event_params.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../../../generic/artist/data/get_artists_use_case.dart';
-import '../../../generic/event/data/get_event_use_case.dart';
+import '../../../generic/event/domain/get_event_use_case.dart';
 import '../use_case/lineup_navigation.dart';
 import 'lineup_state.dart';
 
@@ -35,7 +35,8 @@ class LineupBloc extends Bloc<LineupEvent, LineupState> {
     }
 
     final GetEventParams eventParams = GetEventParams(id: eventId.toString());
-    final GetArtistsParams artistsParams = GetArtistsParams(id: eventId.toString());
+    final GetArtistsParams artistsParams =
+        GetArtistsParams(id: eventId.toString());
 
     final eventResult = await getEventUseCase.call(eventParams);
     final artistsResult = await getArtistsUseCase.call(artistsParams);

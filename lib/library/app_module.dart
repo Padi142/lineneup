@@ -27,9 +27,9 @@ abstract class AppModule {
     final Dio dio = Dio(
       BaseOptions(
         baseUrl: endpoint,
-        connectTimeout: const Duration(seconds: 30).inMilliseconds,
-        receiveTimeout: const Duration(seconds: 30).inMilliseconds,
-        sendTimeout: const Duration(seconds: 30).inMilliseconds,
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+        sendTimeout: const Duration(seconds: 30),
         contentType: 'application/json',
       ),
     );
@@ -40,7 +40,9 @@ abstract class AppModule {
       InterceptorsWrapper(
         onError: (error, handler) {
           String message = 'error__general';
-          final Map<String, dynamic> responseMap = error.response?.data as Map<String, dynamic>? ?? <String, dynamic>{};
+          final Map<String, dynamic> responseMap =
+              error.response?.data as Map<String, dynamic>? ??
+                  <String, dynamic>{};
           if (responseMap.containsKey('error')) {
             message = responseMap['error'].toString();
           }

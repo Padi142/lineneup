@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_event_result.dart';
+part of 'get_events_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,22 +15,22 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$EventDataResult {
+mixin _$EventsDataResult {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(List<EventModel> events) loaded,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(List<EventModel> events)? loaded,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(EventModel event)? loaded,
+    TResult Function(List<EventModel> events)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -57,16 +57,16 @@ mixin _$EventDataResult {
 }
 
 /// @nodoc
-abstract class $EventDataResultCopyWith<$Res> {
-  factory $EventDataResultCopyWith(
-          EventDataResult value, $Res Function(EventDataResult) then) =
-      _$EventDataResultCopyWithImpl<$Res, EventDataResult>;
+abstract class $EventsDataResultCopyWith<$Res> {
+  factory $EventsDataResultCopyWith(
+          EventsDataResult value, $Res Function(EventsDataResult) then) =
+      _$EventsDataResultCopyWithImpl<$Res, EventsDataResult>;
 }
 
 /// @nodoc
-class _$EventDataResultCopyWithImpl<$Res, $Val extends EventDataResult>
-    implements $EventDataResultCopyWith<$Res> {
-  _$EventDataResultCopyWithImpl(this._value, this._then);
+class _$EventsDataResultCopyWithImpl<$Res, $Val extends EventsDataResult>
+    implements $EventsDataResultCopyWith<$Res> {
+  _$EventsDataResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -79,12 +79,12 @@ abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({EventModel event});
+  $Res call({List<EventModel> events});
 }
 
 /// @nodoc
 class __$$LoadedCopyWithImpl<$Res>
-    extends _$EventDataResultCopyWithImpl<$Res, _$Loaded>
+    extends _$EventsDataResultCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, _then);
@@ -92,13 +92,13 @@ class __$$LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? event = null,
+    Object? events = null,
   }) {
     return _then(_$Loaded(
-      null == event
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as EventModel,
+      null == events
+          ? _value._events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<EventModel>,
     ));
   }
 }
@@ -106,14 +106,19 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded(this.event);
+  const _$Loaded(final List<EventModel> events) : _events = events;
 
+  final List<EventModel> _events;
   @override
-  final EventModel event;
+  List<EventModel> get events {
+    if (_events is EqualUnmodifiableListView) return _events;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_events);
+  }
 
   @override
   String toString() {
-    return 'EventDataResult.loaded(event: $event)';
+    return 'EventsDataResult.loaded(events: $events)';
   }
 
   @override
@@ -121,11 +126,12 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            (identical(other.event, event) || other.event == event));
+            const DeepCollectionEquality().equals(other._events, _events));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, event);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_events));
 
   @JsonKey(ignore: true)
   @override
@@ -136,30 +142,30 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(List<EventModel> events) loaded,
     required TResult Function(String message) failure,
   }) {
-    return loaded(event);
+    return loaded(events);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(List<EventModel> events)? loaded,
     TResult? Function(String message)? failure,
   }) {
-    return loaded?.call(event);
+    return loaded?.call(events);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(EventModel event)? loaded,
+    TResult Function(List<EventModel> events)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(event);
+      return loaded(events);
     }
     return orElse();
   }
@@ -196,10 +202,10 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements EventDataResult {
-  const factory Loaded(final EventModel event) = _$Loaded;
+abstract class Loaded implements EventsDataResult {
+  const factory Loaded(final List<EventModel> events) = _$Loaded;
 
-  EventModel get event;
+  List<EventModel> get events;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -215,7 +221,7 @@ abstract class _$$FailureCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailureCopyWithImpl<$Res>
-    extends _$EventDataResultCopyWithImpl<$Res, _$Failure>
+    extends _$EventsDataResultCopyWithImpl<$Res, _$Failure>
     implements _$$FailureCopyWith<$Res> {
   __$$FailureCopyWithImpl(_$Failure _value, $Res Function(_$Failure) _then)
       : super(_value, _then);
@@ -244,7 +250,7 @@ class _$Failure implements Failure {
 
   @override
   String toString() {
-    return 'EventDataResult.failure(message: $message)';
+    return 'EventsDataResult.failure(message: $message)';
   }
 
   @override
@@ -267,7 +273,7 @@ class _$Failure implements Failure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(EventModel event) loaded,
+    required TResult Function(List<EventModel> events) loaded,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -276,7 +282,7 @@ class _$Failure implements Failure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(EventModel event)? loaded,
+    TResult? Function(List<EventModel> events)? loaded,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -285,7 +291,7 @@ class _$Failure implements Failure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(EventModel event)? loaded,
+    TResult Function(List<EventModel> events)? loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -327,7 +333,7 @@ class _$Failure implements Failure {
   }
 }
 
-abstract class Failure implements EventDataResult {
+abstract class Failure implements EventsDataResult {
   const factory Failure(final String message) = _$Failure;
 
   String get message;

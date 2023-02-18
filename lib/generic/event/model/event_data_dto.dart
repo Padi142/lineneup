@@ -3,6 +3,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'event_data_dto.g.dart';
 
 @JsonSerializable()
+class EventListDataDto {
+  final List<EventDataDto> events;
+
+  const EventListDataDto({required this.events});
+
+  factory EventListDataDto.fromJson(Map<String, dynamic> json) =>
+      _$EventListDataDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EventListDataDtoToJson(this);
+}
+
+@JsonSerializable()
 class EventDataDto {
   final int id;
   @JsonKey(name: 'created_at')
@@ -34,7 +46,8 @@ class EventDataDto {
     required this.ticketsUrl,
   });
 
-  factory EventDataDto.fromJson(Map<String, dynamic> json) => _$EventDataDtoFromJson(json);
+  factory EventDataDto.fromJson(Map<String, dynamic> json) =>
+      _$EventDataDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$EventDataDtoToJson(this);
 }

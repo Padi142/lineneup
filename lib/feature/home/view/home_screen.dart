@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lineneup/feature/home/bloc/home_bloc.dart';
 import 'package:lineneup/generic/widget/app_button.dart';
 import 'package:lineneup/library/app_scaffold.dart';
 
@@ -74,6 +76,9 @@ class DesktopHomeBody extends StatelessWidget {
                   backgroundColor: App.appTheme.colorSecondary,
                   text: 'log_in_button'.tr(),
                   textStyle: App.appTheme.textTitle,
+                  onClick: () {
+                    BlocProvider.of<HomeBloc>(context).add(const GoToLogin());
+                  },
                 ),
               ],
             ),
@@ -83,6 +88,7 @@ class DesktopHomeBody extends StatelessWidget {
           ),
           Text(
             'home_leading_text'.tr(),
+            textAlign: TextAlign.center,
             style: App.appTheme.textSuperHeader.copyWith(fontSize: 40),
           ),
           const SizedBox(
@@ -90,7 +96,9 @@ class DesktopHomeBody extends StatelessWidget {
           ),
           Text(
             'home_trailing_text'.tr(),
-            style: App.appTheme.textHeader.copyWith(color: App.appTheme.colorInactive),
+            textAlign: TextAlign.center,
+            style: App.appTheme.textHeader
+                .copyWith(color: App.appTheme.colorTextSecondary),
           ),
           const SizedBox(
             height: 10,
@@ -108,7 +116,8 @@ class DesktopHomeBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Image.network('https://media.discordapp.net/attachments/1033387401407627374/1057424593322774598/New_Project.png')
+          Image.network(
+              'https://media.discordapp.net/attachments/1033387401407627374/1057424593322774598/New_Project.png')
         ],
       ),
     );

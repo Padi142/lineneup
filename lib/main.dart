@@ -2,15 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:lineneup/feature/dashboard/dashboard_module.dart';
 import 'package:lineneup/feature/home/home_module.dart';
 import 'package:lineneup/feature/init/init_module.dart';
 import 'package:lineneup/feature/lineup/lineup_module.dart';
 import 'package:lineneup/generic/artist/artist_module.dart';
 import 'package:qlevar_router/qlevar_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'feature/login/login_module.dart';
 import 'feature/unknown/view/unknown_screen.dart';
 import 'generic/event/event_module.dart';
 import 'generic/locale/locale_resource.dart';
+import 'generic/user/user_module.dart';
 import 'library/app.dart';
 import 'library/app_config.dart';
 import 'library/app_module.dart';
@@ -19,6 +23,12 @@ import 'library/app_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  await Supabase.initialize(
+    url: const String.fromEnvironment('SUPABASE_URL'),
+    anonKey: const String.fromEnvironment('SUPABASE_SECRET'),
+    authCallbackUrlHostname: 'login-callback', // optional
+  );
 
   final AppConfig config = appConfig();
 
@@ -52,8 +62,11 @@ List<AppModule> modules() {
     InitModule(),
     LineupModule(),
     EventModule(),
+    UserModule(),
     ArtistModule(),
     HomeModule(),
+    DashboardModule(),
+    LoginModule(),
   ];
 }
 

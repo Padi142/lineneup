@@ -1,11 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:lineneup/generic/api/event_api.dart';
 import 'package:lineneup/generic/event/data/event_repository_impl.dart';
-import 'package:lineneup/generic/event/data/get_event_use_case.dart';
 import 'package:lineneup/generic/event/domain/event_repository.dart';
+import 'package:lineneup/generic/event/domain/get_event_use_case.dart';
 
 import '../../library/app.dart';
 import '../../library/app_module.dart';
+import 'domain/get_user_events.dart';
 
 class EventModule extends AppModule {
   @override
@@ -26,6 +27,11 @@ class EventModule extends AppModule {
   void registerUseCase() {
     GetIt.I.registerFactory<GetEventUseCase>(
       () => GetEventUseCase(
+        repository: GetIt.I.get<EventRepository>(),
+      ),
+    );
+    GetIt.I.registerFactory<GetUserEventsUseCase>(
+      () => GetUserEventsUseCase(
         repository: GetIt.I.get<EventRepository>(),
       ),
     );

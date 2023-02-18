@@ -6,6 +6,18 @@ part of 'event_data_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+EventListDataDto _$EventListDataDtoFromJson(Map<String, dynamic> json) =>
+    EventListDataDto(
+      events: (json['events'] as List<dynamic>)
+          .map((e) => EventDataDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$EventListDataDtoToJson(EventListDataDto instance) =>
+    <String, dynamic>{
+      'events': instance.events,
+    };
+
 EventDataDto _$EventDataDtoFromJson(Map<String, dynamic> json) => EventDataDto(
       id: json['id'] as int,
       createdAt: DateTime.parse(json['created_at'] as String),
@@ -18,7 +30,8 @@ EventDataDto _$EventDataDtoFromJson(Map<String, dynamic> json) => EventDataDto(
       ticketsUrl: json['tickets_url'] as String,
     );
 
-Map<String, dynamic> _$EventDataDtoToJson(EventDataDto instance) => <String, dynamic>{
+Map<String, dynamic> _$EventDataDtoToJson(EventDataDto instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'created_at': instance.createdAt.toIso8601String(),
       'event_name': instance.eventName,
