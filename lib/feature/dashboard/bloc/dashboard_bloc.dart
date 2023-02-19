@@ -22,6 +22,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     required this.getUserEventsUseCase,
   }) : super(const DashboardState.loading()) {
     on<Initial>(_onInitEvent);
+    on<EventCreation>(_onEventCreation);
   }
   Future<void> _onInitEvent(
     Initial event,
@@ -40,5 +41,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }, failure: (failure) {
       emit(const DashboardState.error('could not load your events'));
     });
+  }
+
+  Future<void> _onEventCreation(
+    EventCreation event,
+    Emitter<DashboardState> emit,
+  ) async {
+    dashboardNavigation.goToEventCreation();
   }
 }

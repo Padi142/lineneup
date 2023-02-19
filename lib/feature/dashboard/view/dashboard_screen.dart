@@ -105,6 +105,10 @@ class DashboardBody extends StatelessWidget {
                 height: 50,
                 width: 270,
                 child: AppButton(
+                  onClick: () {
+                    BlocProvider.of<DashboardBloc>(context)
+                        .add(const EventCreation());
+                  },
                   text: 'create_new_event_label'.tr(),
                   backgroundColor: App.appTheme.colorSecondary,
                   radius: 10,

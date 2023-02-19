@@ -40,33 +40,38 @@ class MobileLoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          'app_name'.tr(),
-          textAlign: TextAlign.center,
-          style: App.appTheme.textHeader,
+    return Container(
+      constraints: const BoxConstraints.expand(),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'app_name'.tr(),
+              textAlign: TextAlign.center,
+              style: App.appTheme.textHeader,
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+              height: 50,
+              width: 270,
+              child: AppButton(
+                backgroundColor: App.appTheme.colorSecondary,
+                radius: 6,
+                imagePrefix:
+                    const SvgButton(asset: 'assets/images/discord-icon.svg'),
+                text: 'Discord',
+                textStyle: App.appTheme.textTitle,
+                onClick: () {
+                  BlocProvider.of<LoginBloc>(context).add(const DiscordLogin());
+                },
+              ),
+            )
+          ],
         ),
-        const SizedBox(
-          height: 50,
-        ),
-        SizedBox(
-          height: 50,
-          width: 270,
-          child: AppButton(
-            backgroundColor: App.appTheme.colorSecondary,
-            radius: 6,
-            imagePrefix:
-                const SvgButton(asset: 'assets/images/discord-icon.svg'),
-            text: 'Discord',
-            textStyle: App.appTheme.textTitle,
-            onClick: () {
-              BlocProvider.of<LoginBloc>(context).add(const DiscordLogin());
-            },
-          ),
-        )
-      ],
+      ),
     );
   }
 }

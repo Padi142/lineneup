@@ -7,8 +7,19 @@
   "home_leading_text": "One place for all your events",
   "home_trailing_text": "All the info about your next event in one, simple link",
 
-
   "create_new_event_label": "Create new",
+
+  "event_creating_name_field_title": "Name your awesome event 😍",
+  "event_creating_name_field_hint": "Something like '✨Supa-awesome-mega-party✨' will do ",
+  "event_creating_description_field_title": "What do you want people to know about your event?",
+  "event_creating_description_field_hint": "Description",
+  "event_creating_start_time_field_title": "When is the event starting?",
+  "event_creating_start_time_field_hint": "We cant wait!! 🤩",
+  "event_creating_end_time_field_title": "When does it end?",
+  "event_creating_end_time_field_hint": "The party never ends tho, right?",
+  "event_creating_logo_field_title": "Does your event have a logo? 👀",
+  "event_creating_logo_field_hint": "The party never ends tho, right?",
+
 
   "live_button_text": "live"
 

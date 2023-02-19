@@ -10,3 +10,6 @@ abstract class DashboardEvent extends Equatable {
 class Initial extends DashboardEvent {
   const Initial();
 }
+class EventCreation extends DashboardEvent {
+  const EventCreation();
+}

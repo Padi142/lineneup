@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:lineneup/feature/dashboard/bloc/dashboard_bloc.dart';
 import 'package:lineneup/feature/dashboard/use_case/dashboard_navigation.dart';
 import 'package:lineneup/feature/dashboard/view/dashboard_screen.dart';
+import 'package:lineneup/feature/dashboard/view/event_creation_page.dart';
 import 'package:lineneup/generic/event/domain/get_user_events.dart';
 import 'package:lineneup/generic/user/use_case/get_current_session_use_case.dart';
 import 'package:lineneup/generic/user/use_case/get_current_user_use_case.dart';
@@ -31,6 +32,7 @@ class DashboardModule extends AppModule {
   @override
   void registerScreen() {
     GetIt.I.registerFactory<DashboardScreen>(() => DashboardScreen());
+    GetIt.I.registerFactory<EventCreationScreen>(() => EventCreationScreen());
   }
 
   @override
@@ -43,6 +45,16 @@ class DashboardModule extends AppModule {
         ),
         name: DashboardScreen.name,
         path: '/dashboard',
+      ),
+    );
+    routes.add(
+      QRoute(
+        builder: () => BlocProvider<DashboardBloc>(
+          create: (_) => GetIt.I.get<DashboardBloc>(),
+          child: GetIt.I.get<EventCreationScreen>(),
+        ),
+        name: EventCreationScreen.name,
+        path: '/create_even',
       ),
     );
   }
