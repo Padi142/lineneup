@@ -40,9 +40,7 @@ abstract class AppModule {
       InterceptorsWrapper(
         onError: (error, handler) {
           String message = 'error__general';
-          final Map<String, dynamic> responseMap =
-              error.response?.data as Map<String, dynamic>? ??
-                  <String, dynamic>{};
+          final Map<String, dynamic> responseMap = error.response?.data as Map<String, dynamic>? ?? <String, dynamic>{};
           if (responseMap.containsKey('error')) {
             message = responseMap['error'].toString();
           }

@@ -35,8 +35,7 @@ class LineupBloc extends Bloc<LineupEvent, LineupState> {
     }
 
     final GetEventParams eventParams = GetEventParams(id: eventId.toString());
-    final GetArtistsParams artistsParams =
-        GetArtistsParams(id: eventId.toString());
+    final GetArtistsParams artistsParams = GetArtistsParams(id: eventId.toString());
 
     final eventResult = await getEventUseCase.call(eventParams);
     final artistsResult = await getArtistsUseCase.call(artistsParams);

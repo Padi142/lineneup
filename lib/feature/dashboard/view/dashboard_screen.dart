@@ -74,17 +74,13 @@ class DashboardBody extends StatelessWidget {
               ),
               SizedBox(
                 height: constrains.maxHeight * 0.7,
-                child: BlocBuilder<DashboardBloc, DashboardState>(
-                    builder: (context, state) {
+                child: BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
                   return state.maybeMap(loaded: (values) {
                     return ListView.builder(
                         itemCount: values.events.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return SizedBox(
-                              height: constrains.maxHeight * 0.35,
-                              child:
-                                  EventContainer(event: values.events[index]));
+                          return SizedBox(height: constrains.maxHeight * 0.35, child: EventContainer(event: values.events[index]));
                         });
                   }, error: (error) {
                     return Center(
@@ -106,8 +102,7 @@ class DashboardBody extends StatelessWidget {
                 width: 270,
                 child: AppButton(
                   onClick: () {
-                    BlocProvider.of<DashboardBloc>(context)
-                        .add(const EventCreation());
+                    BlocProvider.of<DashboardBloc>(context).add(const EventCreation());
                   },
                   text: 'create_new_event_label'.tr(),
                   backgroundColor: App.appTheme.colorSecondary,
@@ -139,8 +134,7 @@ class EventContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Card(
             elevation: 5,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
@@ -161,9 +155,7 @@ class EventContainer extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: App.appTheme.colorInactive,
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
+                        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
                       ),
                       child: Column(
                         children: [

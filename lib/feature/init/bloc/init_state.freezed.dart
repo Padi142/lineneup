@@ -52,13 +52,11 @@ mixin _$InitState {
 
 /// @nodoc
 abstract class $InitStateCopyWith<$Res> {
-  factory $InitStateCopyWith(InitState value, $Res Function(InitState) then) =
-      _$InitStateCopyWithImpl<$Res, InitState>;
+  factory $InitStateCopyWith(InitState value, $Res Function(InitState) then) = _$InitStateCopyWithImpl<$Res, InitState>;
 }
 
 /// @nodoc
-class _$InitStateCopyWithImpl<$Res, $Val extends InitState>
-    implements $InitStateCopyWith<$Res> {
+class _$InitStateCopyWithImpl<$Res, $Val extends InitState> implements $InitStateCopyWith<$Res> {
   _$InitStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -69,16 +67,12 @@ class _$InitStateCopyWithImpl<$Res, $Val extends InitState>
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
-  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
-      __$$LoadingCopyWithImpl<$Res>;
+  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) = __$$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res>
-    extends _$InitStateCopyWithImpl<$Res, _$Loading>
-    implements _$$LoadingCopyWith<$Res> {
-  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, _then);
+class __$$LoadingCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res, _$Loading> implements _$$LoadingCopyWith<$Res> {
+  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then) : super(_value, _then);
 }
 
 /// @nodoc
@@ -93,8 +87,7 @@ class _$Loading implements Loading {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loading);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @override

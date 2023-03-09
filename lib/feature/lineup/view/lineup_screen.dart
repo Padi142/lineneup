@@ -39,17 +39,34 @@ class _InitScreenState extends State<LineupScreen> {
   }
 }
 
-class MobileLineupBody extends StatelessWidget {
+class MobileLineupBody extends StatefulWidget {
   const MobileLineupBody({Key? key}) : super(key: key);
 
+  @override
+  State<MobileLineupBody> createState() => _MobileLineupBodyState();
+}
+
+class _MobileLineupBodyState extends State<MobileLineupBody> {
+  final _controller = PageController(
+    initialPage: 0,
+  );
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LineupBloc, LineupState>(
       builder: (context, state) {
         return state.maybeMap(loaded: (loaded) {
-          return MobileLineupContent(
-            event: loaded.event,
-            artists: loaded.artists,
+          return PageView(
+            controller: _controller,
+            onPageChanged: (index) {
+              setState(() {});
+            },
+            children: [
+              EventInfo(event: loaded.event),
+              MobileLineupContent(
+                event: loaded.event,
+                artists: loaded.artists,
+              ),
+            ],
           );
         }, orElse: () {
           return const Center(child: AppProgress());
@@ -81,22 +98,10 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
           children: [
             SizedBox(
               height: constraints.maxHeight * 0.15,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      widget.event.eventName,
-                      style: App.appTheme.textHeader.copyWith(fontSize: 42),
-                    ),
-                  ),
-                  Text(
-                    'Start - 17:00',
-                    style: App.appTheme.textTitle.copyWith(
-                        color: App.appTheme.colorSecondary, fontSize: 17),
-                  ),
-                ],
+              child: Text(
+                'Start - 17:00',
+                style: App.appTheme.textTitle
+                    .copyWith(color: App.appTheme.colorSecondary, fontSize: 17),
               ),
             ),
             SizedBox(
@@ -206,6 +211,51 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
         ),
       );
     }).toList();
+  }
+}
+
+class EventInfo extends StatelessWidget {
+  final EventModel event;
+  const EventInfo({required this.event, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: LayoutBuilder(
+        builder: (context, constrains) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Center(
+                child: Text(
+                  event.eventName,
+                  style: App.appTheme.textHeader.copyWith(fontSize: 42),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      width: constrains.maxWidth * 0.7,
+                      height: constrains.maxHeight * 0.3,
+                      child: Image.network(event.eventLogo)),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  SizedBox(
+                      width: constrains.maxWidth * 0.8,
+                      child: Text(event.description))
+                ],
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 }
 

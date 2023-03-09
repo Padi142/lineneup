@@ -58,14 +58,11 @@ mixin _$ArtistsDataResult {
 
 /// @nodoc
 abstract class $ArtistsDataResultCopyWith<$Res> {
-  factory $ArtistsDataResultCopyWith(
-          ArtistsDataResult value, $Res Function(ArtistsDataResult) then) =
-      _$ArtistsDataResultCopyWithImpl<$Res, ArtistsDataResult>;
+  factory $ArtistsDataResultCopyWith(ArtistsDataResult value, $Res Function(ArtistsDataResult) then) = _$ArtistsDataResultCopyWithImpl<$Res, ArtistsDataResult>;
 }
 
 /// @nodoc
-class _$ArtistsDataResultCopyWithImpl<$Res, $Val extends ArtistsDataResult>
-    implements $ArtistsDataResultCopyWith<$Res> {
+class _$ArtistsDataResultCopyWithImpl<$Res, $Val extends ArtistsDataResult> implements $ArtistsDataResultCopyWith<$Res> {
   _$ArtistsDataResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -76,18 +73,14 @@ class _$ArtistsDataResultCopyWithImpl<$Res, $Val extends ArtistsDataResult>
 
 /// @nodoc
 abstract class _$$LoadedCopyWith<$Res> {
-  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
-      __$$LoadedCopyWithImpl<$Res>;
+  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) = __$$LoadedCopyWithImpl<$Res>;
   @useResult
   $Res call({List<ArtistModel> artists});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res>
-    extends _$ArtistsDataResultCopyWithImpl<$Res, _$Loaded>
-    implements _$$LoadedCopyWith<$Res> {
-  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, _then);
+class __$$LoadedCopyWithImpl<$Res> extends _$ArtistsDataResultCopyWithImpl<$Res, _$Loaded> implements _$$LoadedCopyWith<$Res> {
+  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -123,21 +116,16 @@ class _$Loaded implements Loaded {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Loaded &&
-            const DeepCollectionEquality().equals(other._artists, _artists));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loaded && const DeepCollectionEquality().equals(other._artists, _artists));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_artists));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_artists));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedCopyWith<_$Loaded> get copyWith =>
-      __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
+  _$$LoadedCopyWith<_$Loaded> get copyWith => __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -207,24 +195,19 @@ abstract class Loaded implements ArtistsDataResult {
 
   List<ArtistModel> get artists;
   @JsonKey(ignore: true)
-  _$$LoadedCopyWith<_$Loaded> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LoadedCopyWith<_$Loaded> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$FailureCopyWith<$Res> {
-  factory _$$FailureCopyWith(_$Failure value, $Res Function(_$Failure) then) =
-      __$$FailureCopyWithImpl<$Res>;
+  factory _$$FailureCopyWith(_$Failure value, $Res Function(_$Failure) then) = __$$FailureCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$FailureCopyWithImpl<$Res>
-    extends _$ArtistsDataResultCopyWithImpl<$Res, _$Failure>
-    implements _$$FailureCopyWith<$Res> {
-  __$$FailureCopyWithImpl(_$Failure _value, $Res Function(_$Failure) _then)
-      : super(_value, _then);
+class __$$FailureCopyWithImpl<$Res> extends _$ArtistsDataResultCopyWithImpl<$Res, _$Failure> implements _$$FailureCopyWith<$Res> {
+  __$$FailureCopyWithImpl(_$Failure _value, $Res Function(_$Failure) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -255,10 +238,7 @@ class _$Failure implements Failure {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Failure &&
-            (identical(other.message, message) || other.message == message));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Failure && (identical(other.message, message) || other.message == message));
   }
 
   @override
@@ -267,8 +247,7 @@ class _$Failure implements Failure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailureCopyWith<_$Failure> get copyWith =>
-      __$$FailureCopyWithImpl<_$Failure>(this, _$identity);
+  _$$FailureCopyWith<_$Failure> get copyWith => __$$FailureCopyWithImpl<_$Failure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -338,6 +317,5 @@ abstract class Failure implements ArtistsDataResult {
 
   String get message;
   @JsonKey(ignore: true)
-  _$$FailureCopyWith<_$Failure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FailureCopyWith<_$Failure> get copyWith => throw _privateConstructorUsedError;
 }

@@ -97,8 +97,7 @@ class DesktopHomeBody extends StatelessWidget {
           Text(
             'home_trailing_text'.tr(),
             textAlign: TextAlign.center,
-            style: App.appTheme.textHeader
-                .copyWith(color: App.appTheme.colorTextSecondary),
+            style: App.appTheme.textHeader.copyWith(color: App.appTheme.colorTextSecondary),
           ),
           const SizedBox(
             height: 10,
@@ -116,8 +115,7 @@ class DesktopHomeBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Image.network(
-              'https://media.discordapp.net/attachments/1033387401407627374/1057424593322774598/New_Project.png')
+          Image.network('https://media.discordapp.net/attachments/1033387401407627374/1057424593322774598/New_Project.png')
         ],
       ),
     );

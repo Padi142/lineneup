@@ -56,6 +56,16 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
   final TextEditingController _startTimeController =
       TextEditingController(text: '00:00');
 
+  final _endDateController = TextEditingController(
+    text: DateFormat('dd-MM-yyyy').format(DateTime.now()),
+  );
+  var selectedEndDate = DateTime.now();
+
+  TimeOfDay selectedEndTime = TimeOfDay(hour: 00, minute: 00);
+
+  final TextEditingController _endTimeController =
+      TextEditingController(text: '00:00');
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -141,7 +151,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                       children: [
                         InkWell(
                           onTap: () {
-                            _selectDate(context);
+                            _selectDate(context, selectedStartDate,
+                                _startDateController);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.4,
@@ -172,7 +183,81 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                         ),
                         InkWell(
                           onTap: () {
-                            _selectTime(context);
+                            _selectTime(context, selectedStartTime,
+                                _startTimeController);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            height: 60,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: App.appTheme.colorNavbar,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: TextFormField(
+                              style: App.appTheme.textHeader,
+                              textAlign: TextAlign.center,
+                              onSaved: (val) {},
+                              enabled: false,
+                              keyboardType: TextInputType.text,
+                              controller: _startTimeController,
+                              decoration: const InputDecoration(
+                                  disabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide.none),
+                                  // labelText: 'Time',
+                                  contentPadding: EdgeInsets.all(5)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'event_creating_end_time_field_title'.tr(),
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      style: App.appTheme.textHeader,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            _selectDate(
+                                context, selectedEndDate, _endDateController);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: 60,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: App.appTheme.colorNavbar,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: TextFormField(
+                              style: App.appTheme.textHeader,
+                              textAlign: TextAlign.center,
+                              enabled: false,
+                              keyboardType: TextInputType.text,
+                              controller: _startDateController,
+                              onSaved: (val) {
+                                print(val);
+                              },
+                              decoration: const InputDecoration(
+                                  disabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide.none),
+                                  contentPadding: EdgeInsets.only(top: 0.0)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            _selectTime(
+                                context, selectedEndTime, _endTimeController);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.2,
@@ -202,15 +287,18 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 ),
               ),
               const Spacer(),
-              SizedBox(
-                height: 50,
-                width: 270,
-                child: AppButton(
-                  onClick: () {},
-                  text: 'create_new_event_label'.tr(),
-                  backgroundColor: App.appTheme.colorSecondary,
-                  radius: 10,
-                  textStyle: App.appTheme.textTitle,
+              Align(
+                alignment: Alignment.centerRight,
+                child: SizedBox(
+                  height: 50,
+                  width: 200,
+                  child: AppButton(
+                    onClick: () {},
+                    text: 'next_page_button_label'.tr(),
+                    backgroundColor: App.appTheme.colorPrimary,
+                    radius: 10,
+                    textStyle: App.appTheme.textTitle,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -223,30 +311,32 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context, DateTime date,
+      TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: selectedStartDate,
+        initialDate: date,
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime.now().subtract(const Duration(days: 5)),
         lastDate: DateTime(2101));
     if (picked != null) {
       setState(() {
-        selectedStartDate = picked;
-        _startDateController.text = DateFormat.yMd().format(selectedStartDate);
+        date = picked;
+        controller.text = DateFormat.yMd().format(date);
       });
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
+  Future<void> _selectTime(BuildContext context, TimeOfDay time,
+      TextEditingController controller) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
-      initialTime: selectedStartTime,
+      initialTime: time,
     );
     if (picked != null) {
       setState(() {
-        selectedStartTime = picked;
-        _startTimeController.text = '${picked.hour}:${picked.minute}';
+        time = picked;
+        controller.text = '${picked.hour}:${picked.minute}';
       });
     }
   }

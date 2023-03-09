@@ -11,16 +11,7 @@ class EventModel extends Equatable {
   final String eventUid;
   final String description;
 
-  const EventModel(
-      {required this.id,
-      required this.createdAt,
-      required this.eventName,
-      required this.eventLogo,
-      required this.startTime,
-      required this.description,
-      required this.endTime,
-      required this.eventUid,
-      required this.ticketsUrl});
+  const EventModel({required this.id, required this.createdAt, required this.eventName, required this.eventLogo, required this.startTime, required this.description, required this.endTime, required this.eventUid, required this.ticketsUrl});
 
   @override
   List<Object?> get props => [id, createdAt, eventName, eventLogo, startTime, description, endTime, eventUid, ticketsUrl];

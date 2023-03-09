@@ -64,14 +64,11 @@ mixin _$LoginState {
 
 /// @nodoc
 abstract class $LoginStateCopyWith<$Res> {
-  factory $LoginStateCopyWith(
-          LoginState value, $Res Function(LoginState) then) =
-      _$LoginStateCopyWithImpl<$Res, LoginState>;
+  factory $LoginStateCopyWith(LoginState value, $Res Function(LoginState) then) = _$LoginStateCopyWithImpl<$Res, LoginState>;
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
-    implements $LoginStateCopyWith<$Res> {
+class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState> implements $LoginStateCopyWith<$Res> {
   _$LoginStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -82,16 +79,12 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
-  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
-      __$$LoadingCopyWithImpl<$Res>;
+  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) = __$$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$Loading>
-    implements _$$LoadingCopyWith<$Res> {
-  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, _then);
+class __$$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res, _$Loading> implements _$$LoadingCopyWith<$Res> {
+  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then) : super(_value, _then);
 }
 
 /// @nodoc
@@ -106,8 +99,7 @@ class _$Loading implements Loading {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loading);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @override
@@ -188,16 +180,12 @@ abstract class Loading implements LoginState {
 
 /// @nodoc
 abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) = __$$ErrorCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
-      : super(_value, _then);
+class __$$ErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res, _$Error> implements _$$ErrorCopyWith<$Res> {
+  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then) : super(_value, _then);
 }
 
 /// @nodoc
@@ -212,8 +200,7 @@ class _$Error implements Error {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Error);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Error);
   }
 
   @override
@@ -294,19 +281,14 @@ abstract class Error implements LoginState {
 
 /// @nodoc
 abstract class _$$LoggedInCopyWith<$Res> {
-  factory _$$LoggedInCopyWith(
-          _$LoggedIn value, $Res Function(_$LoggedIn) then) =
-      __$$LoggedInCopyWithImpl<$Res>;
+  factory _$$LoggedInCopyWith(_$LoggedIn value, $Res Function(_$LoggedIn) then) = __$$LoggedInCopyWithImpl<$Res>;
   @useResult
   $Res call({String username});
 }
 
 /// @nodoc
-class __$$LoggedInCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$LoggedIn>
-    implements _$$LoggedInCopyWith<$Res> {
-  __$$LoggedInCopyWithImpl(_$LoggedIn _value, $Res Function(_$LoggedIn) _then)
-      : super(_value, _then);
+class __$$LoggedInCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res, _$LoggedIn> implements _$$LoggedInCopyWith<$Res> {
+  __$$LoggedInCopyWithImpl(_$LoggedIn _value, $Res Function(_$LoggedIn) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -337,11 +319,7 @@ class _$LoggedIn implements LoggedIn {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoggedIn &&
-            (identical(other.username, username) ||
-                other.username == username));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$LoggedIn && (identical(other.username, username) || other.username == username));
   }
 
   @override
@@ -350,8 +328,7 @@ class _$LoggedIn implements LoggedIn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoggedInCopyWith<_$LoggedIn> get copyWith =>
-      __$$LoggedInCopyWithImpl<_$LoggedIn>(this, _$identity);
+  _$$LoggedInCopyWith<_$LoggedIn> get copyWith => __$$LoggedInCopyWithImpl<_$LoggedIn>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -427,6 +404,5 @@ abstract class LoggedIn implements LoginState {
 
   String get username;
   @JsonKey(ignore: true)
-  _$$LoggedInCopyWith<_$LoggedIn> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LoggedInCopyWith<_$LoggedIn> get copyWith => throw _privateConstructorUsedError;
 }

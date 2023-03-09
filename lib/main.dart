@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +29,7 @@ Future<void> main() async {
   await Supabase.initialize(
     url: const String.fromEnvironment('SUPABASE_URL'),
     anonKey: const String.fromEnvironment('SUPABASE_SECRET'),
+    debug: true,
     authCallbackUrlHostname: 'login-callback', // optional
   );
 
@@ -148,10 +151,20 @@ class MainWidget extends StatelessWidget {
       routeInformationParser: const QRouteInformationParser(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
+      scrollBehavior: AppScrollBehavior(),
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       theme: App.appTheme.themeData,
       routerDelegate: QRouterDelegate(App.routes, initPath: '/landing'),
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+      };
 }

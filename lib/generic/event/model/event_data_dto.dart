@@ -8,8 +8,7 @@ class EventListDataDto {
 
   const EventListDataDto({required this.events});
 
-  factory EventListDataDto.fromJson(Map<String, dynamic> json) =>
-      _$EventListDataDtoFromJson(json);
+  factory EventListDataDto.fromJson(Map<String, dynamic> json) => _$EventListDataDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$EventListDataDtoToJson(this);
 }
@@ -46,8 +45,7 @@ class EventDataDto {
     required this.ticketsUrl,
   });
 
-  factory EventDataDto.fromJson(Map<String, dynamic> json) =>
-      _$EventDataDtoFromJson(json);
+  factory EventDataDto.fromJson(Map<String, dynamic> json) => _$EventDataDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$EventDataDtoToJson(this);
 }
