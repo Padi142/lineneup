@@ -63,8 +63,7 @@ class AppButton<DROPDOWN_VALUE_TYPE extends Object> extends StatelessWidget {
         child.add(SizedBox(width: spaceTextImage));
         child.add(imageSuffixChild);
       }
-      btnChild =
-          Row(children: child, mainAxisAlignment: MainAxisAlignment.center);
+      btnChild = Row(children: child, mainAxisAlignment: MainAxisAlignment.center);
     } else {
       btnChild = textChild;
     }
@@ -76,24 +75,18 @@ class AppButton<DROPDOWN_VALUE_TYPE extends Object> extends StatelessWidget {
         //find position of button, so there can render popup menu options
         FocusScope.of(context).requestFocus(FocusNode());
         final RenderBox? button = context.findRenderObject() as RenderBox?;
-        final RenderBox? overlay =
-            Overlay.of(context).context.findRenderObject() as RenderBox?;
+        final RenderBox? overlay = Overlay.of(context).context.findRenderObject() as RenderBox?;
         final RelativeRect position = RelativeRect.fromRect(
           Rect.fromPoints(
-            button?.localToGlobal(const Offset(0, 0), ancestor: overlay) ??
-                const Offset(0, 0),
-            button?.localToGlobal(button.size.bottomRight(Offset.zero),
-                    ancestor: overlay) ??
-                const Offset(0, 0),
+            button?.localToGlobal(const Offset(0, 0), ancestor: overlay) ?? const Offset(0, 0),
+            button?.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay) ?? const Offset(0, 0),
           ),
           Offset.zero & (overlay?.size ?? const Size(0, 0)),
         );
 
-        final List<PopupMenuEntry<PopupOption<DROPDOWN_VALUE_TYPE>>> toShow =
-            [];
+        final List<PopupMenuEntry<PopupOption<DROPDOWN_VALUE_TYPE>>> toShow = [];
 
-        for (final popupOption
-            in popupMenu ?? <PopupOption<DROPDOWN_VALUE_TYPE>>[]) {
+        for (final popupOption in popupMenu ?? <PopupOption<DROPDOWN_VALUE_TYPE>>[]) {
           toShow.add(popupOption.make());
         }
 
@@ -129,9 +122,7 @@ class AppButton<DROPDOWN_VALUE_TYPE extends Object> extends StatelessWidget {
               });
         }
         return ButtonTheme(
-          minWidth: constraints.maxHeight == double.infinity
-              ? constraints.minHeight
-              : constraints.maxHeight,
+          minWidth: constraints.maxHeight == double.infinity ? constraints.minHeight : constraints.maxHeight,
           child: TextButton(
             style: ElevatedButton.styleFrom(
               elevation: elevation,
@@ -203,8 +194,7 @@ class PopupOption<T> {
               children: <Widget>[
                 if (image != null)
                   Container(
-                    padding: const EdgeInsets.only(
-                        right: 4, top: 4, bottom: 4, left: 4),
+                    padding: const EdgeInsets.only(right: 4, top: 4, bottom: 4, left: 4),
                     width: 35,
                     height: 35,
                     child: image,
@@ -216,15 +206,8 @@ class PopupOption<T> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(title,
-                        style:
-                            textStyle ?? Theme.of(context).textTheme.bodyLarge),
-                    if (subtitle == null)
-                      Container()
-                    else
-                      Text(subtitle ?? '',
-                          style: subtitleTextStyle ??
-                              Theme.of(context).textTheme.bodySmall)
+                    Text(title, style: textStyle ?? Theme.of(context).textTheme.bodyLarge),
+                    if (subtitle == null) Container() else Text(subtitle ?? '', style: subtitleTextStyle ?? Theme.of(context).textTheme.bodySmall)
                   ],
                 ),
                 const SizedBox(width: 8),

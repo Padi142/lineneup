@@ -29,10 +29,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     final params = LoginParams(email: event.email, password: event.password);
     final response = await emailLoginUseCase.call(params);
-    if (response.session != null) {
-      loginNavigation.goToDashboard();
+    if (response == null || response.session == null) {
+      loginNavigation.goToHome();
     }
-    loginNavigation.goToHome();
+    loginNavigation.goToDashboard();
   }
 
   Future<void> _onDiscordLogin(
@@ -50,8 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final accessToken = _getUriParam(Uri.base, "access_token=");
       final tokenType = _getUriParam(Uri.base, "token_type=");
       final refreshToken = _getUriParam(Uri.base, "refresh_token=");
-      final providerRefreshToken =
-          _getUriParam(Uri.base, "provider_refresh_token=");
+      final providerRefreshToken = _getUriParam(Uri.base, "provider_refresh_token=");
       final providerToken = _getUriParam(Uri.base, "provider_token=");
       final expiresIn = int.parse(_getUriParam(Uri.base, "expires_in="));
 

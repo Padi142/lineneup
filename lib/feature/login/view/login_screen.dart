@@ -7,7 +7,6 @@ import 'package:lineneup/library/app_screen.dart';
 
 import '../../../generic/constant.dart';
 import '../../../generic/widget/app_gradient.dart';
-import '../../../generic/widget/app_text_field/app_text_field.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
 import '../../lineup/view/lineup_screen.dart';
@@ -42,8 +41,8 @@ class MobileLoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEntryModel();
-    final passwordController = TextEntryModel();
+    final emailController = TextEntryModel(text: '');
+    final passwordController = TextEntryModel(text: '');
     return Container(
       constraints: const BoxConstraints.expand(),
       child: Center(

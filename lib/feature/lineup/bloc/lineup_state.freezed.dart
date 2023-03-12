@@ -331,7 +331,8 @@ class _$Loaded implements Loaded {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loaded && (identical(other.event, event) || other.event == event) && const DeepCollectionEquality().equals(other._artists, _artists));
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Loaded && (identical(other.event, event) || other.event == event) && const DeepCollectionEquality().equals(other._artists, _artists));
   }
 
   @override

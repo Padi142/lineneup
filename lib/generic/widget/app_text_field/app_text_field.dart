@@ -58,23 +58,18 @@ class AppTextField extends StatelessWidget {
             errorText: model.error?.tr(),
             fillColor: filled ?? App.appTheme.colorBackground1,
             border: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: App.appTheme.colorPrimary, width: 1),
+              borderSide: BorderSide(color: App.appTheme.colorPrimary, width: 1),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: App.appTheme.colorPrimary, width: 1),
+              borderSide: BorderSide(color: App.appTheme.colorPrimary, width: 1),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: App.appTheme.colorInactive, width: 1),
+              borderSide: BorderSide(color: App.appTheme.colorInactive, width: 1),
             ),
             hintText: hint,
-            hintStyle: App.appTheme.textTitle
-                .copyWith(color: App.appTheme.colorTextSecondary),
+            hintStyle: App.appTheme.textTitle.copyWith(color: App.appTheme.colorTextSecondary),
             labelText: label,
-            labelStyle: App.appTheme.textTitle
-                .copyWith(color: App.appTheme.colorTextSecondary),
+            labelStyle: App.appTheme.textTitle.copyWith(color: App.appTheme.colorTextSecondary),
           ),
         ),
         super(key: key) {
@@ -107,8 +102,7 @@ class TextEntryModel {
   String? error;
   List<Validator> validators = [];
 
-  TextEntryModel({String text = ''})
-      : controller = TextEditingController(text: text);
+  TextEntryModel({String text = ''}) : controller = TextEditingController(text: text);
 
   String get text => controller.text;
 
@@ -128,8 +122,7 @@ class TextEntryModel {
     String? hasError;
 
     for (final Validator validator in validators) {
-      final ValidatorResult result = await validator.validate(
-          <ValidableParam, dynamic>{ValidableParam.text: controller.text});
+      final ValidatorResult result = await validator.validate(<ValidableParam, dynamic>{ValidableParam.text: controller.text});
       if (!result.valid) {
         isValid = isValid && result.valid;
         hasError = hasError ?? result.error;

@@ -21,4 +21,11 @@ abstract class EventApi {
   Future<EventListDataDto> getUserEvents(
     @Path() String uid,
   );
+
+  // @POST(
+  //   '/event_upload?uid={uid}',
+  // )
+  // Future<> eventLogoUpload(
+  //     @Path() String uid,
+  //     );
 }

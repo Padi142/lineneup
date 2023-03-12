@@ -14,3 +14,8 @@ class Initial extends DashboardEvent {
 class EventCreation extends DashboardEvent {
   const EventCreation();
 }
+
+class PickAndUploadFile extends DashboardEvent {
+  final String eventUid;
+  const PickAndUploadFile({required this.eventUid});
+}

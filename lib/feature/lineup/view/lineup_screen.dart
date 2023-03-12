@@ -79,9 +79,7 @@ class _MobileLineupBodyState extends State<MobileLineupBody> {
 class MobileLineupContent extends StatefulWidget {
   final EventModel event;
   final List<ArtistModel> artists;
-  const MobileLineupContent(
-      {required this.event, required this.artists, Key? key})
-      : super(key: key);
+  const MobileLineupContent({required this.event, required this.artists, Key? key}) : super(key: key);
 
   @override
   State<MobileLineupContent> createState() => _MobileLineupContentState();
@@ -100,8 +98,7 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
               height: constraints.maxHeight * 0.15,
               child: Text(
                 'Start - 17:00',
-                style: App.appTheme.textTitle
-                    .copyWith(color: App.appTheme.colorSecondary, fontSize: 17),
+                style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorSecondary, fontSize: 17),
               ),
             ),
             SizedBox(
@@ -120,9 +117,7 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
                             Container(
                               width: 10,
                               height: double.infinity,
-                              decoration: BoxDecoration(
-                                  color: App.appTheme.colorInactive,
-                                  borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(20)),
                             ),
                             Container(
                               width: 10,
@@ -150,9 +145,7 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
                       elevation: 2,
                       borderRadius: BorderRadius.circular(25),
                       child: Container(
-                        decoration: BoxDecoration(
-                            color: App.appTheme.colorInactive,
-                            borderRadius: BorderRadius.circular(25)),
+                        decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(25)),
                         child: ArtistInfo(
                           artist: widget.artists[chosenArtist],
                         ),
@@ -169,8 +162,7 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
                 children: [
                   Text(
                     'End - 4:00',
-                    style: App.appTheme.textTitle.copyWith(
-                        color: App.appTheme.colorPrimary, fontSize: 17),
+                    style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorPrimary, fontSize: 17),
                   ),
                   Center(
                     child: Container(),
@@ -195,19 +187,14 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
         child: Container(
           width: 80,
           height: 80,
-          decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 3,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-              shape: BoxShape.circle,
-              border: Border.all(color: App.appTheme.colorPrimary),
-              image: DecorationImage(
-                  image: NetworkImage(it.artistPhoto), fit: BoxFit.fill)),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ], shape: BoxShape.circle, border: Border.all(color: App.appTheme.colorPrimary), image: DecorationImage(image: NetworkImage(it.artistPhoto), fit: BoxFit.fill)),
         ),
       );
     }).toList();
@@ -239,16 +226,11 @@ class EventInfo extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                      width: constrains.maxWidth * 0.7,
-                      height: constrains.maxHeight * 0.3,
-                      child: Image.network(event.eventLogo)),
+                  SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(event.eventLogo)),
                   const SizedBox(
                     width: 5,
                   ),
-                  SizedBox(
-                      width: constrains.maxWidth * 0.8,
-                      child: Text(event.description))
+                  SizedBox(width: constrains.maxWidth * 0.8, child: Text(event.description))
                 ],
               )
             ],
@@ -284,11 +266,7 @@ class ArtistInfo extends StatelessWidget {
                         Container(
                           height: 70,
                           width: 70,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: NetworkImage(artist.artistPhoto),
-                                  fit: BoxFit.fill)),
+                          decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(artist.artistPhoto), fit: BoxFit.fill)),
                         ),
                         const SizedBox(
                           width: 20,
@@ -296,8 +274,7 @@ class ArtistInfo extends StatelessWidget {
                         Center(
                           child: SelectableText(
                             artist.artistName,
-                            style:
-                                App.appTheme.textTitle.copyWith(fontSize: 17),
+                            style: App.appTheme.textTitle.copyWith(fontSize: 17),
                             maxLines: 3,
                           ),
                         )

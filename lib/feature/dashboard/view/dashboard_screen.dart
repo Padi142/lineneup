@@ -168,7 +168,8 @@ class EventContainer extends StatelessWidget {
                             child: SelectableText(
                               event.description,
                               textAlign: TextAlign.center,
-                              style: App.appTheme.textBody,
+                              maxLines: 5,
+                              style: App.appTheme.textBody.copyWith(overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ],

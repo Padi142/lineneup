@@ -7,6 +7,6 @@ class LoginNavigation {
   }
 
   void goToDashboard() {
-    AppNavigation().push(ScreenPath.DASHBOARD_SCREEN);
+    AppNavigation().push(ScreenPath.DASHBOARD_SCREEN, root: true);
   }
 }

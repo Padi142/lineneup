@@ -47,18 +47,14 @@ class LoginModule extends AppModule {
   void registerRoute(routes) {
     routes.add(
       QRoute(
-        builder: () => BlocProvider<LoginBloc>(
-            create: (_) => GetIt.I.get<LoginBloc>(),
-            child: GetIt.I.get<LoginScreen>()),
+        builder: () => BlocProvider<LoginBloc>(create: (_) => GetIt.I.get<LoginBloc>(), child: GetIt.I.get<LoginScreen>()),
         name: LoginScreen.name,
         path: '/login',
       ),
     );
     routes.add(
       QRoute(
-        builder: () => BlocProvider<LoginBloc>(
-            create: (_) => GetIt.I.get<LoginBloc>(),
-            child: GetIt.I.get<LoginCallbackScreen>()),
+        builder: () => BlocProvider<LoginBloc>(create: (_) => GetIt.I.get<LoginBloc>(), child: GetIt.I.get<LoginCallbackScreen>()),
         name: LoginCallbackScreen.name,
         path: '/login-callback',
       ),
