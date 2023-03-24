@@ -21,7 +21,8 @@ class ArtistRepositoryImpl extends ArtistRepository {
     GetArtistsParams params,
   ) async {
     return artistApi.getEventArtists(params.id).then((artistDto) {
-      return ArtistsDataResult.loaded(artistDto.artists.map((it) => it.toDomain()).toList());
+      return ArtistsDataResult.loaded(
+          artistDto.artists.map((it) => it.toDomain()).toList());
     }).onError((error, stackTrace) {
       return ArtistsDataResult.failure(error.toString());
     });
@@ -31,7 +32,9 @@ class ArtistRepositoryImpl extends ArtistRepository {
   Future<ArtistPhotoUploadResult> artistPhotoUpload(
     UploadArtistPhotoParams params,
   ) async {
-    return artistApi.artistPhotoUpload(params.uid, File(params.file.path!)).then((response) {
+    return artistApi
+        .artistPhotoUpload(params.uid, File(params.file.path))
+        .then((response) {
       if (response.error != null) {
         return ArtistPhotoUploadResult.failure(response.error!);
       }

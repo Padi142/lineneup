@@ -11,6 +11,8 @@ import '../../../generic/widget/app_text_field/validator_empty.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
 import '../bloc/dashboard_bloc.dart';
+import '../model/artist_creation_model.dart';
+import 'components/artist_container.dart';
 
 class EventCreationScreen extends Screen {
   static const String name = ScreenPath.EVENT_CREATION;
@@ -40,7 +42,8 @@ class EventCreationMobileBody extends StatefulWidget {
   const EventCreationMobileBody({Key? key}) : super(key: key);
 
   @override
-  State<EventCreationMobileBody> createState() => _EventCreationMobileBodyState();
+  State<EventCreationMobileBody> createState() =>
+      _EventCreationMobileBodyState();
 }
 
 class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
@@ -55,7 +58,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
 
   TimeOfDay selectedStartTime = TimeOfDay(hour: 00, minute: 00);
 
-  final TextEditingController _startTimeController = TextEditingController(text: '00:00');
+  final TextEditingController _startTimeController =
+      TextEditingController(text: '00:00');
 
   final _endDateController = TextEditingController(
     text: DateFormat('dd-MM-yyyy').format(DateTime.now()),
@@ -64,7 +68,11 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
 
   TimeOfDay selectedEndTime = const TimeOfDay(hour: 00, minute: 00);
 
-  final TextEditingController _endTimeController = TextEditingController(text: '00:00');
+  final TextEditingController _endTimeController =
+      TextEditingController(text: '00:00');
+
+  //second pge
+  final List<ArtistCreationModel> addedArtists = [];
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +199,10 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                     onSaved: (val) {
                       print(val);
                     },
-                    decoration: const InputDecoration(disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(top: 0.0)),
+                    decoration: const InputDecoration(
+                        disabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide.none),
+                        contentPadding: EdgeInsets.only(top: 0.0)),
                   ),
                 ),
               ),
@@ -206,7 +217,9 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: App.appTheme.colorNavbar, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(
+                      color: App.appTheme.colorNavbar,
+                      borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
                     textAlign: TextAlign.center,
@@ -215,7 +228,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                     keyboardType: TextInputType.text,
                     controller: _startTimeController,
                     decoration: const InputDecoration(
-                        disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+                        disabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide.none),
                         // labelText: 'Time',
                         contentPadding: EdgeInsets.all(5)),
                   ),
@@ -256,7 +270,10 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                     onSaved: (val) {
                       print(val);
                     },
-                    decoration: const InputDecoration(disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(top: 0.0)),
+                    decoration: const InputDecoration(
+                        disabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide.none),
+                        contentPadding: EdgeInsets.only(top: 0.0)),
                   ),
                 ),
               ),
@@ -271,7 +288,9 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: App.appTheme.colorNavbar, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(
+                      color: App.appTheme.colorNavbar,
+                      borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
                     textAlign: TextAlign.center,
@@ -280,7 +299,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                     keyboardType: TextInputType.text,
                     controller: _endTimeController,
                     decoration: const InputDecoration(
-                        disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+                        disabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide.none),
                         // labelText: 'Time',
                         contentPadding: EdgeInsets.all(5)),
                   ),
@@ -298,7 +318,9 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
               width: 200,
               child: AppButton(
                 onClick: () {
-                  pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+                  pageController.nextPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeIn);
                 },
                 text: 'next_page_button_label'.tr(),
                 backgroundColor: App.appTheme.colorPrimary,
@@ -317,7 +339,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
       child: Column(
         children: [
           Text(
-            'event_creating_name_field_title'.tr(),
+            'event_creating_logo_field_title'.tr(),
             maxLines: 3,
             textAlign: TextAlign.center,
             style: App.appTheme.textHeader,
@@ -327,15 +349,24 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             height: 50,
             child: AppButton(
               radius: 4,
-              backgroundColor: App.appTheme.colorPrimary,
               imagePrefix: const Icon(Icons.add),
               onClick: () {
-                BlocProvider.of<DashboardBloc>(context).add(const PickAndUploadFile(eventUid: 'vize'));
+                BlocProvider.of<DashboardBloc>(context)
+                    .add(const UploadEventCover(eventUid: 'vize'));
               },
             ),
           ),
+          ListView.builder(
+              itemCount: addedArtists.length + 1,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ArtistInfoContainer(
+                    artist: addedArtists.length < index
+                        ? addedArtists[index]
+                        : null);
+              }),
           const SizedBox(
-            height: 250,
+            height: 400,
           ),
           Align(
             alignment: Alignment.centerLeft,
@@ -361,9 +392,14 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context, DateTime date, TextEditingController controller) async {
-    final DateTime? picked =
-        await showDatePicker(context: context, initialDate: date, initialDatePickerMode: DatePickerMode.day, firstDate: DateTime.now().subtract(const Duration(days: 5)), lastDate: DateTime(2101));
+  Future<void> _selectDate(BuildContext context, DateTime date,
+      TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: date,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime.now().subtract(const Duration(days: 5)),
+        lastDate: DateTime(2101));
     if (picked != null) {
       setState(() {
         date = picked;
@@ -372,7 +408,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
     }
   }
 
-  Future<void> _selectTime(BuildContext context, TimeOfDay time, TextEditingController controller) async {
+  Future<void> _selectTime(BuildContext context, TimeOfDay time,
+      TextEditingController controller) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: time,

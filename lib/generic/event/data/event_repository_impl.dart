@@ -2,6 +2,8 @@ import 'package:lineneup/generic/api/event_api.dart';
 import 'package:lineneup/generic/event/data/event_data_convertor.dart';
 import 'package:lineneup/generic/event/domain/event_repository.dart';
 
+import '../../artist/model/params/upload_event_cover_params.dart';
+import '../../artist/model/results/upload_event_cover_result.dart';
 import '../model/params/get_event_params.dart';
 import '../model/params/get_user_events_params.dart';
 import '../model/results/get_event_result.dart';
@@ -39,4 +41,21 @@ class EventRepositoryImpl extends EventRepository {
       return EventsDataResult.failure(error.toString());
     });
   }
+
+  // @override
+  // Future<UploadEventCoverResult> eventCoverUpload(
+  //   UploadEventCoverParams params,
+  // ) async {
+  //   return eventApi.eventCoverUpload(params.uid, params.file).then((response) {
+  //     if (response.error == null) {
+  //       return const UploadEventCoverResult.success();
+  //     }
+  //     return const UploadEventCoverResult.failure(
+  //         "Error uploading event cover");
+  //   }).onError((error, stackTrace) {
+  //     print(error);
+  //     print(stackTrace);
+  //     return UploadEventCoverResult.failure(error.toString());
+  //   });
+  // }
 }

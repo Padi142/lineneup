@@ -58,11 +58,15 @@ mixin _$ArtistPhotoUploadResult {
 
 /// @nodoc
 abstract class $ArtistPhotoUploadResultCopyWith<$Res> {
-  factory $ArtistPhotoUploadResultCopyWith(ArtistPhotoUploadResult value, $Res Function(ArtistPhotoUploadResult) then) = _$ArtistPhotoUploadResultCopyWithImpl<$Res, ArtistPhotoUploadResult>;
+  factory $ArtistPhotoUploadResultCopyWith(ArtistPhotoUploadResult value,
+          $Res Function(ArtistPhotoUploadResult) then) =
+      _$ArtistPhotoUploadResultCopyWithImpl<$Res, ArtistPhotoUploadResult>;
 }
 
 /// @nodoc
-class _$ArtistPhotoUploadResultCopyWithImpl<$Res, $Val extends ArtistPhotoUploadResult> implements $ArtistPhotoUploadResultCopyWith<$Res> {
+class _$ArtistPhotoUploadResultCopyWithImpl<$Res,
+        $Val extends ArtistPhotoUploadResult>
+    implements $ArtistPhotoUploadResultCopyWith<$Res> {
   _$ArtistPhotoUploadResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -73,12 +77,16 @@ class _$ArtistPhotoUploadResultCopyWithImpl<$Res, $Val extends ArtistPhotoUpload
 
 /// @nodoc
 abstract class _$$SuccessCopyWith<$Res> {
-  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) = __$$SuccessCopyWithImpl<$Res>;
+  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
+      __$$SuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SuccessCopyWithImpl<$Res> extends _$ArtistPhotoUploadResultCopyWithImpl<$Res, _$Success> implements _$$SuccessCopyWith<$Res> {
-  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then) : super(_value, _then);
+class __$$SuccessCopyWithImpl<$Res>
+    extends _$ArtistPhotoUploadResultCopyWithImpl<$Res, _$Success>
+    implements _$$SuccessCopyWith<$Res> {
+  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -93,7 +101,8 @@ class _$Success implements Success {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Success);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Success);
   }
 
   @override
@@ -168,14 +177,18 @@ abstract class Success implements ArtistPhotoUploadResult {
 
 /// @nodoc
 abstract class _$$FailureCopyWith<$Res> {
-  factory _$$FailureCopyWith(_$Failure value, $Res Function(_$Failure) then) = __$$FailureCopyWithImpl<$Res>;
+  factory _$$FailureCopyWith(_$Failure value, $Res Function(_$Failure) then) =
+      __$$FailureCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$FailureCopyWithImpl<$Res> extends _$ArtistPhotoUploadResultCopyWithImpl<$Res, _$Failure> implements _$$FailureCopyWith<$Res> {
-  __$$FailureCopyWithImpl(_$Failure _value, $Res Function(_$Failure) _then) : super(_value, _then);
+class __$$FailureCopyWithImpl<$Res>
+    extends _$ArtistPhotoUploadResultCopyWithImpl<$Res, _$Failure>
+    implements _$$FailureCopyWith<$Res> {
+  __$$FailureCopyWithImpl(_$Failure _value, $Res Function(_$Failure) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -206,7 +219,10 @@ class _$Failure implements Failure {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Failure && (identical(other.message, message) || other.message == message));
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Failure &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
@@ -215,7 +231,8 @@ class _$Failure implements Failure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailureCopyWith<_$Failure> get copyWith => __$$FailureCopyWithImpl<_$Failure>(this, _$identity);
+  _$$FailureCopyWith<_$Failure> get copyWith =>
+      __$$FailureCopyWithImpl<_$Failure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -285,5 +302,6 @@ abstract class Failure implements ArtistPhotoUploadResult {
 
   String get message;
   @JsonKey(ignore: true)
-  _$$FailureCopyWith<_$Failure> get copyWith => throw _privateConstructorUsedError;
+  _$$FailureCopyWith<_$Failure> get copyWith =>
+      throw _privateConstructorUsedError;
 }

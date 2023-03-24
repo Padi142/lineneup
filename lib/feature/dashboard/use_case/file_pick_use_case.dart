@@ -1,18 +1,18 @@
-import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../library/use_case.dart';
 
-class PickFileUseCase extends UnitUseCase<PlatformFile?> {
+class PickFileUseCase extends UnitUseCase<XFile?> {
   PickFileUseCase();
 
   @override
-  Future<PlatformFile?> call() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'png', 'gif'],
-    );
-    if (result != null) {
-      return result!.files.first;
+  Future<XFile?> call() async {
+    final ImagePicker picker = ImagePicker();
+    // Pick an image
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      return image;
     }
 
     return null;

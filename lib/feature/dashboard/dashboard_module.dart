@@ -3,9 +3,11 @@ import 'package:get_it/get_it.dart';
 import 'package:lineneup/feature/dashboard/bloc/dashboard_bloc.dart';
 import 'package:lineneup/feature/dashboard/use_case/dashboard_navigation.dart';
 import 'package:lineneup/feature/dashboard/use_case/file_pick_use_case.dart';
-import 'package:lineneup/feature/dashboard/use_case/upload_file_use_case.dart';
+import 'package:lineneup/feature/dashboard/use_case/upload_event_cover_use_case.dart';
+import 'package:lineneup/feature/dashboard/use_case/uploadt_artist_photo_use_case.dart';
 import 'package:lineneup/feature/dashboard/view/dashboard_screen.dart';
 import 'package:lineneup/feature/dashboard/view/event_creation_page.dart';
+import 'package:lineneup/generic/event/domain/event_repository.dart';
 import 'package:lineneup/generic/event/domain/get_user_events.dart';
 import 'package:lineneup/generic/user/use_case/get_current_session_use_case.dart';
 import 'package:lineneup/generic/user/use_case/get_current_user_use_case.dart';
@@ -29,7 +31,8 @@ class DashboardModule extends AppModule {
         getCurrentSessionUseCase: GetIt.I.get<GetCurrentSessionUseCase>(),
         getCurrentUserUseCase: GetIt.I.get<GetCurrentUserUseCase>(),
         pickFileUseCase: GetIt.I.get<PickFileUseCase>(),
-        artistPhotoUploadUseCase: GetIt.I.get<ArtistPhotoUploadUseCase>(),
+        uploadArtistPhotoUseCase: GetIt.I.get<UploadArtistPhotoUseCase>(),
+        uploadEventCoverUseCase: GetIt.I.get<UploadEventCoverUseCase>(),
       ),
     );
   }
@@ -42,9 +45,14 @@ class DashboardModule extends AppModule {
 
   @override
   void registerUseCase() {
-    GetIt.I.registerFactory<ArtistPhotoUploadUseCase>(
-      () => ArtistPhotoUploadUseCase(
+    GetIt.I.registerFactory<UploadArtistPhotoUseCase>(
+      () => UploadArtistPhotoUseCase(
         repository: GetIt.I.get<ArtistRepository>(),
+      ),
+    );
+    GetIt.I.registerFactory<UploadEventCoverUseCase>(
+      () => UploadEventCoverUseCase(
+        repository: GetIt.I.get<EventRepository>(),
       ),
     );
     GetIt.I.registerFactory<PickFileUseCase>(

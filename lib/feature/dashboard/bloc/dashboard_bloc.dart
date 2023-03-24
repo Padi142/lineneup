@@ -1,14 +1,22 @@
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lineneup/generic/event/model/params/get_user_events_params.dart';
+import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import '../../../generic/artist/model/params/upload_artist_photo_params.dart';
+import '../../../generic/artist/model/params/upload_event_cover_params.dart';
 import '../../../generic/event/domain/get_user_events.dart';
 import '../../../generic/user/use_case/get_current_session_use_case.dart';
 import '../../../generic/user/use_case/get_current_user_use_case.dart';
 import '../use_case/dashboard_navigation.dart';
 import '../use_case/file_pick_use_case.dart';
-import '../use_case/upload_file_use_case.dart';
+import '../use_case/upload_event_cover_use_case.dart';
+import '../use_case/uploadt_artist_photo_use_case.dart';
 import 'dashboard_state.dart';
 
 part 'dashboard_event.dart';
@@ -19,7 +27,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetCurrentSessionUseCase getCurrentSessionUseCase;
   final GetUserEventsUseCase getUserEventsUseCase;
   final PickFileUseCase pickFileUseCase;
-  final ArtistPhotoUploadUseCase artistPhotoUploadUseCase;
+  final UploadArtistPhotoUseCase uploadArtistPhotoUseCase;
+  final UploadEventCoverUseCase uploadEventCoverUseCase;
 
   DashboardBloc({
     required this.dashboardNavigation,
@@ -27,11 +36,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     required this.getCurrentSessionUseCase,
     required this.getUserEventsUseCase,
     required this.pickFileUseCase,
-    required this.artistPhotoUploadUseCase,
+    required this.uploadArtistPhotoUseCase,
+    required this.uploadEventCoverUseCase,
   }) : super(const DashboardState.loading()) {
     on<Initial>(_onInitEvent);
     on<EventCreation>(_onEventCreation);
-    on<PickAndUploadFile>(_onPickAndUploadFile);
+    on<UploadEventCover>(_onUploadEventCover);
   }
   Future<void> _onInitEvent(
     Initial event,
@@ -59,15 +69,19 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     dashboardNavigation.goToEventCreation();
   }
 
-  Future<void> _onPickAndUploadFile(
-    PickAndUploadFile event,
+  Future<void> _onUploadEventCover(
+    UploadEventCover event,
     Emitter<DashboardState> emit,
   ) async {
     final fileResult = await pickFileUseCase.call();
     if (fileResult != null) {
-      final uploadParams = UploadArtistPhotoParams(uid: event.eventUid, file: fileResult);
+      final bytes = await fileResult.readAsBytes();
+      final file = File.fromRawPath(bytes);
+      final multipartFile = await MultipartFile.fromFile(file.path);
+      final uploadParams =
+          UploadEventCoverParams(uid: event.eventUid, file: multipartFile);
 
-      final uploadResult = await artistPhotoUploadUseCase.call(uploadParams);
+      final uploadResult = await uploadEventCoverUseCase.call(uploadParams);
       print(uploadResult);
     }
   }

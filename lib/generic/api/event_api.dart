@@ -25,7 +25,8 @@ abstract class EventApi {
   // @POST(
   //   '/event_upload?uid={uid}',
   // )
-  // Future<> eventLogoUpload(
-  //     @Path() String uid,
-  //     );
+  // Future<EventCoverUploadApiResponse> artistPhotoUpload(
+  //   @Path() String uid,
+  //   @Part(name: 'file') File file,
+  // );
 }

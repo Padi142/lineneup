@@ -15,7 +15,12 @@ class EventCreation extends DashboardEvent {
   const EventCreation();
 }
 
-class PickAndUploadFile extends DashboardEvent {
+class UploadEventCover extends DashboardEvent {
   final String eventUid;
-  const PickAndUploadFile({required this.eventUid});
+  const UploadEventCover({required this.eventUid});
+}
+
+class UploadArtistPhoto extends DashboardEvent {
+  final String artistUid;
+  const UploadArtistPhoto({required this.artistUid});
 }

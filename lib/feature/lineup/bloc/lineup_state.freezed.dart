@@ -20,7 +20,8 @@ mixin _$LineupState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,11 +65,14 @@ mixin _$LineupState {
 
 /// @nodoc
 abstract class $LineupStateCopyWith<$Res> {
-  factory $LineupStateCopyWith(LineupState value, $Res Function(LineupState) then) = _$LineupStateCopyWithImpl<$Res, LineupState>;
+  factory $LineupStateCopyWith(
+          LineupState value, $Res Function(LineupState) then) =
+      _$LineupStateCopyWithImpl<$Res, LineupState>;
 }
 
 /// @nodoc
-class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState> implements $LineupStateCopyWith<$Res> {
+class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState>
+    implements $LineupStateCopyWith<$Res> {
   _$LineupStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -79,12 +83,16 @@ class _$LineupStateCopyWithImpl<$Res, $Val extends LineupState> implements $Line
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
-  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) = __$$LoadingCopyWithImpl<$Res>;
+  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
+      __$$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loading> implements _$$LoadingCopyWith<$Res> {
-  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then) : super(_value, _then);
+class __$$LoadingCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Loading>
+    implements _$$LoadingCopyWith<$Res> {
+  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -99,7 +107,8 @@ class _$Loading implements Loading {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Loading);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @override
@@ -110,7 +119,8 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) {
     return loading();
   }
@@ -180,12 +190,16 @@ abstract class Loading implements LineupState {
 
 /// @nodoc
 abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) = __$$ErrorCopyWithImpl<$Res>;
+  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
+      __$$ErrorCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Error> implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then) : super(_value, _then);
+class __$$ErrorCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Error>
+    implements _$$ErrorCopyWith<$Res> {
+  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -200,7 +214,8 @@ class _$Error implements Error {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$Error);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Error);
   }
 
   @override
@@ -211,7 +226,8 @@ class _$Error implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) {
     return error();
   }
@@ -281,14 +297,18 @@ abstract class Error implements LineupState {
 
 /// @nodoc
 abstract class _$$LoadedCopyWith<$Res> {
-  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) = __$$LoadedCopyWithImpl<$Res>;
+  factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
+      __$$LoadedCopyWithImpl<$Res>;
   @useResult
   $Res call({EventModel event, List<ArtistModel> artists});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loaded> implements _$$LoadedCopyWith<$Res> {
-  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then) : super(_value, _then);
+class __$$LoadedCopyWithImpl<$Res>
+    extends _$LineupStateCopyWithImpl<$Res, _$Loaded>
+    implements _$$LoadedCopyWith<$Res> {
+  __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -312,7 +332,8 @@ class __$$LoadedCopyWithImpl<$Res> extends _$LineupStateCopyWithImpl<$Res, _$Loa
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded(this.event, final List<ArtistModel> artists) : _artists = artists;
+  const _$Loaded(this.event, final List<ArtistModel> artists)
+      : _artists = artists;
 
   @override
   final EventModel event;
@@ -332,23 +353,29 @@ class _$Loaded implements Loaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loaded && (identical(other.event, event) || other.event == event) && const DeepCollectionEquality().equals(other._artists, _artists));
+        (other.runtimeType == runtimeType &&
+            other is _$Loaded &&
+            (identical(other.event, event) || other.event == event) &&
+            const DeepCollectionEquality().equals(other._artists, _artists));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, event, const DeepCollectionEquality().hash(_artists));
+  int get hashCode => Object.hash(
+      runtimeType, event, const DeepCollectionEquality().hash(_artists));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedCopyWith<_$Loaded> get copyWith => __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
+  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+      __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(EventModel event, List<ArtistModel> artists) loaded,
+    required TResult Function(EventModel event, List<ArtistModel> artists)
+        loaded,
   }) {
     return loaded(event, artists);
   }
@@ -413,10 +440,12 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements LineupState {
-  const factory Loaded(final EventModel event, final List<ArtistModel> artists) = _$Loaded;
+  const factory Loaded(
+      final EventModel event, final List<ArtistModel> artists) = _$Loaded;
 
   EventModel get event;
   List<ArtistModel> get artists;
   @JsonKey(ignore: true)
-  _$$LoadedCopyWith<_$Loaded> get copyWith => throw _privateConstructorUsedError;
+  _$$LoadedCopyWith<_$Loaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -23,6 +23,11 @@
   "event_creating_logo_field_title": "Does your event have a logo? 👀",
   "event_creating_logo_field_hint": "The party never ends tho, right?",
 
+  "artist_name_field_hint": "Name",
+  "add_artist_page_title": "Add artists!",
+  "ig_field_label": "Instagram url",
+  "add_button_label": "Add",
+
 
   "live_button_text": "live"
 

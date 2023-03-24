@@ -41,8 +41,8 @@ class MobileLoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEntryModel(text: '');
-    final passwordController = TextEntryModel(text: '');
+    final emailController = TextEntryModel(text: 'matyas.krejza@seznam.cz');
+    final passwordController = TextEntryModel(text: 'Sobiflotila1');
     return Container(
       constraints: const BoxConstraints.expand(),
       child: Center(
