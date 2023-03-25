@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:universal_io/io.dart';
 
+import '../../../../generic/artist/data/create_artist_use_case.dart';
 import '../../../../generic/artist/data/get_artists_use_case.dart';
+import '../../../../generic/artist/model/params/create_artist_params.dart';
 import '../../../../generic/artist/model/params/upload_event_cover_params.dart';
 import '../../../../generic/event/domain/create_event_use_case.dart';
 import '../../../../generic/event/domain/get_event_use_case.dart';
@@ -32,6 +34,7 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
   final GetUserEventsUseCase getUserEventsUseCase;
   final PickFileUseCase pickFileUseCase;
   final CreateEventUseCase createEventUseCase;
+  final CreateArtistUseCase createArtistUseCase;
   final UploadArtistPhotoUseCase uploadArtistPhotoUseCase;
   final UploadEventCoverUseCase uploadEventCoverUseCase;
   final GetEventUseCase getEventUseCase;
@@ -48,6 +51,7 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
     required this.uploadEventCoverUseCase,
     required this.getEventUseCase,
     required this.getArtistsUseCase,
+    required this.createArtistUseCase,
   }) : super(const EventState.loading()) {
     on<EventInitial>(_onInitEvent);
     on<UploadEventCover>(_onUploadEventCover);
@@ -88,12 +92,44 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
       //TODO emit error
     }
 
-    final params = CreateEventParams(eventName: event.eventName, creatorUid: user!.id, description: event.description, startDate: startDate, endDate: endDate);
+    final eventParams = CreateEventParams(eventName: event.eventName, creatorUid: user!.id, description: event.description, startDate: startDate, endDate: endDate);
 
-    final result = await createEventUseCase(params);
+    final eventResult = await createEventUseCase(eventParams);
 
-    if (result != 'JO') {
+    if (eventResult.error != null || eventResult.uid == null) {
       //TODO emit error
+    }
+
+    for (ArtistCreationModel artist in event.artists) {
+      DateTime? artistStartTime;
+      DateTime? artistEndTime;
+      if (artist.startTime.hour < 8) {
+        artistStartTime = event.startDate.add(const Duration(days: 1));
+      } else {
+        artistStartTime = event.startDate;
+      }
+
+      if (artist.endTime.hour < 8) {
+        artistEndTime = event.startDate.add(const Duration(days: 1));
+      } else {
+        artistEndTime = event.startDate;
+      }
+
+      final artistParams = CreateArtistParams(
+          artistName: artist.name,
+          eventUid: eventResult.uid!,
+          description: 'Artist',
+          startTime: artistStartTime,
+          endTime: artistEndTime,
+          spotifyUrl: '',
+          instagramUrl: artist.instagramUrl,
+          appleUrl: '',
+          image: 'https://media.discordapp.net/attachments/1067446074945577031/1089327520756809808/336631773_538820211655657_2763088481672576367_n.png?width=802&height=754');
+
+      final artistResult = await createArtistUseCase.call(artistParams);
+      if (artistResult != 'ok') {
+        //TODO emit error
+      }
     }
 
     dashboardNavigation.goToDashboard();

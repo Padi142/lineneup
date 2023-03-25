@@ -7,7 +7,7 @@ import '../../../../library/app.dart';
 import '../../model/artist_creation_model.dart';
 
 class NewArtistContainer extends StatefulWidget {
-  final Function(String name, String instagram, TimeOfDay time) onAdded;
+  final Function(String name, String instagram, TimeOfDay startTime, TimeOfDay endTime) onAdded;
   const NewArtistContainer({Key? key, required this.onAdded}) : super(key: key);
 
   @override
@@ -19,8 +19,10 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
   late TextEntryModel instagramModel;
 
   TimeOfDay selectedStartTime = TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay selectedEndTime = TimeOfDay(hour: 00, minute: 00);
 
   final TextEditingController _startTimeController = TextEditingController(text: '00:00');
+  final TextEditingController _endTimeController = TextEditingController(text: '00:00');
 
   @override
   void initState() {
@@ -87,6 +89,30 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      _selectTime(context, selectedEndTime, _endTimeController);
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.08,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: App.appTheme.colorNavbar, border: Border.all(color: App.appTheme.colorBlack)),
+                      child: TextFormField(
+                        style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorTextSecondary),
+                        textAlign: TextAlign.center,
+                        onSaved: (val) {},
+                        enabled: false,
+                        keyboardType: TextInputType.text,
+                        controller: _endTimeController,
+                        decoration: const InputDecoration(
+                            // labelText: 'Time',
+                            contentPadding: EdgeInsets.all(5)),
+                      ),
+                    ),
+                  ),
                   const Spacer(),
                   SizedBox(
                     width: constrains.maxWidth * 0.15,
@@ -96,7 +122,7 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
                       backgroundColor: App.appTheme.colorPrimary,
                       radius: 4,
                       onClick: () {
-                        widget.onAdded(artistNameModel.text, instagramModel.text, selectedStartTime);
+                        widget.onAdded(artistNameModel.text, instagramModel.text, selectedStartTime, selectedEndTime);
                       },
                     ),
                   ),
@@ -161,7 +187,7 @@ class AddedArtistContainer extends StatelessWidget {
                   SizedBox(
                       width: constrains.maxWidth * 0.2,
                       child: Text(
-                        '${artist.time.hour}:${artist.time.minute}',
+                        '${artist.startTime.hour}:${artist.startTime.minute}',
                         style: App.appTheme.textTitle,
                       )),
                   const Spacer(),

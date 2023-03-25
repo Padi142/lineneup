@@ -1,3 +1,4 @@
+import '../model/params/create_artist_params.dart';
 import '../model/params/get_artists_params.dart';
 import '../model/params/upload_artist_photo_params.dart';
 import '../model/results/get_artists_result.dart';
@@ -10,5 +11,9 @@ abstract class ArtistRepository {
 
   Future<ArtistPhotoUploadResult> artistPhotoUpload(
     UploadArtistPhotoParams params,
+  );
+
+  Future<String> createArtist(
+    CreateArtistParams params,
   );
 }

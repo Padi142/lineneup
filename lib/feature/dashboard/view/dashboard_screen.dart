@@ -70,7 +70,7 @@ class DashboardBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 5,
               ),
               SizedBox(
                 height: constrains.maxHeight * 0.8,

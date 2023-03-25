@@ -65,7 +65,7 @@ class _EventApi implements EventApi {
   }
 
   @override
-  Future<String> createEvent(
+  Future<EventCreateResult> createEvent(
     event_name,
     creator_uid,
     start_time,
@@ -96,20 +96,21 @@ class _EventApi implements EventApi {
       'description',
       description,
     ));
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EventCreateResult>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
-        .compose(
-          _dio.options,
-          '/create_event',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+            .compose(
+              _dio.options,
+              '/create_event',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EventCreateResult.fromJson(_result.data!);
     return value;
   }
 

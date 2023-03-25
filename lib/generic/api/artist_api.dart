@@ -26,4 +26,19 @@ abstract class ArtistApi {
     @Path() String uid,
     @Part(name: 'file') File file,
   );
+  @POST(
+    '/create_artist',
+  )
+  @MultiPart()
+  Future<String> createArtist(
+    @Part(name: 'artist_name') String artist_name,
+    @Part(name: 'event_uid') String event_uid,
+    @Part(name: 'start_time') String start_time,
+    @Part(name: 'end_time') String end_time,
+    @Part(name: 'description') String description,
+    @Part(name: 'spotify') String spotify,
+    @Part(name: 'apple') String apple,
+    @Part(name: 'instagram') String instagram,
+    @Part(name: 'image') String image,
+  );
 }

@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:lineneup/generic/event/model/event_data_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../event/model/results/event_creation_result.dart';
+
 part 'event_api.g.dart';
 
 @RestApi()
@@ -26,7 +28,7 @@ abstract class EventApi {
     '/create_event',
   )
   @MultiPart()
-  Future<String> createEvent(
+  Future<EventCreateResult> createEvent(
     @Part(name: 'event_name') String event_name,
     @Part(name: 'creator_uid') String creator_uid,
     @Part(name: 'start_time') String start_time,

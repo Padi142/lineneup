@@ -6,6 +6,7 @@ import 'package:lineneup/generic/artist/domain/artist_repository.dart';
 import '../../library/app.dart';
 import '../../library/app_module.dart';
 import 'data/artist_repository_impl.dart';
+import 'data/create_artist_use_case.dart';
 
 class ArtistModule extends AppModule {
   @override
@@ -26,6 +27,12 @@ class ArtistModule extends AppModule {
   void registerUseCase() {
     GetIt.I.registerFactory<GetArtistsUseCase>(
       () => GetArtistsUseCase(
+        repository: GetIt.I.get<ArtistRepository>(),
+      ),
+    );
+
+    GetIt.I.registerFactory<CreateArtistUseCase>(
+      () => CreateArtistUseCase(
         repository: GetIt.I.get<ArtistRepository>(),
       ),
     );

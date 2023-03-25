@@ -87,9 +87,24 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'app_name'.tr(),
-                      style: App.appTheme.textHeader,
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              DashboardNavigation().goToDashboard();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_outlined,
+                              color: App.appTheme.colorText,
+                            )),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'app_name'.tr(),
+                          style: App.appTheme.textHeader,
+                        ),
+                      ],
                     ),
                     IconButton(
                         onPressed: () {},
@@ -101,7 +116,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 5,
               ),
               Expanded(
                 child: PageView(
@@ -367,8 +382,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
               itemBuilder: (context, index) {
                 if (addedArtists.length < index + 1) {
                   return NewArtistContainer(
-                    onAdded: (name, instagram, time) {
-                      addedArtists.add(ArtistCreationModel(name: name, instagramUrl: instagram, time: time));
+                    onAdded: (name, instagram, starTime, endTime) {
+                      addedArtists.add(ArtistCreationModel(name: name, instagramUrl: instagram, startTime: starTime, endTime: endTime));
                       setState(() {});
                     },
                   );
@@ -404,7 +419,14 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 width: 150,
                 child: AppButton(
                   onClick: () {
-                    BlocProvider.of<EventBloc>(context).add(CreateEvent(eventName: _eventTitleModel.text, description: _eventDescriptionModel.text, startDate: selectedStartDate, startTime: selectedStartTime, endDate: selectedEndDate, endTime: selectedEndTime, artists: addedArtists));
+                    BlocProvider.of<EventBloc>(context).add(CreateEvent(
+                        eventName: _eventTitleModel.text,
+                        description: _eventDescriptionModel.text,
+                        startDate: selectedStartDate,
+                        startTime: selectedStartTime,
+                        endDate: selectedEndDate,
+                        endTime: selectedEndTime,
+                        artists: addedArtists));
                   },
                   text: 'finish_event_creation_button'.tr(),
                   backgroundColor: App.appTheme.colorPrimary,
@@ -420,7 +442,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
   }
 
   Future<void> _selectDate(BuildContext context, DateTime date, TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(context: context, initialDate: date, initialDatePickerMode: DatePickerMode.day, firstDate: DateTime.now().subtract(const Duration(days: 5)), lastDate: DateTime(2101));
+    final DateTime? picked =
+        await showDatePicker(context: context, initialDate: date, initialDatePickerMode: DatePickerMode.day, firstDate: DateTime.now().subtract(const Duration(days: 5)), lastDate: DateTime(2101));
     if (picked != null) {
       setState(() {
         date = picked;

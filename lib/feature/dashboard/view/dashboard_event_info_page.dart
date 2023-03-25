@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lineneup/feature/dashboard/bloc/dashboard/dashboard_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc_state.dart';
-import 'package:lineneup/generic/widget/app_button.dart';
 import 'package:lineneup/generic/widget/app_progress.dart';
 import 'package:lineneup/library/app_screen.dart';
 
@@ -12,6 +10,7 @@ import '../../../generic/constant.dart';
 import '../../../generic/widget/app_gradient.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
+import '../use_case/dashboard_navigation.dart';
 
 class DashboardEventInfo extends Screen {
   static const String name = ScreenPath.DASHBOARD_EVENT_INFO;
@@ -56,9 +55,24 @@ class DashboardEventInfoBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'app_name'.tr(),
-                      style: App.appTheme.textHeader,
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              DashboardNavigation().goToDashboard();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_outlined,
+                              color: App.appTheme.colorText,
+                            )),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'app_name'.tr(),
+                          style: App.appTheme.textHeader,
+                        ),
+                      ],
                     ),
                     IconButton(
                         onPressed: () {},
@@ -70,7 +84,7 @@ class DashboardEventInfoBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 5,
               ),
               SizedBox(
                 height: constrains.maxHeight * 0.8,
@@ -116,19 +130,6 @@ class DashboardEventInfoBody extends StatelessWidget {
                     );
                   });
                 }),
-              ),
-              SizedBox(
-                height: 50,
-                width: 270,
-                child: AppButton(
-                  onClick: () {
-                    BlocProvider.of<DashboardBloc>(context).add(const OpenEventCreation());
-                  },
-                  text: 'create_new_event_label'.tr(),
-                  backgroundColor: App.appTheme.colorSecondary,
-                  radius: 10,
-                  textStyle: App.appTheme.textTitle,
-                ),
               ),
               const SizedBox(
                 height: 15,
