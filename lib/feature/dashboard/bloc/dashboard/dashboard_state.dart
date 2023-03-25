@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../generic/event/model/event_model.dart';
+import '../../../../generic/event/model/event_model.dart';
 
 part 'dashboard_state.freezed.dart';
 

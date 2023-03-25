@@ -54,7 +54,7 @@ Future<void> main() async {
 
 AppConfig appConfig() {
   return AppConfig(
-    endpoint: 'https://lineapbackend-production.up.railway.app/',
+    endpoint: 'https://lineapbackend-production.up.railway.app/', //'
     languages: ['en'],
     theme: MainTheme(),
   );

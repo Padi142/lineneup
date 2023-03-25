@@ -2,7 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/dashboard/dashboard_bloc.dart';
-import 'package:lineneup/feature/dashboard/bloc/dashboard/dashboard_state.dart';
+import 'package:lineneup/feature/dashboard/bloc/event/event_bloc.dart';
+import 'package:lineneup/feature/dashboard/bloc/event/event_bloc_state.dart';
 import 'package:lineneup/generic/widget/app_button.dart';
 import 'package:lineneup/generic/widget/app_progress.dart';
 import 'package:lineneup/library/app_screen.dart';
@@ -11,21 +12,20 @@ import '../../../generic/constant.dart';
 import '../../../generic/widget/app_gradient.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
-import 'components/event_list_container.dart';
 
-class DashboardScreen extends Screen {
-  static const String name = ScreenPath.DASHBOARD_SCREEN;
+class DashboardEventInfo extends Screen {
+  static const String name = ScreenPath.DASHBOARD_EVENT_INFO;
 
-  DashboardScreen({Key? key}) : super(name, key: key);
+  DashboardEventInfo({Key? key}) : super(name, key: key);
 
   @override
   State<StatefulWidget> createState() => _InitScreenState();
 }
 
-class _InitScreenState extends State<DashboardScreen> {
+class _InitScreenState extends State<DashboardEventInfo> {
   @override
   void initState() {
-    BlocProvider.of<DashboardBloc>(context).add(const Initial());
+    BlocProvider.of<EventBloc>(context).add(const LoadEventInfo());
 
     super.initState();
   }
@@ -33,14 +33,14 @@ class _InitScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return const AppScaffold(
-      mobileLayout: AppGradient(child: DashboardBody()),
-      desktopLayout: AppGradient(child: DashboardBody()),
+      mobileLayout: AppGradient(child: DashboardEventInfoBody()),
+      desktopLayout: AppGradient(child: DashboardEventInfoBody()),
     );
   }
 }
 
-class DashboardBody extends StatelessWidget {
-  const DashboardBody({Key? key}) : super(key: key);
+class DashboardEventInfoBody extends StatelessWidget {
+  const DashboardEventInfoBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +74,35 @@ class DashboardBody extends StatelessWidget {
               ),
               SizedBox(
                 height: constrains.maxHeight * 0.8,
-                child: BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
-                  return state.maybeMap(loaded: (values) {
-                    return ListView.builder(
-                        itemCount: values.events.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return SizedBox(height: constrains.maxHeight * 0.35, child: EventContainer(event: values.events[index]));
-                        });
+                child: BlocBuilder<EventBloc, EventState>(builder: (context, state) {
+                  return state.maybeMap(loadedEvent: (values) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(values.event.eventLogo)),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            SizedBox(width: constrains.maxWidth * 0.8, child: Text(values.event.description))
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Center(
+                          child: Text(
+                            values.event.eventName,
+                            style: App.appTheme.textHeader.copyWith(fontSize: 42),
+                          ),
+                        ),
+                      ],
+                    );
                   }, error: (error) {
                     return Center(
                       child: Text(

@@ -10,14 +10,16 @@
   "create_new_event_label": "Create new",
   "next_page_button_label": "Next",
   "back_page_button_label": "Back",
+  "cancel_button_label": "Cancel",
   "login_button_text": "Log in",
+  "finish_event_creation_button": "✨ Finish ✨",
 
   "event_creating_name_field_title": "Name your awesome event 😍",
   "event_creating_name_field_hint": "Something like '✨Supa-awesome-mega-party✨' will do ",
   "event_creating_description_field_title": "What do you want people to know about your event?",
   "event_creating_description_field_hint": "Description",
   "event_creating_start_time_field_title": "When is the event starting?",
-  "event_creating_start_time_field_hint": "We cant wait!! 🤩",
+  "event_creating_start_time_field_hint": "We can't wait!! 🤩",
   "event_creating_end_time_field_title": "When does it end?",
   "event_creating_end_time_field_hint": "The party never ends tho, right?",
   "event_creating_logo_field_title": "Does your event have a logo? 👀",
@@ -26,6 +28,8 @@
   "artist_name_field_hint": "Name",
   "add_artist_page_title": "Add artists!",
   "ig_field_label": "Instagram url",
+  "artists_adding_list": "Who is gonna perform at your event? 🎶🎶",
+  "artist_start_time_picker": "When will they play? 👀",
   "add_button_label": "Add",
 
 

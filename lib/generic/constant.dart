@@ -6,5 +6,6 @@ class ScreenPath {
   static const String LOGIN_SCREEN = '/login';
   static const String DASHBOARD_SCREEN = '/dashboard';
   static const String EVENT_CREATION = '/create_event';
+  static const String DASHBOARD_EVENT_INFO = '/dashboard-info';
   static const String LOGIN_CALLBACK_SCREEN = '/login-callback';
 }
