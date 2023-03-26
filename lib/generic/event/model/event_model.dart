@@ -5,8 +5,8 @@ class EventModel extends Equatable {
   final DateTime createdAt;
   final String eventName;
   final String eventLogo;
-  final String startTime;
-  final String endTime;
+  final DateTime startTime;
+  final DateTime endTime;
   final String ticketsUrl;
   final String eventUid;
   final String description;

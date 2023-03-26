@@ -50,21 +50,46 @@ class _MobileLineupBodyState extends State<MobileLineupBody> {
   final _controller = PageController(
     initialPage: 0,
   );
+  int _index = 0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LineupBloc, LineupState>(
       builder: (context, state) {
         return state.maybeMap(loaded: (loaded) {
-          return PageView(
-            controller: _controller,
-            onPageChanged: (index) {
-              setState(() {});
-            },
+          return Column(
             children: [
-              EventInfo(event: loaded.event),
-              MobileLineupContent(
-                event: loaded.event,
-                artists: loaded.artists,
+              Expanded(
+                child: PageView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  controller: _controller,
+                  onPageChanged: (index) {
+                    _index = index;
+                    setState(() {});
+                  },
+                  children: [
+                    EventInfo(event: loaded.event),
+                    MobileLineupContent(
+                      event: loaded.event,
+                      artists: loaded.artists,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              BottomBar(
+                onTap: (index) {
+                  _controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+                  _index = index;
+                  setState(() {});
+                },
+                maxWidth: 150,
+                currentIndex: _index,
+                maxIndex: 2,
+              ),
+              const SizedBox(
+                height: 5,
               ),
             ],
           );
@@ -95,7 +120,7 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
         return Column(
           children: [
             SizedBox(
-              height: constraints.maxHeight * 0.15,
+              height: constraints.maxHeight * 0.10,
               child: Text(
                 'Start - 17:00',
                 style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorSecondary, fontSize: 17),
@@ -214,25 +239,50 @@ class EventInfo extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
-                child: Text(
-                  event.eventName,
-                  style: App.appTheme.textHeader.copyWith(fontSize: 42),
-                ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(event.eventLogo)),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                event.eventName,
+                style: App.appTheme.textHeader.copyWith(fontSize: 45),
+              ),
+              Container(
+                width: constrains.maxWidth * 0.2,
+                height: 4,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: App.appTheme.colorSecondary),
+              ),
+              Text(
+                DateFormat('dd.MM. yyyy - kk:mm').format(event.startTime),
+                style: App.appTheme.textTitle.copyWith(fontSize: 27),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(event.eventLogo)),
-                  const SizedBox(
-                    width: 5,
+              Material(
+                elevation: 2,
+                borderRadius: BorderRadius.circular(25),
+                child: Container(
+                  decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            width: constrains.maxWidth * 0.8,
+                            child: Text(
+                              event.description,
+                              textAlign: TextAlign.center,
+                            ))
+                      ],
+                    ),
                   ),
-                  SizedBox(width: constrains.maxWidth * 0.8, child: Text(event.description))
-                ],
-              )
+                ),
+              ),
             ],
           );
         },
@@ -352,6 +402,65 @@ class SvgButton extends StatelessWidget {
         child: SvgPicture.asset(
           asset,
           width: 25,
+        ),
+      ),
+    );
+  }
+}
+
+class BottomBar extends StatelessWidget {
+  final Function(int index) onTap;
+  final double maxWidth;
+  final int currentIndex;
+  final int maxIndex;
+
+  const BottomBar({required this.onTap, required this.maxWidth, required this.currentIndex, required this.maxIndex, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: maxWidth,
+      height: 20,
+      child: Center(
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: maxIndex,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            if (currentIndex == index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: App.appTheme.colorPrimary,
+                    ),
+                  ),
+                ),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: GestureDetector(
+                onTap: () {
+                  onTap(index);
+                },
+                child: SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: App.appTheme.colorInactive,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

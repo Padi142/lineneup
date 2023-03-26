@@ -23,9 +23,9 @@ class EventDataDto {
   @JsonKey(name: 'event_logo')
   final String eventLogo;
   @JsonKey(name: 'start_time')
-  final String startTime;
+  final DateTime startTime;
   @JsonKey(name: 'end_time')
-  final String endTime;
+  final DateTime endTime;
   @JsonKey(name: 'tickets_url')
   final String ticketsUrl;
   @JsonKey(name: 'event_uid')
