@@ -41,8 +41,8 @@ class MobileLoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEntryModel(text: 'matyas.krejza@seznam.cz');
-    final passwordController = TextEntryModel(text: 'Sobiflotila1');
+    final emailController = TextEntryModel(text: '');
+    final passwordController = TextEntryModel(text: '');
     return Container(
       constraints: const BoxConstraints.expand(),
       child: Center(
@@ -91,9 +91,7 @@ class MobileLoginBody extends StatelessWidget {
                 text: 'login_button_text'.tr(),
                 textStyle: App.appTheme.textTitle,
                 onClick: () {
-                  BlocProvider.of<LoginBloc>(context).add(EmailLogin(
-                      email: emailController.text,
-                      password: passwordController.text));
+                  BlocProvider.of<LoginBloc>(context).add(EmailLogin(email: emailController.text, password: passwordController.text));
                 },
               ),
             ),
@@ -106,8 +104,7 @@ class MobileLoginBody extends StatelessWidget {
               child: AppButton(
                 backgroundColor: App.appTheme.colorSecondary,
                 radius: 6,
-                imagePrefix:
-                    const SvgButton(asset: 'assets/images/discord-icon.svg'),
+                imagePrefix: const SvgButton(asset: 'assets/images/discord-icon.svg'),
                 text: 'Discord',
                 textStyle: App.appTheme.textTitle,
                 onClick: () {
