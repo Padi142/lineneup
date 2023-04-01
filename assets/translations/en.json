@@ -1,13 +1,40 @@
 {
-    "app_name":"Lineap",
-    "log_in_button":"Log in",
-    "create_event_button":"Create new event",
-    "app_desc":"One place for all your events",
-    "no_events_label":"You have no events :/ ",
-    "user_logged_button":"User",
-    "event_start_input_label":"Start date & Time",
-    "event_end_input_label":"End date & Time",
-    "event_name_input_label":"Event name",
-    "create_event_button_label":"Create event"
+  "app_name": "LineApp",
+  "unknown_screen__title": "Sorry",
+  "unknown_screen__message": "We could not find this screen",
+  "log_in_button": "Log in",
+  "sign_up_button": "Sign up",
+  "home_leading_text": "One place for all your events",
+  "home_trailing_text": "All the info about your next event in one, simple link",
 
+  "create_new_event_label": "Create new",
+  "next_page_button_label": "Next",
+  "back_page_button_label": "Back",
+  "cancel_button_label": "Cancel",
+  "login_button_text": "Log in",
+  "finish_event_creation_button": "✨ Finish ✨",
+
+  "event_creating_name_field_title": "Name your awesome event 😍",
+  "event_creating_name_field_hint": "Something like '✨Supa-awesome-mega-party✨' will do ",
+  "event_creating_description_field_title": "What do you want people to know about your event?",
+  "event_creating_description_field_hint": "Description",
+  "event_creating_start_time_field_title": "When is the event starting?",
+  "event_creating_start_time_field_hint": "We can't wait!! 🤩",
+  "event_creating_end_time_field_title": "When does it end?",
+  "event_creating_end_time_field_hint": "The party never ends tho, right?",
+  "event_creating_logo_field_title": "Does your event have a logo? 👀",
+  "event_creating_logo_field_hint": "The party never ends tho, right?",
+
+  "artist_name_field_hint": "Name",
+  "add_artist_page_title": "Add artists!",
+  "ig_field_label": "Instagram url",
+  "artists_adding_list": "Who is gonna perform at your event? 🎶🎶",
+  "artist_start_time_picker": "When will they play? 👀",
+  "add_button_label": "Add",
+
+
+  "live_button_text": "live",
+  "tickets_button_label": "Tickets",
+  "event_ig_button_label": "Follow us",
+  "event_website_button_label": "Our Website"
 }
