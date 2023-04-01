@@ -33,6 +33,8 @@
   "add_button_label": "Add",
 
 
-  "live_button_text": "live"
-
+  "live_button_text": "live",
+  "tickets_button_label": "Tickets",
+  "event_ig_button_label": "Follow us",
+  "event_website_button_label": "Our Website"
 }

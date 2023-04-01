@@ -32,6 +32,10 @@ class EventDataDto {
   final String eventUid;
   @JsonKey(name: 'description')
   final String description;
+  @JsonKey(name: 'event_instagram')
+  final String eventInstagram;
+  @JsonKey(name: 'event_website')
+  final String eventWebsite;
 
   const EventDataDto({
     required this.id,
@@ -43,6 +47,8 @@ class EventDataDto {
     required this.endTime,
     required this.eventUid,
     required this.ticketsUrl,
+    required this.eventInstagram,
+    required this.eventWebsite,
   });
 
   factory EventDataDto.fromJson(Map<String, dynamic> json) => _$EventDataDtoFromJson(json);

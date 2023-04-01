@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:lineneup/generic/event/model/params/update_event_params.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:universal_io/io.dart';
 
@@ -14,6 +16,7 @@ import '../../../../generic/artist/model/params/upload_event_cover_params.dart';
 import '../../../../generic/event/domain/create_event_use_case.dart';
 import '../../../../generic/event/domain/get_event_use_case.dart';
 import '../../../../generic/event/domain/get_user_events.dart';
+import '../../../../generic/event/domain/update_event_use_case.dart';
 import '../../../../generic/event/model/params/create_event_params.dart';
 import '../../../../generic/event/model/params/get_event_params.dart';
 import '../../../../generic/user/use_case/get_current_session_use_case.dart';
@@ -39,6 +42,7 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
   final UploadEventCoverUseCase uploadEventCoverUseCase;
   final GetEventUseCase getEventUseCase;
   final GetArtistsUseCase getArtistsUseCase;
+  final UpdateEventUseCase updateEventUseCase;
 
   EventBloc({
     required this.dashboardNavigation,
@@ -52,11 +56,13 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
     required this.getEventUseCase,
     required this.getArtistsUseCase,
     required this.createArtistUseCase,
+    required this.updateEventUseCase,
   }) : super(const EventState.loading()) {
     on<EventInitial>(_onInitEvent);
     on<UploadEventCover>(_onUploadEventCover);
     on<CreateEvent>(_onCreateEvent);
     on<LoadEventInfo>(_onLoadEventInfo);
+    on<UpdateEvent>(_onUpdateEvent);
   }
   Future<void> _onInitEvent(
     EventInitial event,
@@ -139,12 +145,20 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
     LoadEventInfo event,
     Emitter<EventState> emit,
   ) async {
-    final eventUid = QR.params['id'];
+    emit(const EventState.loading());
+
+    String? eventUid;
+    if (event.eventId == null) {
+      eventUid = QR.params['id'].toString();
+    } else {
+      eventUid = event.eventId;
+    }
 
     if (eventUid == null) {
       emit(const EventState.error('error loading event'));
+      return;
     }
-    final params = GetEventParams(id: eventUid.toString());
+    final params = GetEventParams(id: eventUid);
 
     final result = await getEventUseCase(params);
 
@@ -153,5 +167,58 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
     }, failure: (failure) {
       emit(const EventState.error('Error loading event'));
     });
+  }
+
+  Future<void> _onUpdateEvent(
+    UpdateEvent event,
+    Emitter<EventState> emit,
+  ) async {
+    final type = EnumToString.convertToString(event.type);
+
+    switch (event.type) {
+      case UpdateType.description:
+        {
+          final params = UpdateEventParams(eventUid: event.eventId, type: type, description: event.description);
+          final result = updateEventUseCase.call(params);
+
+          break;
+        }
+
+      case UpdateType.eventName:
+        {
+          final params = UpdateEventParams(eventUid: event.eventId, type: type, eventName: event.name);
+          final result = updateEventUseCase.call(params);
+
+          break;
+        }
+
+      case UpdateType.startTime:
+        break;
+      case UpdateType.endTime:
+        break;
+      case UpdateType.eventInstagram:
+        {
+          final params = UpdateEventParams(eventUid: event.eventId, type: type, eventInstagram: event.eventInstagram);
+          final result = updateEventUseCase.call(params);
+
+          break;
+        }
+      case UpdateType.eventWebsite:
+        {
+          final params = UpdateEventParams(eventUid: event.eventId, type: type, eventWebsite: event.eventWebsite);
+          final result = updateEventUseCase.call(params);
+
+          break;
+        }
+      case UpdateType.ticketsUrl:
+        {
+          final params = UpdateEventParams(eventUid: event.eventId, type: type, ticketsUrl: event.ticketsUrl);
+          final result = updateEventUseCase.call(params);
+
+          break;
+        }
+    }
+
+    Future.delayed(const Duration(milliseconds: 200)).then((value) => add(LoadEventInfo(eventId: event.eventId)));
   }
 }

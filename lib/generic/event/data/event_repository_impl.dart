@@ -5,6 +5,7 @@ import 'package:lineneup/generic/event/domain/event_repository.dart';
 import '../model/params/create_event_params.dart';
 import '../model/params/get_event_params.dart';
 import '../model/params/get_user_events_params.dart';
+import '../model/params/update_event_params.dart';
 import '../model/results/event_creation_result.dart';
 import '../model/results/get_event_result.dart';
 import '../model/results/get_events_result.dart';
@@ -40,6 +41,13 @@ class EventRepositoryImpl extends EventRepository {
     }).onError((error, stackTrace) {
       return EventsDataResult.failure(error.toString());
     });
+  }
+
+  @override
+  Future<String> updateEvent(
+    UpdateEventParams params,
+  ) async {
+    return eventApi.updateEvent(params.eventUid, params.type, params.eventName, params.startDate?.toIso8601String(), params.endDate?.toIso8601String(), params.description);
   }
 
   @override

@@ -24,6 +24,18 @@ abstract class EventApi {
     @Path() String uid,
   );
 
+  @GET(
+    '/update_event?uid={uid}&type={type}&name={name}&startTime={startTime}&endTime={endTime}&description={description}',
+  )
+  Future<String> updateEvent(
+    @Path() String uid,
+    @Path() String type,
+    @Path() String? name,
+    @Path() String? startTime,
+    @Path() String? endTime,
+    @Path() String? description,
+  );
+
   @POST(
     '/create_event',
   )

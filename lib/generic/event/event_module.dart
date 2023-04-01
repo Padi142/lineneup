@@ -8,6 +8,7 @@ import 'package:lineneup/generic/event/domain/get_event_use_case.dart';
 import '../../library/app.dart';
 import '../../library/app_module.dart';
 import 'domain/get_user_events.dart';
+import 'domain/update_event_use_case.dart';
 
 class EventModule extends AppModule {
   @override
@@ -38,6 +39,11 @@ class EventModule extends AppModule {
     );
     GetIt.I.registerFactory<CreateEventUseCase>(
       () => CreateEventUseCase(
+        repository: GetIt.I.get<EventRepository>(),
+      ),
+    );
+    GetIt.I.registerFactory<UpdateEventUseCase>(
+      () => UpdateEventUseCase(
         repository: GetIt.I.get<EventRepository>(),
       ),
     );

@@ -65,6 +65,36 @@ class _EventApi implements EventApi {
   }
 
   @override
+  Future<String> updateEvent(
+    uid,
+    type,
+    name,
+    startTime,
+    endTime,
+    description,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/update_event?uid=${uid}&type=${type}&name=${name}&startTime=${startTime}&endTime=${endTime}&description=${description}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
   Future<EventCreateResult> createEvent(
     event_name,
     creator_uid,

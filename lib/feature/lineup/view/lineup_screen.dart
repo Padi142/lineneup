@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lineneup/feature/lineup/bloc/lineup_bloc.dart';
 import 'package:lineneup/feature/lineup/bloc/lineup_state.dart';
+import 'package:lineneup/generic/widget/app_button.dart';
 import 'package:lineneup/generic/widget/app_gradient.dart';
 import 'package:lineneup/generic/widget/app_progress.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../generic/artist/model/artist_model.dart';
 import '../../../generic/constant.dart';
@@ -217,7 +220,7 @@ class _MobileLineupContentState extends State<MobileLineupContent> {
               color: Colors.black.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 3,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ], shape: BoxShape.circle, border: Border.all(color: App.appTheme.colorPrimary), image: DecorationImage(image: NetworkImage(it.artistPhoto), fit: BoxFit.fill)),
         ),
@@ -268,7 +271,7 @@ class EventInfo extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(10)),
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -283,6 +286,74 @@ class EventInfo extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppButton(
+                    text: 'tickets_button_label'.tr(),
+                    imagePrefix: SvgPicture.asset('assets/images/tickets.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
+                    onClick: () async {
+                      if (event.ticketsUrl == '') {
+                        return;
+                      }
+                      try {
+                        final Uri url = Uri.parse(event.ticketsUrl);
+                        await launchUrl(url);
+                      } catch (e) {
+                        if (kDebugMode) {
+                          print(e);
+                        }
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  AppButton(
+                    text: 'event_ig_button_label'.tr(),
+                    imagePrefix: SvgPicture.asset('assets/images/instagram-icon.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
+                    onClick: () async {
+                      if (event.eventInstagram == '') {
+                        return;
+                      }
+                      try {
+                        final Uri url = Uri.parse(event.eventInstagram);
+                        await launchUrl(url);
+                      } catch (e) {
+                        if (kDebugMode) {
+                          print(e);
+                        }
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  AppButton(
+                    text: 'event_website_button_label'.tr(),
+                    imagePrefix: Icon(
+                      Icons.language,
+                      color: App.appTheme.colorPrimary,
+                    ),
+                    onClick: () async {
+                      if (event.eventWebsite == '') {
+                        return;
+                      }
+                      try {
+                        final Uri url = Uri.parse(event.eventWebsite);
+                        await launchUrl(url);
+                      } catch (e) {
+                        if (kDebugMode) {
+                          print(e);
+                        }
+                      }
+                    },
+                  ),
+                ],
+              )
             ],
           );
         },
@@ -371,11 +442,71 @@ class ArtistInfo extends StatelessWidget {
                     const Divider(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        SvgButton(asset: 'assets/images/spotify-icon.svg'),
-                        SvgButton(asset: 'assets/images/instagram-icon.svg'),
-                        SvgButton(asset: 'assets/images/soundcloud-icon.svg'),
-                        SvgButton(asset: 'assets/images/applemusic-icon.svg'),
+                      children: [
+                        SvgButton(
+                          asset: 'assets/images/spotify-icon.svg',
+                          onClicked: () async {
+                            if (artist.spotifyLink == '') {
+                              return;
+                            }
+                            try {
+                              final Uri url = Uri.parse(artist.spotifyLink);
+                              await launchUrl(url);
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print(e);
+                              }
+                            }
+                          },
+                        ),
+                        SvgButton(
+                          asset: 'assets/images/instagram-icon.svg',
+                          onClicked: () async {
+                            if (artist.instagramLink == '') {
+                              return;
+                            }
+                            try {
+                              final Uri url = Uri.parse(artist.instagramLink);
+                              await launchUrl(url);
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print(e);
+                              }
+                            }
+                          },
+                        ),
+                        SvgButton(
+                          asset: 'assets/images/soundcloud-icon.svg',
+                          onClicked: () async {
+                            if (artist.spotifyLink == '') {
+                              return;
+                            }
+                            try {
+                              final Uri url = Uri.parse(artist.spotifyLink);
+                              await launchUrl(url);
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print(e);
+                              }
+                            }
+                          },
+                        ),
+                        SvgButton(
+                          asset: 'assets/images/applemusic-icon.svg',
+                          onClicked: () async {
+                            if (artist.appleLink == '') {
+                              return;
+                            }
+                            try {
+                              final Uri url = Uri.parse(artist.appleLink);
+                              await launchUrl(url);
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print(e);
+                              }
+                            }
+                          },
+                        ),
                       ],
                     ),
                   ],
@@ -392,17 +523,16 @@ class ArtistInfo extends StatelessWidget {
 
 class SvgButton extends StatelessWidget {
   final String asset;
-  const SvgButton({required this.asset, Key? key}) : super(key: key);
+  final Color? color;
+  final Function() onClicked;
+  const SvgButton({required this.asset, this.color, Key? key, required this.onClicked}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Ink(
       child: InkWell(
-        onTap: () {},
-        child: SvgPicture.asset(
-          asset,
-          width: 25,
-        ),
+        onTap: onClicked,
+        child: SvgPicture.asset(asset, width: 25, colorFilter: ColorFilter.mode(color != null ? color! : Colors.white, BlendMode.srcIn)),
       ),
     );
   }

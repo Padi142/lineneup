@@ -52,7 +52,7 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
                       width: constrains.maxWidth * 0.4,
                       child: AppTextField(
                         artistNameModel,
-                        filled: App.appTheme.colorNavbar,
+                        filled: App.appTheme.colorInactive,
                         hint: 'artist_name_field_hint'.tr(),
                       )),
                   const SizedBox(
@@ -62,7 +62,7 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
                       width: constrains.maxWidth * 0.2,
                       child: AppTextField(
                         instagramModel,
-                        filled: App.appTheme.colorNavbar,
+                        filled: App.appTheme.colorInactive,
                         hint: 'ig_field_label'.tr(),
                       )),
                   const SizedBox(
@@ -75,7 +75,7 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.08,
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: App.appTheme.colorNavbar, border: Border.all(color: App.appTheme.colorBlack)),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: App.appTheme.colorInactive, border: Border.all(color: App.appTheme.colorBlack)),
                       child: TextFormField(
                         style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorTextSecondary),
                         textAlign: TextAlign.center,
@@ -99,7 +99,7 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.08,
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: App.appTheme.colorNavbar, border: Border.all(color: App.appTheme.colorBlack)),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: App.appTheme.colorInactive, border: Border.all(color: App.appTheme.colorBlack)),
                       child: TextFormField(
                         style: App.appTheme.textTitle.copyWith(color: App.appTheme.colorTextSecondary),
                         textAlign: TextAlign.center,

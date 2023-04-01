@@ -28,6 +28,8 @@ EventDataDto _$EventDataDtoFromJson(Map<String, dynamic> json) => EventDataDto(
       endTime: DateTime.parse(json['end_time'] as String),
       eventUid: json['event_uid'] as String,
       ticketsUrl: json['tickets_url'] as String,
+      eventInstagram: json['event_instagram'] as String,
+      eventWebsite: json['event_website'] as String,
     );
 
 Map<String, dynamic> _$EventDataDtoToJson(EventDataDto instance) =>
@@ -41,4 +43,6 @@ Map<String, dynamic> _$EventDataDtoToJson(EventDataDto instance) =>
       'tickets_url': instance.ticketsUrl,
       'event_uid': instance.eventUid,
       'description': instance.description,
+      'event_instagram': instance.eventInstagram,
+      'event_website': instance.eventWebsite,
     };

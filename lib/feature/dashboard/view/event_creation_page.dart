@@ -150,7 +150,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
           ),
           AppTextField(
             _eventTitleModel,
-            filled: App.appTheme.colorNavbar,
+            filled: App.appTheme.colorInactive,
             hint: 'event_creating_name_field_hint'.tr(),
             lines: 1,
             validators: [ValidatorEmpty()],
@@ -170,7 +170,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
           ),
           AppTextField(
             _eventDescriptionModel,
-            filled: App.appTheme.colorNavbar,
+            filled: App.appTheme.colorInactive,
             hint: 'event_creating_description_field_hint'.tr(),
             lines: 8,
             validators: [ValidatorEmpty()],
@@ -200,7 +200,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   height: 60,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: App.appTheme.colorNavbar,
+                    color: App.appTheme.colorInactive,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextFormField(
@@ -227,7 +227,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: App.appTheme.colorNavbar, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
                     textAlign: TextAlign.center,
@@ -265,7 +265,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   height: 60,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: App.appTheme.colorNavbar,
+                    color: App.appTheme.colorInactive,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextFormField(
@@ -292,7 +292,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: App.appTheme.colorNavbar, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
                     textAlign: TextAlign.center,

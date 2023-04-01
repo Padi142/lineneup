@@ -19,6 +19,7 @@ import '../../generic/artist/data/get_artists_use_case.dart';
 import '../../generic/artist/domain/artist_repository.dart';
 import '../../generic/event/domain/create_event_use_case.dart';
 import '../../generic/event/domain/get_event_use_case.dart';
+import '../../generic/event/domain/update_event_use_case.dart';
 import '../../library/app_module.dart';
 import 'bloc/event/event_bloc.dart';
 
@@ -52,6 +53,7 @@ class DashboardModule extends AppModule {
         getArtistsUseCase: GetIt.I.get<GetArtistsUseCase>(),
         getEventUseCase: GetIt.I.get<GetEventUseCase>(),
         createArtistUseCase: GetIt.I.get<CreateArtistUseCase>(),
+        updateEventUseCase: GetIt.I.get<UpdateEventUseCase>(),
       ),
     );
   }

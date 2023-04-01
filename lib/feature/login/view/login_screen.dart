@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lineneup/generic/widget/app_button.dart';
 import 'package:lineneup/generic/widget/app_text_field/index.dart';
 import 'package:lineneup/library/app_screen.dart';
@@ -9,7 +10,6 @@ import '../../../generic/constant.dart';
 import '../../../generic/widget/app_gradient.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
-import '../../lineup/view/lineup_screen.dart';
 import '../bloc/login_bloc.dart';
 
 class LoginScreen extends Screen {
@@ -104,7 +104,7 @@ class MobileLoginBody extends StatelessWidget {
               child: AppButton(
                 backgroundColor: App.appTheme.colorSecondary,
                 radius: 6,
-                imagePrefix: const SvgButton(asset: 'assets/images/discord-icon.svg'),
+                imagePrefix: SvgPicture.asset('assets/images/discord-icon.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
                 text: 'Discord',
                 textStyle: App.appTheme.textTitle,
                 onClick: () {

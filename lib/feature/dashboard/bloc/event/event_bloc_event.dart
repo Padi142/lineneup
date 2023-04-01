@@ -22,7 +22,21 @@ class UploadArtistPhoto extends EventBlocEvent {
 }
 
 class LoadEventInfo extends EventBlocEvent {
-  const LoadEventInfo();
+  final String? eventId;
+  const LoadEventInfo({required this.eventId});
+}
+
+class UpdateEvent extends EventBlocEvent {
+  final UpdateType type;
+  final String eventId;
+  final String? name;
+  final String? description;
+  final DateTime? startDate;
+  final DateTime? endTime;
+  final String? ticketsUrl;
+  final String? eventInstagram;
+  final String? eventWebsite;
+  const UpdateEvent({required this.type, required this.eventId, this.name, this.description, this.startDate, this.endTime, this.ticketsUrl, this.eventInstagram, this.eventWebsite});
 }
 
 class CreateEvent extends EventBlocEvent {
@@ -34,4 +48,14 @@ class CreateEvent extends EventBlocEvent {
   final DateTime endDate;
   final List<ArtistCreationModel> artists;
   const CreateEvent({required this.eventName, required this.description, required this.startTime, required this.startDate, required this.endTime, required this.endDate, required this.artists});
+}
+
+enum UpdateType {
+  eventName,
+  startTime,
+  endTime,
+  description,
+  eventInstagram,
+  eventWebsite,
+  ticketsUrl,
 }
