@@ -104,7 +104,7 @@ class MobileLoginBody extends StatelessWidget {
               child: AppButton(
                 backgroundColor: App.appTheme.colorSecondary,
                 radius: 6,
-                imagePrefix: SvgPicture.asset('assets/images/discord-icon.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
+                imagePrefix: SvgPicture.asset('assets/images/discord-icon.svg', width: 25, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
                 text: 'Discord',
                 textStyle: App.appTheme.textTitle,
                 onClick: () {

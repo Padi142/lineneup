@@ -309,9 +309,7 @@ class EventInfo extends StatelessWidget {
                       }
                     },
                   ),
-                  const SizedBox(
-                    width: 40,
-                  ),
+                  SizedBox(width: constrains.maxWidth * 0.04),
                   AppButton(
                     text: 'event_ig_button_label'.tr(),
                     imagePrefix: SvgPicture.asset('assets/images/instagram-icon.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
@@ -329,9 +327,7 @@ class EventInfo extends StatelessWidget {
                       }
                     },
                   ),
-                  const SizedBox(
-                    width: 40,
-                  ),
+                  SizedBox(width: constrains.maxWidth * 0.04),
                   AppButton(
                     text: 'event_website_button_label'.tr(),
                     imagePrefix: Icon(
@@ -584,7 +580,7 @@ class BottomBar extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: App.appTheme.colorInactive,
+                      color: App.appTheme.colorPrimary.withOpacity(0.4),
                     ),
                   ),
                 ),
