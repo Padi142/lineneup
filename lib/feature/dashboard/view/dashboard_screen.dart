@@ -73,14 +73,19 @@ class DashboardBody extends StatelessWidget {
                 height: 5,
               ),
               SizedBox(
-                height: constrains.maxHeight * 0.8,
+                height: constrains.maxHeight * 0.85,
                 child: BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
                   return state.maybeMap(loaded: (values) {
                     return ListView.builder(
-                        itemCount: values.events.length,
+                        itemCount: values.events.length + 1,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return SizedBox(height: constrains.maxHeight * 0.35, child: EventContainer(event: values.events[index]));
+                          if (index == values.events.length) {
+                            return const SizedBox(
+                              height: 400,
+                            );
+                          }
+                          return SizedBox(height: constrains.maxHeight * 0.30, child: EventContainer(event: values.events[index]));
                         });
                   }, error: (error) {
                     return Center(
