@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,29 +41,39 @@ class EventContainer extends StatelessWidget {
                     height: constrains.maxHeight * 0.45,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: App.appTheme.colorInactive,
+                        color: App.appTheme.colorActive,
                         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
                       ),
-                      child: Column(
-                        children: [
-                          SelectableText(
-                            event.eventName,
-                            style: App.appTheme.textTitle,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: SelectableText(
-                              event.description,
-                              textAlign: TextAlign.center,
-                              maxLines: 5,
-                              style: App.appTheme.textBody.copyWith(overflow: TextOverflow.ellipsis),
-                            ),
-                          ),
-                        ],
+                      child: Center(
+                        child: SelectableText(
+                          event.eventName,
+                          style: App.appTheme.textTitle,
+                        ),
                       ),
                     ),
                   ),
-                )
+                ),
+                Positioned(
+                    top: 4,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10),
+                      elevation: 2,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12, top: 4, right: 12, bottom: 4),
+                            child: Text(
+                              DateFormat('dd.MM').format(event.startTime),
+                              style: App.appTheme.textTitle.copyWith(fontWeight: FontWeight.bold, color: App.appTheme.colorBlack),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ))
               ],
             ),
           ),

@@ -237,122 +237,128 @@ class EventInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: LayoutBuilder(
-        builder: (context, constrains) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(event.eventLogo)),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                event.eventName,
-                style: App.appTheme.textHeader.copyWith(fontSize: 45),
-              ),
-              Container(
-                width: constrains.maxWidth * 0.2,
-                height: 4,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: App.appTheme.colorSecondary),
-              ),
-              Text(
-                DateFormat('dd.MM. yyyy - kk:mm').format(event.startTime),
-                style: App.appTheme.textTitle.copyWith(fontSize: 27),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Material(
-                elevation: 2,
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            width: constrains.maxWidth * 0.8,
-                            child: Text(
-                              event.description,
-                              textAlign: TextAlign.center,
-                            ))
-                      ],
+      child: SingleChildScrollView(
+        child: LayoutBuilder(
+          builder: (context, constrains) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(width: constrains.maxWidth * 0.7, height: MediaQuery.of(context).size.height * 0.36, child: Image.network(event.eventLogo)),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  event.eventName,
+                  style: App.appTheme.textHeader.copyWith(fontSize: 45),
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  width: constrains.maxWidth * 0.2,
+                  height: 4,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: App.appTheme.colorSecondary),
+                ),
+                Text(
+                  DateFormat('dd.MM. yyyy - kk:mm').format(event.startTime),
+                  style: App.appTheme.textTitle.copyWith(fontSize: 27),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(25),
+                  child: Container(
+                    decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                              width: constrains.maxWidth * 0.8,
+                              child: Text(
+                                event.description,
+                                textAlign: TextAlign.center,
+                              ))
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppButton(
-                    text: 'tickets_button_label'.tr(),
-                    imagePrefix: SvgPicture.asset('assets/images/tickets.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
-                    onClick: () async {
-                      if (event.ticketsUrl == '') {
-                        return;
-                      }
-                      try {
-                        final Uri url = Uri.parse(event.ticketsUrl);
-                        await launchUrl(url);
-                      } catch (e) {
-                        if (kDebugMode) {
-                          print(e);
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppButton(
+                      text: 'tickets_button_label'.tr(),
+                      imagePrefix: SvgPicture.asset('assets/images/tickets.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
+                      onClick: () async {
+                        if (event.ticketsUrl == '') {
+                          return;
                         }
-                      }
-                    },
-                  ),
-                  SizedBox(width: constrains.maxWidth * 0.04),
-                  AppButton(
-                    text: 'event_ig_button_label'.tr(),
-                    imagePrefix: SvgPicture.asset('assets/images/instagram-icon.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
-                    onClick: () async {
-                      if (event.eventInstagram == '') {
-                        return;
-                      }
-                      try {
-                        final Uri url = Uri.parse(event.eventInstagram);
-                        await launchUrl(url);
-                      } catch (e) {
-                        if (kDebugMode) {
-                          print(e);
+                        try {
+                          final Uri url = Uri.parse(event.ticketsUrl);
+                          await launchUrl(url);
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
                         }
-                      }
-                    },
-                  ),
-                  SizedBox(width: constrains.maxWidth * 0.04),
-                  AppButton(
-                    text: 'event_website_button_label'.tr(),
-                    imagePrefix: Icon(
-                      Icons.language,
-                      color: App.appTheme.colorPrimary,
+                      },
                     ),
-                    onClick: () async {
-                      if (event.eventWebsite == '') {
-                        return;
-                      }
-                      try {
-                        final Uri url = Uri.parse(event.eventWebsite);
-                        await launchUrl(url);
-                      } catch (e) {
-                        if (kDebugMode) {
-                          print(e);
+                    SizedBox(width: constrains.maxWidth * 0.04),
+                    AppButton(
+                      text: 'event_ig_button_label'.tr(),
+                      imagePrefix: SvgPicture.asset('assets/images/instagram-icon.svg', width: 25, colorFilter: ColorFilter.mode(App.appTheme.colorPrimary, BlendMode.srcIn)),
+                      onClick: () async {
+                        if (event.eventInstagram == '') {
+                          return;
                         }
-                      }
-                    },
-                  ),
-                ],
-              )
-            ],
-          );
-        },
+                        try {
+                          final Uri url = Uri.parse(event.eventInstagram);
+                          await launchUrl(url);
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        }
+                      },
+                    ),
+                    SizedBox(width: constrains.maxWidth * 0.04),
+                    AppButton(
+                      text: 'event_website_button_label'.tr(),
+                      imagePrefix: Icon(
+                        Icons.language,
+                        color: App.appTheme.colorPrimary,
+                      ),
+                      onClick: () async {
+                        if (event.eventWebsite == '') {
+                          return;
+                        }
+                        try {
+                          final Uri url = Uri.parse(event.eventWebsite);
+                          await launchUrl(url);
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 50,
+                )
+              ],
+            );
+          },
+        ),
       ),
     );
   }

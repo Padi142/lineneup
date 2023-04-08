@@ -14,6 +14,8 @@
   "login_button_text": "Log in",
   "finish_event_creation_button": "✨ Finish ✨",
 
+  "lineup_url_button_label": "Lineup url",
+
   "event_creating_name_field_title": "Name your awesome event 😍",
   "event_creating_name_field_hint": "Something like '✨Supa-awesome-mega-party✨' will do ",
   "event_creating_description_field_title": "What do you want people to know about your event?",
@@ -31,7 +33,6 @@
   "artists_adding_list": "Who is gonna perform at your event? 🎶🎶",
   "artist_start_time_picker": "When will they play? 👀",
   "add_button_label": "Add",
-
 
   "live_button_text": "live",
   "tickets_button_label": "Tickets",

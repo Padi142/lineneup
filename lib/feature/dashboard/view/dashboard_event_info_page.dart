@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc_state.dart';
+import 'package:lineneup/generic/widget/app_button.dart';
 import 'package:lineneup/generic/widget/app_progress.dart';
 import 'package:lineneup/library/app_screen.dart';
+import 'package:qlevar_router/qlevar_router.dart';
 
 import '../../../generic/constant.dart';
 import '../../../generic/event/model/event_model.dart';
@@ -54,108 +56,110 @@ class _DashboardEventInfoBodyState extends State<DashboardEventInfoBody> {
       builder: (context, constrains) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: constrains.maxHeight * 0.07,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              DashboardNavigation().goToDashboard();
-                            },
-                            icon: Icon(
-                              Icons.arrow_back_outlined,
-                              color: App.appTheme.colorText,
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'app_name'.tr(),
-                          style: App.appTheme.textHeader,
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.menu_rounded,
-                          color: App.appTheme.colorSecondary,
-                        ))
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                DashboardNavigation().goToDashboard();
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_outlined,
+                                color: App.appTheme.colorText,
+                              )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'app_name'.tr(),
+                            style: App.appTheme.textHeader,
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.menu_rounded,
+                            color: App.appTheme.colorSecondary,
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                height: constrains.maxHeight * 0.8,
-                child: BlocBuilder<EventBloc, EventState>(builder: (context, state) {
-                  return state.maybeMap(loadedEvent: (values) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(values.event.eventLogo)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        EventName(
-                          constrains: constrains,
-                          event: values.event,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Material(
-                          elevation: 2,
-                          borderRadius: BorderRadius.circular(25),
-                          child: Container(
-                            decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  _EventDescription(
-                                    constrains: constrains,
-                                    event: values.event,
-                                  )
-                                ],
-                              ),
+                const SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  child: BlocBuilder<EventBloc, EventState>(builder: (context, state) {
+                    return state.maybeMap(loadedEvent: (values) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(values.event.eventLogo)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          EventName(
+                            constrains: constrains,
+                            event: values.event,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          _EventDescription(
+                            constrains: constrains,
+                            event: values.event,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: constrains.maxWidth * 0.3,
+                            height: 60,
+                            child: AppButton(
+                              radius: 10,
+                              backgroundColor: App.appTheme.colorSecondary,
+                              text: 'lineup_url_button_label'.tr(),
+                              onClick: () async {
+                                QR.to("lineup/${values.event.eventUid}");
+                              },
                             ),
                           ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                        ],
+                      );
+                    }, error: (error) {
+                      return Center(
+                        child: Text(
+                          error.error,
+                          style: App.appTheme.textTitle,
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                      ],
-                    );
-                  }, error: (error) {
-                    return Center(
-                      child: Text(
-                        error.error,
-                        style: App.appTheme.textTitle,
-                      ),
-                    );
-                  }, orElse: () {
-                    return const Center(
-                      child: AppProgress(),
-                    );
-                  });
-                }),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
+                      );
+                    }, orElse: () {
+                      return const Center(
+                        child: AppProgress(),
+                      );
+                    });
+                  }),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -197,7 +201,7 @@ class _EventNameState extends State<EventName> {
           });
         },
         child: SizedBox(
-          width: widget.constrains.maxWidth * 0.6,
+          width: widget.constrains.maxWidth * 0.8,
           child: Stack(
             children: [
               editableName
@@ -290,82 +294,92 @@ class _EventDescriptionState extends State<_EventDescription> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (e) {
-        setState(() {
-          showEditButton = true;
-        });
-      },
-      onExit: (e) {
-        setState(() {
-          showEditButton = false;
-        });
-      },
-      child: SizedBox(
-          width: widget.constrains.maxWidth * 0.8,
-          child: Stack(
-            children: [
-              editableDescription
-                  ? AppTextField(
-                      _eventDescriptionModel,
-                      keyboardType: TextInputType.multiline,
-                      filled: App.appTheme.colorInactive,
-                      hint: 'event_creating_description_field_hint'.tr(),
-                      lines: 8,
-                      beginEdit: (te) {
-                        te.model.error = null;
-                        setState(() {});
-                      },
-                    )
-                  : Text(
-                      widget.event.description,
-                      textAlign: TextAlign.center,
-                      style: App.appTheme.textBody,
-                    ),
-              showEditButton
-                  ? Positioned(
-                      right: 5,
-                      top: 1,
-                      child: editableDescription
-                          ? SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: GestureDetector(
-                                child: Icon(
-                                  Icons.check,
-                                  color: App.appTheme.colorPrimary,
-                                ),
-                                onTap: () {
-                                  BlocProvider.of<EventBloc>(context)
-                                      .add(UpdateEvent(type: UpdateType.description, eventId: widget.event.eventUid, description: _eventDescriptionModel.controller.text));
+    return Material(
+      elevation: 2,
+      borderRadius: BorderRadius.circular(25),
+      child: Container(
+        decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: MouseRegion(
+            onEnter: (e) {
+              setState(() {
+                showEditButton = true;
+              });
+            },
+            onExit: (e) {
+              setState(() {
+                showEditButton = false;
+              });
+            },
+            child: SizedBox(
+                width: widget.constrains.maxWidth * 0.8,
+                child: Stack(
+                  children: [
+                    editableDescription
+                        ? AppTextField(
+                            _eventDescriptionModel,
+                            keyboardType: TextInputType.multiline,
+                            filled: App.appTheme.colorInactive,
+                            hint: 'event_creating_description_field_hint'.tr(),
+                            lines: 8,
+                            beginEdit: (te) {
+                              te.model.error = null;
+                              setState(() {});
+                            },
+                          )
+                        : Text(
+                            widget.event.description,
+                            textAlign: TextAlign.center,
+                            style: App.appTheme.textBody,
+                          ),
+                    showEditButton
+                        ? Positioned(
+                            right: 5,
+                            top: 1,
+                            child: editableDescription
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: GestureDetector(
+                                      child: Icon(
+                                        Icons.check,
+                                        color: App.appTheme.colorPrimary,
+                                      ),
+                                      onTap: () {
+                                        BlocProvider.of<EventBloc>(context)
+                                            .add(UpdateEvent(type: UpdateType.description, eventId: widget.event.eventUid, description: _eventDescriptionModel.controller.text));
 
-                                  setState(() {
-                                    editableDescription = !editableDescription;
-                                  });
-                                },
-                              ),
-                            )
-                          : SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: GestureDetector(
-                                child: Icon(
-                                  Icons.edit,
-                                  color: App.appTheme.colorPrimary,
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    editableDescription = !editableDescription;
-                                  });
-                                },
-                              ),
-                            ))
-                  : Container(),
-              const SizedBox(
-                height: 25,
-              )
-            ],
-          )),
+                                        setState(() {
+                                          editableDescription = !editableDescription;
+                                        });
+                                      },
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: GestureDetector(
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: App.appTheme.colorPrimary,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          editableDescription = !editableDescription;
+                                        });
+                                      },
+                                    ),
+                                  ))
+                        : Container(),
+                    const SizedBox(
+                      height: 25,
+                    )
+                  ],
+                )),
+          ),
+        ),
+      ),
     );
   }
 }

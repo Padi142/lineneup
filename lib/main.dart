@@ -114,7 +114,7 @@ class MainTheme extends AppTheme {
   Color get colorNavbar => const Color(0xFFAFAFAF);
 
   @override
-  Color get colorActive => const Color(0xFFda5b34);
+  Color get colorActive => const Color(0xFF222831);
 
   @override
   Color get colorError => const Color(0xFFFF5252);
