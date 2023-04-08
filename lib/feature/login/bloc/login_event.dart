@@ -20,3 +20,15 @@ class EmailLogin extends LoginEvent {
 class DiscordLogin extends LoginEvent {
   const DiscordLogin();
 }
+
+class GoogleLogin extends LoginEvent {
+  const GoogleLogin();
+}
+
+class AppleLogin extends LoginEvent {
+  const AppleLogin();
+}
+
+class SpotifyEvent extends LoginEvent {
+  const SpotifyEvent();
+}

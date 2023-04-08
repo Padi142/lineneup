@@ -72,13 +72,18 @@ class DesktopHomeBody extends StatelessWidget {
                   'app_name'.tr(),
                   style: App.appTheme.textHeader,
                 ),
-                AppButton(
-                  backgroundColor: App.appTheme.colorSecondary,
-                  text: 'log_in_button'.tr(),
-                  textStyle: App.appTheme.textTitle,
-                  onClick: () {
-                    BlocProvider.of<HomeBloc>(context).add(const GoToLogin());
-                  },
+                SizedBox(
+                  height: 30,
+                  width: 80,
+                  child: AppButton(
+                    backgroundColor: App.appTheme.colorPrimary,
+                    radius: 8,
+                    text: 'log_in_button'.tr(),
+                    textStyle: App.appTheme.textTitle,
+                    onClick: () {
+                      BlocProvider.of<HomeBloc>(context).add(const GoToLogin());
+                    },
+                  ),
                 ),
               ],
             ),
@@ -103,12 +108,14 @@ class DesktopHomeBody extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            height: 70,
+            height: 80,
             child: AppGradientButton(
               buttonText: 'sign_up_button'.tr(),
               radius: 5,
               colors: [App.appTheme.colorPrimary, App.appTheme.colorSecondary],
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<HomeBloc>(context).add(const GoToLogin());
+              },
               width: 200,
             ),
           ),

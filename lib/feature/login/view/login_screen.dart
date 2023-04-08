@@ -105,13 +105,68 @@ class MobileLoginBody extends StatelessWidget {
                 backgroundColor: App.appTheme.colorSecondary,
                 radius: 6,
                 imagePrefix: SvgPicture.asset('assets/images/discord-icon.svg', width: 25, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                spaceTextImage: 15,
                 text: 'Discord',
                 textStyle: App.appTheme.textTitle,
                 onClick: () {
                   BlocProvider.of<LoginBloc>(context).add(const DiscordLogin());
                 },
               ),
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 50,
+              width: 330,
+              child: AppButton(
+                backgroundColor: const Color(0xFF1DB954),
+                radius: 6,
+                imagePrefix: SvgPicture.asset('assets/images/spotify-logo.svg', width: 25, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                spaceTextImage: 15,
+                text: 'Spotify',
+                textStyle: App.appTheme.textTitle,
+                onClick: () {
+                  BlocProvider.of<LoginBloc>(context).add(const SpotifyEvent());
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 50,
+              width: 330,
+              child: AppButton(
+                backgroundColor: App.appTheme.colorBlack,
+                radius: 6,
+                imagePrefix: SvgPicture.asset('assets/images/apple-logo.svg', width: 25, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                spaceTextImage: 15,
+                text: 'Apple',
+                textStyle: App.appTheme.textTitle.copyWith(color: Colors.white),
+                onClick: () {
+                  BlocProvider.of<LoginBloc>(context).add(const AppleLogin());
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 50,
+              width: 330,
+              child: AppButton(
+                backgroundColor: const Color(0xFF4285F4),
+                radius: 6,
+                imagePrefix: SvgPicture.asset('assets/images/google-logo.svg', width: 25, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                spaceTextImage: 15,
+                text: 'Google',
+                textStyle: App.appTheme.textTitle,
+                onClick: () {
+                  BlocProvider.of<LoginBloc>(context).add(const AppleLogin());
+                },
+              ),
+            ),
           ],
         ),
       ),

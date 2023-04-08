@@ -172,6 +172,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             _eventDescriptionModel,
             filled: App.appTheme.colorInactive,
             hint: 'event_creating_description_field_hint'.tr(),
+            keyboardType: TextInputType.multiline,
             lines: 8,
             validators: [ValidatorEmpty()],
             beginEdit: (te) {
