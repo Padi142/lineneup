@@ -19,6 +19,8 @@ class ArtistBloc extends Bloc<ArtistEvent, ArtistState> {
   }) : super(const ArtistState.loading()) {
     on<LoadArtists>(_onLoadArtists);
     on<SearchArtistSpotify>(_onSearchArtistSpotify);
+    on<SearchInitial>(_onSearchInitial);
+    on<ResetSearch>(_onResetSearch);
   }
   Future<void> _onLoadArtists(
     LoadArtists event,
@@ -42,19 +44,36 @@ class ArtistBloc extends Bloc<ArtistEvent, ArtistState> {
         orElse: () {});
   }
 
+  Future<void> _onSearchInitial(
+    SearchInitial event,
+    Emitter<ArtistState> emit,
+  ) async {
+    emit(const ArtistState.searchedArtists([]));
+  }
+
+  Future<void> _onResetSearch(
+    ResetSearch event,
+    Emitter<ArtistState> emit,
+  ) async {
+    emit(const ArtistState.searchedArtists([]));
+  }
+
   Future<void> _onSearchArtistSpotify(
     SearchArtistSpotify event,
     Emitter<ArtistState> emit,
   ) async {
+    if (event.name == '') {
+      emit(const ArtistState.searchedArtists([]));
+
+      return;
+    }
     emit(const ArtistState.loading());
     final params = SearchSpotifyArtistParams(artistName: event.name);
     final response = await searchSpotifyArtistsUseCase.call(params);
 
     response.map(loaded: (loaded) {
-      print("loaded");
-      emit(ArtistState.searchedArtists(loaded.artists));
+      emit(ArtistState.searchedArtists(loaded.artists.artists));
     }, failure: (failure) {
-      print("fail");
       emit(const ArtistState.error('error'));
     });
   }

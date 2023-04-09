@@ -16,3 +16,11 @@ class SearchArtistSpotify extends ArtistEvent {
   final String name;
   const SearchArtistSpotify({required this.name});
 }
+
+class SearchInitial extends ArtistEvent {
+  const SearchInitial();
+}
+
+class ResetSearch extends ArtistEvent {
+  const ResetSearch();
+}

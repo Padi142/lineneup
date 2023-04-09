@@ -10,5 +10,5 @@ abstract class ArtistState with _$ArtistState {
   const factory ArtistState.loading() = Loading;
   const factory ArtistState.error(String error) = Error;
   const factory ArtistState.loadedArtists(List<ArtistModel> artists) = LoadedArtists;
-  const factory ArtistState.searchedArtists(SpotifyArtistList artists) = SearchedArtists;
+  const factory ArtistState.searchedArtists(List<SpotifyArtistData> artists) = SearchedArtists;
 }

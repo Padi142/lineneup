@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lineneup/feature/dashboard/bloc/artist/artist_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc.dart';
+import 'package:lineneup/feature/dashboard/view/components/new_artist_container.dart';
+import 'package:lineneup/generic/widget/app_progress.dart';
 import 'package:lineneup/library/app_screen.dart';
 
 import '../../../generic/constant.dart';
@@ -27,6 +30,8 @@ class EventCreationScreen extends Screen {
 class _InitScreenState extends State<EventCreationScreen> {
   @override
   void initState() {
+    BlocProvider.of<ArtistBloc>(context).add(const SearchInitial());
+
     super.initState();
   }
 
@@ -71,6 +76,9 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
 
   //second pge
   final List<ArtistCreationModel> addedArtists = [];
+
+  //Create button
+  bool createButtonPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -490,15 +498,22 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   name: artist.name,
                   instagramUrl: '',
                   spotifyUrl: artist.url,
-                  spotifyImage: '',
+                  spotifyImage: artist.photos.isNotEmpty ? artist.photos.first.url : 'https://media.discordapp.net/attachments/1035650959512174604/1094633761599135895/flopir.jpg',
                   startTime: const TimeOfDay(hour: 19, minute: 00),
                   endTime: const TimeOfDay(hour: 20, minute: 00),
                 ),
               );
+              setState(() {});
             },
           ),
           const SizedBox(
-            height: 400,
+            height: 20,
+          ),
+          Wrap(
+            children: _getArtistContainers(addedArtists),
+          ),
+          const SizedBox(
+            height: 200,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -524,16 +539,22 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 width: 150,
                 child: AppButton(
                   onClick: () {
-                    BlocProvider.of<EventBloc>(context).add(CreateEvent(
-                        eventName: _eventTitleModel.text,
-                        description: _eventDescriptionModel.text,
-                        startDate: selectedStartDate,
-                        startTime: selectedStartTime,
-                        endDate: selectedEndDate,
-                        endTime: selectedEndTime,
-                        artists: addedArtists));
+                    if (!createButtonPressed) {
+                      BlocProvider.of<EventBloc>(context).add(CreateEvent(
+                          eventName: _eventTitleModel.text,
+                          description: _eventDescriptionModel.text,
+                          startDate: selectedStartDate,
+                          startTime: selectedStartTime,
+                          endDate: selectedEndDate,
+                          endTime: selectedEndTime,
+                          artists: addedArtists));
+                    }
+                    setState(() {
+                      createButtonPressed = true;
+                    });
                   },
-                  text: 'finish_event_creation_button'.tr(),
+                  text: createButtonPressed ? '' : 'finish_event_creation_button'.tr(),
+                  imageSuffix: createButtonPressed ? const AppProgress() : const SizedBox(),
                   backgroundColor: App.appTheme.colorPrimary,
                   radius: 10,
                   textStyle: App.appTheme.textTitle,
@@ -544,6 +565,18 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
         ],
       ),
     );
+  }
+
+  _getArtistContainers(List<ArtistCreationModel> artists) {
+    return artists
+        .map((it) => NewArtistContainer(
+              artist: it,
+              onRemoved: () {
+                addedArtists.remove(it);
+                setState(() {});
+              },
+            ))
+        .toList();
   }
 
   Future<void> _selectDate(BuildContext context, DateTime date, TextEditingController controller) async {

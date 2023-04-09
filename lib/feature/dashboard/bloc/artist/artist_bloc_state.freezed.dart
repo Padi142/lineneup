@@ -21,7 +21,7 @@ mixin _$ArtistState {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<ArtistModel> artists) loadedArtists,
-    required TResult Function(SpotifyArtistList artists) searchedArtists,
+    required TResult Function(List<SpotifyArtistData> artists) searchedArtists,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$ArtistState {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<ArtistModel> artists)? loadedArtists,
-    TResult? Function(SpotifyArtistList artists)? searchedArtists,
+    TResult? Function(List<SpotifyArtistData> artists)? searchedArtists,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$ArtistState {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<ArtistModel> artists)? loadedArtists,
-    TResult Function(SpotifyArtistList artists)? searchedArtists,
+    TResult Function(List<SpotifyArtistData> artists)? searchedArtists,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$Loading implements Loading {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<ArtistModel> artists) loadedArtists,
-    required TResult Function(SpotifyArtistList artists) searchedArtists,
+    required TResult Function(List<SpotifyArtistData> artists) searchedArtists,
   }) {
     return loading();
   }
@@ -136,7 +136,7 @@ class _$Loading implements Loading {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<ArtistModel> artists)? loadedArtists,
-    TResult? Function(SpotifyArtistList artists)? searchedArtists,
+    TResult? Function(List<SpotifyArtistData> artists)? searchedArtists,
   }) {
     return loading?.call();
   }
@@ -147,7 +147,7 @@ class _$Loading implements Loading {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<ArtistModel> artists)? loadedArtists,
-    TResult Function(SpotifyArtistList artists)? searchedArtists,
+    TResult Function(List<SpotifyArtistData> artists)? searchedArtists,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -263,7 +263,7 @@ class _$Error implements Error {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<ArtistModel> artists) loadedArtists,
-    required TResult Function(SpotifyArtistList artists) searchedArtists,
+    required TResult Function(List<SpotifyArtistData> artists) searchedArtists,
   }) {
     return error(this.error);
   }
@@ -274,7 +274,7 @@ class _$Error implements Error {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<ArtistModel> artists)? loadedArtists,
-    TResult? Function(SpotifyArtistList artists)? searchedArtists,
+    TResult? Function(List<SpotifyArtistData> artists)? searchedArtists,
   }) {
     return error?.call(this.error);
   }
@@ -285,7 +285,7 @@ class _$Error implements Error {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<ArtistModel> artists)? loadedArtists,
-    TResult Function(SpotifyArtistList artists)? searchedArtists,
+    TResult Function(List<SpotifyArtistData> artists)? searchedArtists,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -413,7 +413,7 @@ class _$LoadedArtists implements LoadedArtists {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<ArtistModel> artists) loadedArtists,
-    required TResult Function(SpotifyArtistList artists) searchedArtists,
+    required TResult Function(List<SpotifyArtistData> artists) searchedArtists,
   }) {
     return loadedArtists(artists);
   }
@@ -424,7 +424,7 @@ class _$LoadedArtists implements LoadedArtists {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<ArtistModel> artists)? loadedArtists,
-    TResult? Function(SpotifyArtistList artists)? searchedArtists,
+    TResult? Function(List<SpotifyArtistData> artists)? searchedArtists,
   }) {
     return loadedArtists?.call(artists);
   }
@@ -435,7 +435,7 @@ class _$LoadedArtists implements LoadedArtists {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<ArtistModel> artists)? loadedArtists,
-    TResult Function(SpotifyArtistList artists)? searchedArtists,
+    TResult Function(List<SpotifyArtistData> artists)? searchedArtists,
     required TResult orElse(),
   }) {
     if (loadedArtists != null) {
@@ -498,7 +498,7 @@ abstract class _$$SearchedArtistsCopyWith<$Res> {
           _$SearchedArtists value, $Res Function(_$SearchedArtists) then) =
       __$$SearchedArtistsCopyWithImpl<$Res>;
   @useResult
-  $Res call({SpotifyArtistList artists});
+  $Res call({List<SpotifyArtistData> artists});
 }
 
 /// @nodoc
@@ -516,9 +516,9 @@ class __$$SearchedArtistsCopyWithImpl<$Res>
   }) {
     return _then(_$SearchedArtists(
       null == artists
-          ? _value.artists
+          ? _value._artists
           : artists // ignore: cast_nullable_to_non_nullable
-              as SpotifyArtistList,
+              as List<SpotifyArtistData>,
     ));
   }
 }
@@ -526,10 +526,16 @@ class __$$SearchedArtistsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchedArtists implements SearchedArtists {
-  const _$SearchedArtists(this.artists);
+  const _$SearchedArtists(final List<SpotifyArtistData> artists)
+      : _artists = artists;
 
+  final List<SpotifyArtistData> _artists;
   @override
-  final SpotifyArtistList artists;
+  List<SpotifyArtistData> get artists {
+    if (_artists is EqualUnmodifiableListView) return _artists;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_artists);
+  }
 
   @override
   String toString() {
@@ -541,11 +547,12 @@ class _$SearchedArtists implements SearchedArtists {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchedArtists &&
-            (identical(other.artists, artists) || other.artists == artists));
+            const DeepCollectionEquality().equals(other._artists, _artists));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, artists);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_artists));
 
   @JsonKey(ignore: true)
   @override
@@ -559,7 +566,7 @@ class _$SearchedArtists implements SearchedArtists {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(List<ArtistModel> artists) loadedArtists,
-    required TResult Function(SpotifyArtistList artists) searchedArtists,
+    required TResult Function(List<SpotifyArtistData> artists) searchedArtists,
   }) {
     return searchedArtists(artists);
   }
@@ -570,7 +577,7 @@ class _$SearchedArtists implements SearchedArtists {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<ArtistModel> artists)? loadedArtists,
-    TResult? Function(SpotifyArtistList artists)? searchedArtists,
+    TResult? Function(List<SpotifyArtistData> artists)? searchedArtists,
   }) {
     return searchedArtists?.call(artists);
   }
@@ -581,7 +588,7 @@ class _$SearchedArtists implements SearchedArtists {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(List<ArtistModel> artists)? loadedArtists,
-    TResult Function(SpotifyArtistList artists)? searchedArtists,
+    TResult Function(List<SpotifyArtistData> artists)? searchedArtists,
     required TResult orElse(),
   }) {
     if (searchedArtists != null) {
@@ -629,10 +636,10 @@ class _$SearchedArtists implements SearchedArtists {
 }
 
 abstract class SearchedArtists implements ArtistState {
-  const factory SearchedArtists(final SpotifyArtistList artists) =
+  const factory SearchedArtists(final List<SpotifyArtistData> artists) =
       _$SearchedArtists;
 
-  SpotifyArtistList get artists;
+  List<SpotifyArtistData> get artists;
   @JsonKey(ignore: true)
   _$$SearchedArtistsCopyWith<_$SearchedArtists> get copyWith =>
       throw _privateConstructorUsedError;

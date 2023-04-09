@@ -23,6 +23,16 @@ class _SpotifyArtistSearchState extends State<SpotifyArtistSearch> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: App.appTheme.colorActive,
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 1),
+            blurRadius: 5,
+            color: Colors.black.withOpacity(0.4),
+          ),
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -43,7 +53,7 @@ class _SpotifyArtistSearchState extends State<SpotifyArtistSearch> {
             BlocBuilder<ArtistBloc, ArtistState>(builder: (context, state) {
               return state.maybeMap(searchedArtists: (values) {
                 return ListView.builder(
-                    itemCount: values.artists.artists.length,
+                    itemCount: values.artists.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -58,26 +68,28 @@ class _SpotifyArtistSearchState extends State<SpotifyArtistSearch> {
                             width: 300,
                             child: Row(
                               children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(image: NetworkImage(values.artists.artists[index].photos.first.url), fit: BoxFit.fill),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: const Offset(0, 1),
-                                        blurRadius: 5,
-                                        color: Colors.black.withOpacity(0.6),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                values.artists[index].photos.length != 0
+                                    ? Container(
+                                        width: 60,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(image: NetworkImage(values.artists[index].photos.first.url), fit: BoxFit.fill),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: const Offset(0, 1),
+                                              blurRadius: 5,
+                                              color: Colors.black.withOpacity(0.6),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : const SizedBox(),
                                 const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  values.artists.artists[index].name,
+                                  values.artists[index].name,
                                   style: App.appTheme.textTitle,
                                 ),
                               ],
@@ -90,7 +102,11 @@ class _SpotifyArtistSearchState extends State<SpotifyArtistSearch> {
                               radius: 4,
                               text: 'add_button_label'.tr(),
                               textStyle: App.appTheme.textTitle,
-                              onClick: widget.onPickedArtist(values.artists.artists[index]),
+                              onClick: () {
+                                widget.onPickedArtist(values.artists[index]);
+                                BlocProvider.of<ArtistBloc>(context).add(const ResetSearch());
+                                artistSearchModel.controller.text = '';
+                              },
                             ),
                           ),
                         ),

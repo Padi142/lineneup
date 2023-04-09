@@ -98,6 +98,7 @@ class DashboardModule extends AppModule {
           builder: () => MultiBlocProvider(
                 providers: [
                   BlocProvider<DashboardBloc>.value(value: GetIt.I.get<DashboardBloc>()),
+                  BlocProvider<ArtistBloc>.value(value: GetIt.I.get<ArtistBloc>()),
                   BlocProvider<EventBloc>(
                     create: (_) => GetIt.I.get<EventBloc>(),
                   ),
@@ -110,10 +111,10 @@ class DashboardModule extends AppModule {
             QRoute(
               builder: () => MultiBlocProvider(
                 providers: [
-                  BlocProvider<ArtistBloc>.value(value: GetIt.I.get<ArtistBloc>()),
                   BlocProvider<EventBloc>(
                     create: (_) => GetIt.I.get<EventBloc>(),
                   ),
+                  BlocProvider<ArtistBloc>.value(value: GetIt.I.get<ArtistBloc>()),
                 ],
                 child: GetIt.I.get<EventCreationScreen>(),
               ),
@@ -124,6 +125,7 @@ class DashboardModule extends AppModule {
               builder: () => MultiBlocProvider(
                 providers: [
                   BlocProvider<DashboardBloc>.value(value: GetIt.I.get<DashboardBloc>()),
+                  BlocProvider<ArtistBloc>.value(value: GetIt.I.get<ArtistBloc>()),
                   BlocProvider<EventBloc>(
                     create: (_) => GetIt.I.get<EventBloc>(),
                   ),

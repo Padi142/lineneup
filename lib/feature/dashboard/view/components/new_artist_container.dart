@@ -7,8 +7,9 @@ import '../../../../library/app.dart';
 import '../../model/artist_creation_model.dart';
 
 class NewArtistContainer extends StatefulWidget {
-  final Function(String name, String instagram, TimeOfDay startTime, TimeOfDay endTime) onAdded;
-  const NewArtistContainer({Key? key, required this.onAdded}) : super(key: key);
+  final ArtistCreationModel artist;
+  final Function() onRemoved;
+  const NewArtistContainer({Key? key, required this.artist, required this.onRemoved}) : super(key: key);
 
   @override
   State<NewArtistContainer> createState() => _NewArtistContainerState();
@@ -18,8 +19,8 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
   late TextEntryModel artistNameModel;
   late TextEntryModel instagramModel;
 
-  TimeOfDay selectedStartTime = TimeOfDay(hour: 00, minute: 00);
-  TimeOfDay selectedEndTime = TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay selectedStartTime = TimeOfDay(hour: 19, minute: 00);
+  TimeOfDay selectedEndTime = TimeOfDay(hour: 20, minute: 00);
 
   final TextEditingController _startTimeController = TextEditingController(text: '00:00');
   final TextEditingController _endTimeController = TextEditingController(text: '00:00');
@@ -35,14 +36,104 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      color: App.appTheme.colorActive,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Column(
-        children: [],
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: SizedBox(
+        width: 250,
+        height: 450,
+        child: Card(
+          elevation: 2,
+          color: App.appTheme.colorActive,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            widget.artist.spotifyImage ?? 'https://media.discordapp.net/attachments/1035650959512174604/1094633761599135895/flopir.jpg',
+                          ),
+                          fit: BoxFit.fill),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(0, 1),
+                          blurRadius: 5,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: widget.onRemoved,
+                      icon: Icon(
+                        Icons.person_remove_rounded,
+                        color: App.appTheme.colorPrimary,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                widget.artist.name,
+                style: App.appTheme.textHeader.copyWith(fontSize: 32),
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.fade,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const Spacer(),
+              Text(
+                'artist_performing_at_label'.tr(),
+                style: App.appTheme.textBody.copyWith(color: App.appTheme.colorTextSecondary),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: App.appTheme.colorActive2,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 1),
+                      blurRadius: 5,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    selectedStartTime.format(context),
+                    style: App.appTheme.textHeader.copyWith(fontSize: 40),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
