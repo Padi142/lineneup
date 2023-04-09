@@ -16,11 +16,13 @@ import 'package:lineneup/generic/user/use_case/get_current_user_use_case.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../../generic/artist/data/get_artists_use_case.dart';
+import '../../generic/artist/data/search_artist_use_case.dart';
 import '../../generic/artist/domain/artist_repository.dart';
 import '../../generic/event/domain/create_event_use_case.dart';
 import '../../generic/event/domain/get_event_use_case.dart';
 import '../../generic/event/domain/update_event_use_case.dart';
 import '../../library/app_module.dart';
+import 'bloc/artist/artist_bloc.dart';
 import 'bloc/event/event_bloc.dart';
 
 class DashboardModule extends AppModule {
@@ -54,6 +56,13 @@ class DashboardModule extends AppModule {
         getEventUseCase: GetIt.I.get<GetEventUseCase>(),
         createArtistUseCase: GetIt.I.get<CreateArtistUseCase>(),
         updateEventUseCase: GetIt.I.get<UpdateEventUseCase>(),
+      ),
+    );
+
+    GetIt.I.registerFactory<ArtistBloc>(
+      () => ArtistBloc(
+        getArtistsUseCase: GetIt.I.get<GetArtistsUseCase>(),
+        searchSpotifyArtistsUseCase: GetIt.I.get<SearchSpotifyArtistsUseCase>(),
       ),
     );
   }
@@ -99,16 +108,26 @@ class DashboardModule extends AppModule {
           path: '/dashboard',
           children: [
             QRoute(
-              builder: () => BlocProvider<EventBloc>(
-                create: (_) => GetIt.I.get<EventBloc>(),
+              builder: () => MultiBlocProvider(
+                providers: [
+                  BlocProvider<ArtistBloc>.value(value: GetIt.I.get<ArtistBloc>()),
+                  BlocProvider<EventBloc>(
+                    create: (_) => GetIt.I.get<EventBloc>(),
+                  ),
+                ],
                 child: GetIt.I.get<EventCreationScreen>(),
               ),
               name: EventCreationScreen.name,
               path: '/create_event',
             ),
             QRoute(
-              builder: () => BlocProvider<EventBloc>(
-                create: (_) => GetIt.I.get<EventBloc>(),
+              builder: () => MultiBlocProvider(
+                providers: [
+                  BlocProvider<DashboardBloc>.value(value: GetIt.I.get<DashboardBloc>()),
+                  BlocProvider<EventBloc>(
+                    create: (_) => GetIt.I.get<EventBloc>(),
+                  ),
+                ],
                 child: GetIt.I.get<DashboardEventInfo>(),
               ),
               name: DashboardEventInfo.name,

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lineneup/feature/dashboard/bloc/artist/artist_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc.dart';
 import 'package:lineneup/feature/dashboard/bloc/event/event_bloc_state.dart';
 import 'package:lineneup/generic/widget/app_button.dart';
@@ -8,13 +9,16 @@ import 'package:lineneup/generic/widget/app_progress.dart';
 import 'package:lineneup/library/app_screen.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
+import '../../../generic/artist/model/artist_model.dart';
 import '../../../generic/constant.dart';
 import '../../../generic/event/model/event_model.dart';
 import '../../../generic/widget/app_gradient.dart';
 import '../../../generic/widget/app_text_field/app_text_field.dart';
 import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
+import '../bloc/artist/artist_bloc_state.dart';
 import '../use_case/dashboard_navigation.dart';
+import 'components/artist_container.dart';
 
 class DashboardEventInfo extends Screen {
   static const String name = ScreenPath.DASHBOARD_EVENT_INFO;
@@ -29,6 +33,7 @@ class _InitScreenState extends State<DashboardEventInfo> {
   @override
   void initState() {
     BlocProvider.of<EventBloc>(context).add(const LoadEventInfo(eventId: null));
+    BlocProvider.of<ArtistBloc>(context).add(const LoadArtists(eventId: null));
 
     super.initState();
   }
@@ -96,15 +101,14 @@ class _DashboardEventInfoBodyState extends State<DashboardEventInfoBody> {
                 const SizedBox(
                   height: 5,
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.9,
+                SingleChildScrollView(
                   child: BlocBuilder<EventBloc, EventState>(builder: (context, state) {
                     return state.maybeMap(loadedEvent: (values) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           SizedBox(width: constrains.maxWidth * 0.7, height: constrains.maxHeight * 0.3, child: Image.network(values.event.eventLogo)),
                           const SizedBox(
@@ -122,22 +126,32 @@ class _DashboardEventInfoBodyState extends State<DashboardEventInfoBody> {
                             event: values.event,
                           ),
                           const SizedBox(
-                            width: 10,
+                            width: 40,
                           ),
-                          SizedBox(
-                            width: constrains.maxWidth * 0.3,
-                            height: 60,
-                            child: AppButton(
-                              radius: 10,
-                              backgroundColor: App.appTheme.colorSecondary,
-                              text: 'lineup_url_button_label'.tr(),
-                              onClick: () async {
-                                QR.to("lineup/${values.event.eventUid}");
-                              },
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: constrains.maxWidth * 0.3,
+                              height: 60,
+                              child: AppButton(
+                                radius: 10,
+                                backgroundColor: App.appTheme.colorSecondary,
+                                text: 'lineup_url_button_label'.tr(),
+                                textStyle: App.appTheme.textTitle,
+                                onClick: () async {
+                                  QR.to("lineup/${values.event.eventUid}");
+                                },
+                              ),
                             ),
                           ),
                           const SizedBox(
                             height: 5,
+                          ),
+                          EventArtists(
+                            event: values.event,
+                          ),
+                          const SizedBox(
+                            height: 200,
                           ),
                         ],
                       );
@@ -222,7 +236,8 @@ class _EventNameState extends State<EventName> {
                       child: Text(
                         widget.event.eventName,
                         textAlign: TextAlign.center,
-                        style: App.appTheme.textHeader.copyWith(fontSize: 45),
+                        maxLines: 3,
+                        style: App.appTheme.textHeader.copyWith(fontSize: 40),
                       ),
                     ),
               showEditButton
@@ -328,10 +343,17 @@ class _EventDescriptionState extends State<_EventDescription> {
                               setState(() {});
                             },
                           )
-                        : Text(
-                            widget.event.description,
-                            textAlign: TextAlign.center,
-                            style: App.appTheme.textBody,
+                        : SingleChildScrollView(
+                            child: SizedBox(
+                              height: 300,
+                              child: Text(
+                                widget.event.description,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.fade,
+                                style: App.appTheme.textBody,
+                                softWrap: true,
+                              ),
+                            ),
                           ),
                     showEditButton
                         ? Positioned(
@@ -381,5 +403,31 @@ class _EventDescriptionState extends State<_EventDescription> {
         ),
       ),
     );
+  }
+}
+
+class EventArtists extends StatelessWidget {
+  final EventModel event;
+  const EventArtists({Key? key, required this.event}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ArtistBloc, ArtistState>(builder: (context, state) {
+      return state.maybeMap(loadedArtists: (loaded) {
+        return Wrap(
+          children: _getArtistContainers(loaded.artists),
+        );
+      }, orElse: () {
+        return const AppProgress();
+      });
+    });
+  }
+
+  _getArtistContainers(List<ArtistModel> artists) {
+    return artists
+        .map((it) => DashboardArtistContainer(
+              artist: it,
+            ))
+        .toList();
   }
 }

@@ -127,10 +127,10 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
           description: 'Artist',
           startTime: artistStartTime,
           endTime: artistEndTime,
-          spotifyUrl: '',
-          instagramUrl: artist.instagramUrl,
+          spotifyUrl: artist.spotifyUrl ?? '',
+          instagramUrl: artist.instagramUrl ?? '',
           appleUrl: '',
-          image: 'https://media.discordapp.net/attachments/1067446074945577031/1089327520756809808/336631773_538820211655657_2763088481672576367_n.png?width=802&height=754');
+          image: artist.spotifyImage ?? 'https://media.discordapp.net/attachments/1067446074945577031/1089327520756809808/336631773_538820211655657_2763088481672576367_n.png?width=802&height=754');
 
       final artistResult = await createArtistUseCase.call(artistParams);
       if (artistResult != 'ok') {

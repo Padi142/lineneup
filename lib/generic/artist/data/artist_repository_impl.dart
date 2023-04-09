@@ -6,9 +6,11 @@ import 'package:lineneup/generic/artist/domain/artist_repository.dart';
 import '../../api/artist_api.dart';
 import '../model/params/create_artist_params.dart';
 import '../model/params/get_artists_params.dart';
+import '../model/params/search_spotify_artist.dart';
 import '../model/params/upload_artist_photo_params.dart';
 import '../model/results/get_artists_result.dart';
 import '../model/results/photo_upload_result.dart';
+import '../model/results/search_artists_result.dart';
 
 class ArtistRepositoryImpl extends ArtistRepository {
   final ArtistApi artistApi;
@@ -51,6 +53,17 @@ class ArtistRepositoryImpl extends ArtistRepository {
       return response;
     }).onError((error, stackTrace) {
       return 'Error';
+    });
+  }
+
+  @override
+  Future<SearchArtistResult> searchArtist(
+    SearchSpotifyArtistParams params,
+  ) {
+    return artistApi.searchSpotifyArtists(params.artistName).then((response) {
+      return SearchArtistResult.loaded(response.toDomain());
+    }).onError((error, stackTrace) {
+      return SearchArtistResult.failure('Error');
     });
   }
 }

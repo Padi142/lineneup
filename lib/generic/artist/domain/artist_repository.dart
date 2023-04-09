@@ -1,8 +1,10 @@
 import '../model/params/create_artist_params.dart';
 import '../model/params/get_artists_params.dart';
+import '../model/params/search_spotify_artist.dart';
 import '../model/params/upload_artist_photo_params.dart';
 import '../model/results/get_artists_result.dart';
 import '../model/results/photo_upload_result.dart';
+import '../model/results/search_artists_result.dart';
 
 abstract class ArtistRepository {
   Future<ArtistsDataResult> getArtistsAtEvent(
@@ -15,5 +17,8 @@ abstract class ArtistRepository {
 
   Future<String> createArtist(
     CreateArtistParams params,
+  );
+  Future<SearchArtistResult> searchArtist(
+    SearchSpotifyArtistParams params,
   );
 }

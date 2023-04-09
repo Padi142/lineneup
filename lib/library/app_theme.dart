@@ -18,6 +18,7 @@ abstract class AppTheme {
   Color get colorInactive;
   Color get colorNavbar;
   Color get colorActive;
+  Color get colorActive2;
 
   Color get colorError;
   Color get colorWarning;

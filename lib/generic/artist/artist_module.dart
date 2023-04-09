@@ -7,6 +7,7 @@ import '../../library/app.dart';
 import '../../library/app_module.dart';
 import 'data/artist_repository_impl.dart';
 import 'data/create_artist_use_case.dart';
+import 'data/search_artist_use_case.dart';
 
 class ArtistModule extends AppModule {
   @override
@@ -33,6 +34,12 @@ class ArtistModule extends AppModule {
 
     GetIt.I.registerFactory<CreateArtistUseCase>(
       () => CreateArtistUseCase(
+        repository: GetIt.I.get<ArtistRepository>(),
+      ),
+    );
+
+    GetIt.I.registerFactory<SearchSpotifyArtistsUseCase>(
+      () => SearchSpotifyArtistsUseCase(
         repository: GetIt.I.get<ArtistRepository>(),
       ),
     );

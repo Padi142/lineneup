@@ -13,7 +13,7 @@ import '../../../library/app.dart';
 import '../../../library/app_scaffold.dart';
 import '../model/artist_creation_model.dart';
 import '../use_case/dashboard_navigation.dart';
-import 'components/artist_container.dart';
+import 'components/spotify_search_container.dart';
 
 class EventCreationScreen extends Screen {
   static const String name = ScreenPath.EVENT_CREATION;
@@ -124,7 +124,8 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   controller: pageController,
                   children: [
                     _nameTimeScreen(),
-                    _logoArtistPage(),
+                    _logoPage(),
+                    _artistsPage(),
                   ],
                 ),
               ),
@@ -148,16 +149,27 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             textAlign: TextAlign.center,
             style: App.appTheme.textHeader,
           ),
-          AppTextField(
-            _eventTitleModel,
-            filled: App.appTheme.colorInactive,
-            hint: 'event_creating_name_field_hint'.tr(),
-            lines: 1,
-            validators: [ValidatorEmpty()],
-            beginEdit: (te) {
-              te.model.error = null;
-              setState(() {});
-            },
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 1),
+                  blurRadius: 5,
+                  color: Colors.black.withOpacity(0.4),
+                ),
+              ],
+            ),
+            child: AppTextField(
+              _eventTitleModel,
+              filled: App.appTheme.colorInactive,
+              hint: 'event_creating_name_field_hint'.tr(),
+              lines: 1,
+              validators: [ValidatorEmpty()],
+              beginEdit: (te) {
+                te.model.error = null;
+                setState(() {});
+              },
+            ),
           ),
           const SizedBox(
             height: 15,
@@ -168,17 +180,28 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             textAlign: TextAlign.center,
             style: App.appTheme.textHeader,
           ),
-          AppTextField(
-            _eventDescriptionModel,
-            filled: App.appTheme.colorInactive,
-            hint: 'event_creating_description_field_hint'.tr(),
-            keyboardType: TextInputType.multiline,
-            lines: 8,
-            validators: [ValidatorEmpty()],
-            beginEdit: (te) {
-              te.model.error = null;
-              setState(() {});
-            },
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 1),
+                  blurRadius: 5,
+                  color: Colors.black.withOpacity(0.4),
+                ),
+              ],
+            ),
+            child: AppTextField(
+              _eventDescriptionModel,
+              filled: App.appTheme.colorInactive,
+              hint: 'event_creating_description_field_hint'.tr(),
+              keyboardType: TextInputType.multiline,
+              lines: 8,
+              validators: [ValidatorEmpty()],
+              beginEdit: (te) {
+                te.model.error = null;
+                setState(() {});
+              },
+            ),
           ),
           const SizedBox(
             height: 15,
@@ -203,6 +226,13 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   decoration: BoxDecoration(
                     color: App.appTheme.colorInactive,
                     borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 1),
+                        blurRadius: 5,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ],
                   ),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
@@ -228,7 +258,17 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(
+                    color: App.appTheme.colorInactive,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 1),
+                        blurRadius: 5,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ],
+                  ),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
                     textAlign: TextAlign.center,
@@ -268,6 +308,13 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   decoration: BoxDecoration(
                     color: App.appTheme.colorInactive,
                     borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 1),
+                        blurRadius: 5,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ],
                   ),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
@@ -293,7 +340,17 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: App.appTheme.colorInactive, borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(
+                    color: App.appTheme.colorInactive,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 1),
+                        blurRadius: 5,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ],
+                  ),
                   child: TextFormField(
                     style: App.appTheme.textHeader,
                     textAlign: TextAlign.center,
@@ -349,7 +406,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
     );
   }
 
-  Widget _logoArtistPage() {
+  Widget _logoPage() {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -364,35 +421,82 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             height: 50,
             child: AppButton(
               radius: 4,
+              backgroundColor: App.appTheme.colorInactive,
               imagePrefix: const Icon(Icons.add),
               onClick: () {
                 BlocProvider.of<EventBloc>(context).add(const UploadEventCover(eventUid: 'vize'));
               },
             ),
           ),
+          const SizedBox(
+            height: 400,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: 50,
+                width: 110,
+                child: AppButton(
+                  onClick: () {
+                    pageController.previousPage(
+                      duration: const Duration(milliseconds: 160),
+                      curve: Curves.bounceIn,
+                    );
+                  },
+                  text: 'back_page_button_label'.tr(),
+                  backgroundColor: App.appTheme.colorSecondary,
+                  radius: 10,
+                  textStyle: App.appTheme.textTitle,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+                width: 150,
+                child: AppButton(
+                  onClick: () {
+                    pageController.nextPage(
+                      duration: const Duration(milliseconds: 160),
+                      curve: Curves.bounceIn,
+                    );
+                  },
+                  text: 'next_page_button_label'.tr(),
+                  backgroundColor: App.appTheme.colorPrimary,
+                  radius: 10,
+                  textStyle: App.appTheme.textTitle,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _artistsPage() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
           Text(
             'artists_adding_list'.tr(),
             maxLines: 3,
             textAlign: TextAlign.center,
             style: App.appTheme.textHeader,
           ),
-          ListView.builder(
-              itemCount: addedArtists.length + 1,
-              shrinkWrap: true,
-              reverse: true,
-              itemBuilder: (context, index) {
-                if (addedArtists.length < index + 1) {
-                  return NewArtistContainer(
-                    onAdded: (name, instagram, starTime, endTime) {
-                      addedArtists.add(ArtistCreationModel(name: name, instagramUrl: instagram, startTime: starTime, endTime: endTime));
-                      setState(() {});
-                    },
-                  );
-                }
-                return AddedArtistContainer(
-                  artist: addedArtists[index],
-                );
-              }),
+          SpotifyArtistSearch(
+            onPickedArtist: (artist) {
+              addedArtists.add(
+                ArtistCreationModel(
+                  name: artist.name,
+                  instagramUrl: '',
+                  spotifyUrl: artist.url,
+                  spotifyImage: '',
+                  startTime: const TimeOfDay(hour: 19, minute: 00),
+                  endTime: const TimeOfDay(hour: 20, minute: 00),
+                ),
+              );
+            },
+          ),
           const SizedBox(
             height: 400,
           ),

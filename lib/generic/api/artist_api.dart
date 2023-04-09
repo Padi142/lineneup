@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:lineneup/generic/artist/model/spotify_artist_search_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../artist/model/artist_data_dto.dart';
@@ -40,5 +41,12 @@ abstract class ArtistApi {
     @Part(name: 'apple') String apple,
     @Part(name: 'instagram') String instagram,
     @Part(name: 'image') String image,
+  );
+
+  @GET(
+    '/spotify/search_artist?artistName={artistName}',
+  )
+  Future<SpotifyArtistListDto> searchSpotifyArtists(
+    @Path() String artistName,
   );
 }
