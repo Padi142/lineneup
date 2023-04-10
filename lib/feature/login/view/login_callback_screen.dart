@@ -40,6 +40,7 @@ class _LoginCallbackScreenState extends State<LoginCallbackScreen> {
       ),
       child: const AppScaffold(
         mobileLayout: MobileInitBody(),
+        desktopLayout: MobileInitBody(),
       ),
     );
   }

@@ -39,6 +39,7 @@ class _InitScreenState extends State<InitScreen> {
         ),
       ),
       child: const AppScaffold(
+        desktopLayout: MobileInitBody(),
         mobileLayout: MobileInitBody(),
       ),
     );

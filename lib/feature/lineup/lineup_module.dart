@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lineneup/feature/lineup/use_case/lineup_navigation.dart';
 import 'package:lineneup/feature/lineup/view/lineup_screen.dart';
-import 'package:lineneup/generic/artist/data/get_artists_use_case.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
+import '../../generic/artist/domain/get_artists_use_case.dart';
 import '../../generic/event/domain/get_event_use_case.dart';
 import '../../library/app_module.dart';
 import 'bloc/lineup_bloc.dart';

@@ -4,7 +4,7 @@ import 'package:lineneup/generic/artist/model/params/get_artists_params.dart';
 import 'package:lineneup/generic/event/model/params/get_event_params.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../../../generic/artist/data/get_artists_use_case.dart';
+import '../../../generic/artist/domain/get_artists_use_case.dart';
 import '../../../generic/event/domain/get_event_use_case.dart';
 import '../use_case/lineup_navigation.dart';
 import 'lineup_state.dart';

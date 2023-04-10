@@ -8,16 +8,16 @@ import 'package:lineneup/feature/dashboard/use_case/uploadt_artist_photo_use_cas
 import 'package:lineneup/feature/dashboard/view/dashboard_event_info_page.dart';
 import 'package:lineneup/feature/dashboard/view/dashboard_screen.dart';
 import 'package:lineneup/feature/dashboard/view/event_creation_page.dart';
-import 'package:lineneup/generic/artist/data/create_artist_use_case.dart';
+import 'package:lineneup/generic/artist/domain/create_artist_use_case.dart';
 import 'package:lineneup/generic/event/domain/event_repository.dart';
 import 'package:lineneup/generic/event/domain/get_user_events.dart';
 import 'package:lineneup/generic/user/use_case/get_current_session_use_case.dart';
 import 'package:lineneup/generic/user/use_case/get_current_user_use_case.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../../generic/artist/data/get_artists_use_case.dart';
-import '../../generic/artist/data/search_artist_use_case.dart';
 import '../../generic/artist/domain/artist_repository.dart';
+import '../../generic/artist/domain/get_artists_use_case.dart';
+import '../../generic/artist/domain/search_artist_use_case.dart';
 import '../../generic/event/domain/create_event_use_case.dart';
 import '../../generic/event/domain/get_event_use_case.dart';
 import '../../generic/event/domain/update_event_use_case.dart';

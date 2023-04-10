@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:lineneup/generic/artist/data/search_artist_use_case.dart';
+import 'package:lineneup/generic/artist/domain/search_artist_use_case.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../../../../generic/artist/data/get_artists_use_case.dart';
+import '../../../../generic/artist/domain/get_artists_use_case.dart';
 import '../../../../generic/artist/model/params/get_artists_params.dart';
 import '../../../../generic/artist/model/params/search_spotify_artist.dart';
 import 'artist_bloc_state.dart';

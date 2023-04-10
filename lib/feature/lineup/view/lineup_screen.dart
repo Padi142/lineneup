@@ -362,6 +362,28 @@ class EventInfo extends StatelessWidget {
       ),
     );
   }
+
+  //TODO
+  double _getEventProgress(DateTime startTime, DateTime endTime) {
+    final currentHour = DateTime.now().hour;
+    final currentMinute = DateTime.now().minute;
+    if (startTime.day == endTime.day) {
+      final hourLength = endTime.hour - startTime.hour;
+      final elapsedHours = currentHour - startTime.hour;
+      final minuteLength = (endTime.minute - startTime.minute).abs();
+      final elapsedMinutes = (currentMinute - startTime.minute).abs();
+
+      final length = hourLength * 60 + minuteLength;
+      final elapsedLength = elapsedHours * 60 + elapsedMinutes;
+      return length / elapsedLength;
+    }
+    final hourLength = (24 - startTime.hour) + endTime.hour;
+    final elapsedHours = currentHour - startTime.hour;
+    final minuteLength = (endTime.minute - startTime.minute).abs();
+    final elapsedMinutes = currentMinute - startTime.minute;
+
+    return 0;
+  }
 }
 
 class ArtistInfo extends StatelessWidget {

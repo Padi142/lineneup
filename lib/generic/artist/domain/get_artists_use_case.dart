@@ -13,8 +13,7 @@ class GetArtistsUseCase extends UseCase<ArtistsDataResult, GetArtistsParams> {
 
   @override
   Future<ArtistsDataResult> call(params) async {
-    final ArtistsDataResult result = await repository.getArtistsAtEvent(params);
-
+    ArtistsDataResult result = await repository.getArtistsAtEvent(params);
     return result;
   }
 }

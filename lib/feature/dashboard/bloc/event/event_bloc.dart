@@ -9,8 +9,8 @@ import 'package:lineneup/generic/event/model/params/update_event_params.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:universal_io/io.dart';
 
-import '../../../../generic/artist/data/create_artist_use_case.dart';
-import '../../../../generic/artist/data/get_artists_use_case.dart';
+import '../../../../generic/artist/domain/create_artist_use_case.dart';
+import '../../../../generic/artist/domain/get_artists_use_case.dart';
 import '../../../../generic/artist/model/params/create_artist_params.dart';
 import '../../../../generic/artist/model/params/upload_event_cover_params.dart';
 import '../../../../generic/event/domain/create_event_use_case.dart';
