@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:lineneup/generic/artist/model/artist_model.dart';
 import 'package:lineneup/library/app.dart';
 
-class DashboardArtistContainer extends StatelessWidget {
+class DashboardArtistContainer extends StatefulWidget {
   final ArtistModel artist;
   const DashboardArtistContainer({Key? key, required this.artist}) : super(key: key);
 
+  @override
+  State<DashboardArtistContainer> createState() => _DashboardArtistContainerState();
+}
+
+class _DashboardArtistContainerState extends State<DashboardArtistContainer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +36,7 @@ class DashboardArtistContainer extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image: DecorationImage(image: NetworkImage(artist.artistPhoto), fit: BoxFit.fill),
+                  image: DecorationImage(image: NetworkImage(widget.artist.artistPhoto), fit: BoxFit.fill),
                   boxShadow: [
                     BoxShadow(
                       offset: const Offset(0, 1),
@@ -45,7 +50,7 @@ class DashboardArtistContainer extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                artist.artistName,
+                widget.artist.artistName,
                 style: App.appTheme.textHeader.copyWith(fontSize: 32),
                 textAlign: TextAlign.center,
                 maxLines: 3,
@@ -77,7 +82,7 @@ class DashboardArtistContainer extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                    DateFormat('kk:mm').format(artist.startTime),
+                    DateFormat('kk:mm').format(widget.artist.startTime),
                     style: App.appTheme.textHeader.copyWith(fontSize: 40),
                   ),
                 ),

@@ -61,7 +61,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
   );
   var selectedStartDate = DateTime.now();
 
-  TimeOfDay selectedStartTime = TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay selectedStartTime = const TimeOfDay(hour: 00, minute: 00);
 
   final TextEditingController _startTimeController = TextEditingController(text: '00:00');
 
@@ -74,11 +74,22 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
 
   final TextEditingController _endTimeController = TextEditingController(text: '00:00');
 
-  //second pge
+  //second page thing
   final List<ArtistCreationModel> addedArtists = [];
 
-  //Create button
+  //Block create button after its pressed
   bool createButtonPressed = false;
+
+  @override
+  void initState() {
+    _startDateController.addListener(() {
+      if (_endDateController.text == DateFormat('dd-MM-yyyy').format(DateTime.now())) {
+        _endDateController.text = _startDateController.text;
+        selectedEndDate = selectedStartDate;
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +236,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             children: [
               InkWell(
                 onTap: () {
-                  _selectDate(context, selectedStartDate, _startDateController);
+                  _selectDate(context, selectedStartDate, _startDateController, true);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.4,
@@ -248,9 +259,6 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                     enabled: false,
                     keyboardType: TextInputType.text,
                     controller: _startDateController,
-                    onSaved: (val) {
-                      print(val);
-                    },
                     decoration: const InputDecoration(disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(top: 0.0)),
                   ),
                 ),
@@ -260,7 +268,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
               ),
               InkWell(
                 onTap: () {
-                  _selectTime(context, selectedStartTime, _startTimeController);
+                  _selectTime(context, selectedStartTime, _startTimeController, true);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.2,
@@ -307,7 +315,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
             children: [
               InkWell(
                 onTap: () {
-                  _selectDate(context, selectedEndDate, _endDateController);
+                  _selectDate(context, selectedEndDate, _endDateController, false);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.4,
@@ -329,10 +337,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                     textAlign: TextAlign.center,
                     enabled: false,
                     keyboardType: TextInputType.text,
-                    controller: _startDateController,
-                    onSaved: (val) {
-                      print(val);
-                    },
+                    controller: _endDateController,
                     decoration: const InputDecoration(disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none), contentPadding: EdgeInsets.only(top: 0.0)),
                   ),
                 ),
@@ -342,7 +347,7 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
               ),
               InkWell(
                 onTap: () {
-                  _selectTime(context, selectedEndTime, _endTimeController);
+                  _selectTime(context, selectedEndTime, _endTimeController, false);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.2,
@@ -399,6 +404,10 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 width: 130,
                 child: AppButton(
                   onClick: () {
+                    if (selectedStartDate.day == selectedEndDate.day && selectedStartTime.hour >= selectedEndTime.hour) {
+                      //TODO: Show error
+                      return;
+                    }
                     pageController.nextPage(duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
                   },
                   text: 'next_page_button_label'.tr(),
@@ -575,22 +584,42 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
                 addedArtists.remove(it);
                 setState(() {});
               },
+              onTimeChanged: (TimeOfDay playingAt) {
+                addedArtists.map((element) {
+                  if (element.props == it.props) {
+                    return ArtistCreationModel(
+                      name: element.name,
+                      endTime: element.endTime,
+                      startTime: playingAt,
+                      instagramUrl: element.instagramUrl,
+                      spotifyImage: element.spotifyImage,
+                      spotifyUrl: element.spotifyUrl,
+                    );
+                  }
+
+                  return element;
+                });
+              },
             ))
         .toList();
   }
 
-  Future<void> _selectDate(BuildContext context, DateTime date, TextEditingController controller) async {
-    final DateTime? picked =
-        await showDatePicker(context: context, initialDate: date, initialDatePickerMode: DatePickerMode.day, firstDate: DateTime.now().subtract(const Duration(days: 5)), lastDate: DateTime(2101));
+  Future<void> _selectDate(BuildContext context, DateTime date, TextEditingController controller, bool isStartDate) async {
+    final DateTime? picked = await showDatePicker(context: context, initialDate: date, initialDatePickerMode: DatePickerMode.day, firstDate: date, lastDate: DateTime(2101));
     if (picked != null) {
       setState(() {
-        date = picked;
+        if (isStartDate) {
+          selectedStartDate = picked;
+        } else {
+          selectedEndDate = picked;
+        }
+
         controller.text = DateFormat.yMd().format(date);
       });
     }
   }
 
-  Future<void> _selectTime(BuildContext context, TimeOfDay time, TextEditingController controller) async {
+  Future<void> _selectTime(BuildContext context, TimeOfDay time, TextEditingController controller, bool isStartTime) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: time,
@@ -603,8 +632,12 @@ class _EventCreationMobileBodyState extends State<EventCreationMobileBody> {
     );
     if (picked != null) {
       setState(() {
-        time = picked;
-        controller.text = '${picked.hour}:${picked.minute}';
+        if (isStartTime) {
+          selectedStartTime = picked;
+        } else {
+          selectedEndTime = picked;
+        }
+        controller.text = DateFormat.Hm().format(DateTime(picked.hour, picked.minute)); // Formats time as 24-hour string
       });
     }
   }

@@ -9,7 +9,8 @@ import '../../model/artist_creation_model.dart';
 class NewArtistContainer extends StatefulWidget {
   final ArtistCreationModel artist;
   final Function() onRemoved;
-  const NewArtistContainer({Key? key, required this.artist, required this.onRemoved}) : super(key: key);
+  final Function(TimeOfDay playingAt) onTimeChanged;
+  const NewArtistContainer({Key? key, required this.artist, required this.onRemoved, required this.onTimeChanged}) : super(key: key);
 
   @override
   State<NewArtistContainer> createState() => _NewArtistContainerState();
@@ -19,17 +20,18 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
   late TextEntryModel artistNameModel;
   late TextEntryModel instagramModel;
 
-  TimeOfDay selectedStartTime = TimeOfDay(hour: 19, minute: 00);
-  TimeOfDay selectedEndTime = TimeOfDay(hour: 20, minute: 00);
+  late TimeOfDay selectedStartTime;
 
-  final TextEditingController _startTimeController = TextEditingController(text: '00:00');
-  final TextEditingController _endTimeController = TextEditingController(text: '00:00');
+  final TextEditingController _startTimeController = TextEditingController();
 
   @override
   void initState() {
     artistNameModel = TextEntryModel();
-
     instagramModel = TextEntryModel();
+
+    selectedStartTime = widget.artist.startTime;
+
+    _startTimeController.text = DateFormat.Hm().format(DateTime(selectedStartTime.hour, selectedStartTime.minute));
 
     super.initState();
   }
@@ -108,26 +110,63 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
               const SizedBox(
                 height: 5,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: App.appTheme.colorActive2,
-                  borderRadius: BorderRadius.circular(4),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: const Offset(0, 1),
-                      blurRadius: 5,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    selectedStartTime.format(context),
-                    style: App.appTheme.textHeader.copyWith(fontSize: 40),
+              InkWell(
+                onTap: () {
+                  _selectTime(
+                    context,
+                    selectedStartTime,
+                    _startTimeController,
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: 60,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: App.appTheme.colorInactive,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 1),
+                        blurRadius: 5,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ],
+                  ),
+                  child: TextFormField(
+                    style: App.appTheme.textHeader,
+                    textAlign: TextAlign.center,
+                    onSaved: (val) {},
+                    enabled: false,
+                    keyboardType: TextInputType.text,
+                    controller: _startTimeController,
+                    decoration: const InputDecoration(
+                        disabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+                        // labelText: 'Time',
+                        contentPadding: EdgeInsets.all(5)),
                   ),
                 ),
               ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     color: App.appTheme.colorActive2,
+              //     borderRadius: BorderRadius.circular(4),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         offset: const Offset(0, 1),
+              //         blurRadius: 5,
+              //         color: Colors.black.withOpacity(0.6),
+              //       ),
+              //     ],
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8),
+              //     child: Text(
+              //       selectedStartTime.format(context),
+              //       style: App.appTheme.textHeader.copyWith(fontSize: 40),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -151,10 +190,7 @@ class _NewArtistContainerState extends State<NewArtistContainer> {
       },
     );
     if (picked != null) {
-      setState(() {
-        time = picked;
-        controller.text = '${picked.hour}:${picked.minute}';
-      });
+      controller.text = DateFormat.Hm().format(DateTime(picked.hour, picked.minute));
     }
   }
 }
