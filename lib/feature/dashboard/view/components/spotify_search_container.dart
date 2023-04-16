@@ -54,6 +54,7 @@ class _SpotifyArtistSearchState extends State<SpotifyArtistSearch> {
               return state.maybeMap(searchedArtists: (values) {
                 return ListView.builder(
                     itemCount: values.artists.length,
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
