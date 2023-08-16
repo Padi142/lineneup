@@ -32,7 +32,7 @@ class _EventApi implements EventApi {
     )
             .compose(
               _dio.options,
-              '/event?uid=${uid}',
+              '/api/event/${uid}',
               queryParameters: queryParameters,
               data: _data,
             )

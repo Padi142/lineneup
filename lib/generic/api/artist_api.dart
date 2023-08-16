@@ -14,7 +14,7 @@ abstract class ArtistApi {
   factory ArtistApi(Dio dio) = _ArtistApi;
 
   @GET(
-    '/artists?uid={id}',
+    '/api/artists/{id}',
   )
   Future<ArtistListDto> getEventArtists(
     @Path() String id,

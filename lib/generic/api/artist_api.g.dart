@@ -32,7 +32,7 @@ class _ArtistApi implements ArtistApi {
     )
             .compose(
               _dio.options,
-              '/artists?uid=${id}',
+              '/api/artists/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
